@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,7 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChiTietHoaDon.cs" />
-    <Compile Include="DBHelper.cs" />
+    <Compile Include="DataAccess.cs" />
+    <Compile Include="frmDangNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDangNhap.Designer.cs">
+      <DependentUpon>frmDangNhap.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmHoaDon.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,13 +67,14 @@
     <Compile Include="frmMon.Designer.cs">
       <DependentUpon>frmMon.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTrangChu.cs">
+    <Compile Include="frmThemMon.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTrangChu.Designer.cs">
-      <DependentUpon>frmTrangChu.cs</DependentUpon>
+    <Compile Include="frmThemMon.Designer.cs">
+      <DependentUpon>frmThemMon.cs</DependentUpon>
     </Compile>
     <Compile Include="Mon.cs" />
+    <Compile Include="MonInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaiKhoan.cs" />
@@ -76,8 +84,8 @@
     <EmbeddedResource Include="frmMon.resx">
       <DependentUpon>frmMon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTrangChu.resx">
-      <DependentUpon>frmTrangChu.cs</DependentUpon>
+    <EmbeddedResource Include="frmThemMon.resx">
+      <DependentUpon>frmThemMon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

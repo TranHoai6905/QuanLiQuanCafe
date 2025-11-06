@@ -1,14 +1,10 @@
-﻿namespace QuanLiQuanCafe
+﻿using System.Windows.Forms;
+
+namespace QuanLiQuanCafe
 {
     partial class frmHoaDon
     {
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.DataGridView dgvHoaDon;
-        private System.Windows.Forms.DataGridView dgvChiTiet;
-        private System.Windows.Forms.Button btnThemMon;
-        private System.Windows.Forms.Button btnXoaMon;
-        private System.Windows.Forms.Button btnThanhToan;
-        private System.Windows.Forms.TextBox txtSoBan;
 
         protected override void Dispose(bool disposing)
         {
@@ -16,88 +12,103 @@
             base.Dispose(disposing);
         }
 
+        #region Windows Form Designer generated code
+
         private void InitializeComponent()
         {
             this.dgvHoaDon = new System.Windows.Forms.DataGridView();
-            this.dgvChiTiet = new System.Windows.Forms.DataGridView();
+            this.dgvChiTietHoaDon = new System.Windows.Forms.DataGridView();
+            this.btnThemHoaDonMoi = new System.Windows.Forms.Button();
             this.btnThemMon = new System.Windows.Forms.Button();
             this.btnXoaMon = new System.Windows.Forms.Button();
             this.btnThanhToan = new System.Windows.Forms.Button();
-            this.txtSoBan = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHoaDon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvChiTiet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChiTietHoaDon)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvHoaDon
             // 
-            this.dgvHoaDon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvHoaDon.Location = new System.Drawing.Point(61, 220);
+            this.dgvHoaDon.Location = new System.Drawing.Point(10, 43);
             this.dgvHoaDon.Name = "dgvHoaDon";
-            this.dgvHoaDon.Size = new System.Drawing.Size(352, 180);
+            this.dgvHoaDon.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvHoaDon.Size = new System.Drawing.Size(651, 173);
             this.dgvHoaDon.TabIndex = 0;
-            this.dgvHoaDon.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHoaDon_CellClick);
             // 
-            // dgvChiTiet
+            // dgvChiTietHoaDon
             // 
-            this.dgvChiTiet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvChiTiet.Location = new System.Drawing.Point(50, 30);
-            this.dgvChiTiet.Name = "dgvChiTiet";
-            this.dgvChiTiet.Size = new System.Drawing.Size(391, 150);
-            this.dgvChiTiet.TabIndex = 1;
+            this.dgvChiTietHoaDon.Location = new System.Drawing.Point(10, 234);
+            this.dgvChiTietHoaDon.Name = "dgvChiTietHoaDon";
+            this.dgvChiTietHoaDon.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvChiTietHoaDon.Size = new System.Drawing.Size(651, 130);
+            this.dgvChiTietHoaDon.TabIndex = 1;
+            // 
+            // btnThemHoaDonMoi
+            // 
+            this.btnThemHoaDonMoi.Location = new System.Drawing.Point(10, 10);
+            this.btnThemHoaDonMoi.Name = "btnThemHoaDonMoi";
+            this.btnThemHoaDonMoi.Size = new System.Drawing.Size(129, 22);
+            this.btnThemHoaDonMoi.TabIndex = 2;
+            this.btnThemHoaDonMoi.Text = "Thêm hóa đơn mới";
+            this.btnThemHoaDonMoi.UseVisualStyleBackColor = true;
+            this.btnThemHoaDonMoi.Click += new System.EventHandler(this.btnThemHoaDonMoi_Click);
             // 
             // btnThemMon
             // 
-            this.btnThemMon.Location = new System.Drawing.Point(466, 148);
+            this.btnThemMon.Location = new System.Drawing.Point(10, 381);
             this.btnThemMon.Name = "btnThemMon";
-            this.btnThemMon.Size = new System.Drawing.Size(100, 25);
-            this.btnThemMon.TabIndex = 2;
+            this.btnThemMon.Size = new System.Drawing.Size(86, 22);
+            this.btnThemMon.TabIndex = 3;
             this.btnThemMon.Text = "Thêm món";
             this.btnThemMon.UseVisualStyleBackColor = true;
             this.btnThemMon.Click += new System.EventHandler(this.btnThemMon_Click);
             // 
             // btnXoaMon
             // 
-            this.btnXoaMon.Location = new System.Drawing.Point(466, 199);
+            this.btnXoaMon.Location = new System.Drawing.Point(103, 381);
             this.btnXoaMon.Name = "btnXoaMon";
-            this.btnXoaMon.Size = new System.Drawing.Size(100, 25);
-            this.btnXoaMon.TabIndex = 3;
+            this.btnXoaMon.Size = new System.Drawing.Size(86, 22);
+            this.btnXoaMon.TabIndex = 4;
             this.btnXoaMon.Text = "Xóa món";
             this.btnXoaMon.UseVisualStyleBackColor = true;
             this.btnXoaMon.Click += new System.EventHandler(this.btnXoaMon_Click);
             // 
             // btnThanhToan
             // 
-            this.btnThanhToan.Location = new System.Drawing.Point(466, 253);
+            this.btnThanhToan.Location = new System.Drawing.Point(197, 381);
             this.btnThanhToan.Name = "btnThanhToan";
-            this.btnThanhToan.Size = new System.Drawing.Size(100, 25);
-            this.btnThanhToan.TabIndex = 4;
+            this.btnThanhToan.Size = new System.Drawing.Size(86, 22);
+            this.btnThanhToan.TabIndex = 5;
             this.btnThanhToan.Text = "Thanh toán";
             this.btnThanhToan.UseVisualStyleBackColor = true;
             this.btnThanhToan.Click += new System.EventHandler(this.btnThanhToan_Click);
             // 
-            // txtSoBan
-            // 
-            this.txtSoBan.Location = new System.Drawing.Point(447, 321);
-            this.txtSoBan.Name = "txtSoBan";
-            this.txtSoBan.Size = new System.Drawing.Size(100, 20);
-            this.txtSoBan.TabIndex = 5;
-            // 
             // frmHoaDon
             // 
-            this.ClientSize = new System.Drawing.Size(600, 450);
-            this.Controls.Add(this.txtSoBan);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(672, 417);
             this.Controls.Add(this.btnThanhToan);
             this.Controls.Add(this.btnXoaMon);
             this.Controls.Add(this.btnThemMon);
-            this.Controls.Add(this.dgvChiTiet);
+            this.Controls.Add(this.btnThemHoaDonMoi);
+            this.Controls.Add(this.dgvChiTietHoaDon);
             this.Controls.Add(this.dgvHoaDon);
             this.Name = "frmHoaDon";
-            this.Text = "Quản lý Hóa đơn";
+            this.Text = "Hóa đơn - Quản lý quán cafe";
+            this.Load += new System.EventHandler(this.frmHoaDon_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHoaDon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvChiTiet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChiTietHoaDon)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
+
+        #endregion
+
+        private System.Windows.Forms.DataGridView dgvHoaDon;
+        private System.Windows.Forms.DataGridView dgvChiTietHoaDon;
+        private System.Windows.Forms.Button btnThemHoaDonMoi;
+        private System.Windows.Forms.Button btnThemMon;
+        private System.Windows.Forms.Button btnXoaMon;
+        private System.Windows.Forms.Button btnThanhToan;
     }
 }

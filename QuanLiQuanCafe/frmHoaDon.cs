@@ -1,89 +1,112 @@
 ﻿using System;
-using System.Data;
-using System.Linq;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace QuanLiQuanCafe
 {
     public partial class frmHoaDon : Form
     {
-        private DataTable dtHoaDon;
-        private DataTable dtChiTiet;
-        private string nhanVien = "NV01";
+        private int nhanVienId;
+        private string vaiTro;
+        private int hoaDonId;
 
-        public frmHoaDon()
+        public frmHoaDon(int nhanVienId, string vaiTro, int hoaDonId)
         {
             InitializeComponent();
-            LoadData();
+            this.nhanVienId = nhanVienId;
+            this.vaiTro = vaiTro;
+            this.hoaDonId = hoaDonId;
         }
 
-        private void LoadData()
+        private void frmHoaDon_Load(object sender, EventArgs e)
         {
-            dtHoaDon = new DataTable();
-            dtHoaDon.Columns.Add("Mã HD");
-            dtHoaDon.Columns.Add("Ngày");
-            dtHoaDon.Columns.Add("Nhân viên");
-            dtHoaDon.Columns.Add("Tổng tiền");
-            dtHoaDon.Columns.Add("Số lượng món");
-
-            dtChiTiet = new DataTable();
-            dtChiTiet.Columns.Add("Loại");
-            dtChiTiet.Columns.Add("Tên món");
-            dtChiTiet.Columns.Add("Giá");
-            dtChiTiet.Columns.Add("Số lượng");
-
-            dgvHoaDon.DataSource = dtHoaDon;
-            dgvChiTiet.DataSource = dtChiTiet;
-
-            // Dữ liệu mẫu
-            dtHoaDon.Rows.Add("HD001", DateTime.Now.ToString("dd/MM/yyyy"), nhanVien, 0, 0);
-            dtHoaDon.Rows.Add("HD002", DateTime.Now.ToString("dd/MM/yyyy"), nhanVien, 0, 0);
+            LoadChiTietHoaDon();
+            KiemTraTrangThaiHoaDon();
         }
 
-        private void dgvHoaDon_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void LoadChiTietHoaDon()
         {
-            dtChiTiet.Clear();
-            if (dgvHoaDon.CurrentRow != null)
-            {
-                // Lấy dữ liệu món (ví dụ mẫu)
-                dtChiTiet.Rows.Add("Thức uống", "Cà phê sữa", 15000, 1);
-            }
+            string sql = @"SELECT c.Id, m.TenMon, c.SoLuong, m.Gia, (c.SoLuong * m.Gia) AS ThanhTien
+                           FROM ChiTietHoaDon c
+                           JOIN Mon m ON c.MonId = m.Id
+                           WHERE c.HoaDonId = @id";
+            dgvChiTietHoaDon.DataSource = DataAccess.GetDataTable(sql, new SqlParameter("@id", hoaDonId));
+        }
+
+        private void KiemTraTrangThaiHoaDon()
+        {
+            string sql = "SELECT TrangThai FROM HoaDon WHERE Id=@id";
+            object kq = DataAccess.ExecuteScalar(sql, new SqlParameter("@id", hoaDonId));
+            string trangThai = kq?.ToString();
+            bool chuaThanhToan = trangThai == "Chưa thanh toán";
+
+            btnThemMon.Enabled = chuaThanhToan;
+            btnXoaMon.Enabled = chuaThanhToan;
+            btnThanhToan.Enabled = chuaThanhToan;
         }
 
         private void btnThemMon_Click(object sender, EventArgs e)
         {
-            frmMon frm = new frmMon(admin: false, fromHoaDon: true);
+            frmMon frm = new frmMon(hoaDonId);
             frm.ShowDialog();
-            // Sau khi chọn món, giả lập thêm vào chi tiết hóa đơn
-            dtChiTiet.Rows.Add("Thức uống", "Trà đá", 5000, 1);
+            LoadChiTietHoaDon();
         }
 
         private void btnXoaMon_Click(object sender, EventArgs e)
         {
-            if (dgvChiTiet.CurrentRow != null)
+            if (dgvChiTietHoaDon.SelectedRows.Count > 0)
             {
-                DataRow row = (dgvChiTiet.CurrentRow.DataBoundItem as DataRowView).Row;
-                dtChiTiet.Rows.Remove(row);
+                int id = Convert.ToInt32(dgvChiTietHoaDon.SelectedRows[0].Cells["Id"].Value);
+                string sql = "DELETE FROM ChiTietHoaDon WHERE Id=@id";
+                DataAccess.ExecuteNonQuery(sql, new SqlParameter("@id", id));
+                LoadChiTietHoaDon();
             }
         }
-
 
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
-            if (dgvHoaDon.CurrentRow == null) return;
-
-            decimal tong = 0;
-            int soLuong = 0;
-            foreach (DataRow r in dtChiTiet.Rows)
-            {
-                tong += Convert.ToDecimal(r["Giá"]) * Convert.ToInt32(r["Số lượng"]);
-                soLuong += Convert.ToInt32(r["Số lượng"]);
-            }
-
-            dgvHoaDon.CurrentRow.Cells["Tổng tiền"].Value = tong;
-            dgvHoaDon.CurrentRow.Cells["Số lượng món"].Value = soLuong;
-            MessageBox.Show($"Thanh toán thành công: {tong} VND");
-            dtChiTiet.Clear();
+            string sql = "UPDATE HoaDon SET TrangThai=N'Đã thanh toán' WHERE Id=@id";
+            DataAccess.ExecuteNonQuery(sql, new SqlParameter("@id", hoaDonId));
+            MessageBox.Show("Thanh toán thành công!");
+            KiemTraTrangThaiHoaDon();
         }
+
+
+        private void btnThemHoaDonMoi_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Tạo hóa đơn mới
+                string sql = @"INSERT INTO HoaDon (NhanVienId, NgayTao, TrangThai, TongTien, SoLuongMon)
+                       OUTPUT INSERTED.Id
+                       VALUES (@nv, GETDATE(), N'Chưa thanh toán', 0, 0)";
+                int newHoaDonId = Convert.ToInt32(DataAccess.ExecuteScalar(sql, new SqlParameter("@nv", nhanVienId)));
+
+                // Cập nhật hoaDonId hiện tại
+                hoaDonId = newHoaDonId;
+
+                // Load lại danh sách chi tiết (rỗng)
+                dgvChiTietHoaDon.DataSource = null;
+                LoadChiTietHoaDon();
+
+                // Bật/ tắt nút theo trạng thái
+                KiemTraTrangThaiHoaDon();
+
+                MessageBox.Show("✅ Tạo hóa đơn mới thành công!");
+
+                // ✅ **Load lại DataGridView hiển thị tất cả hóa đơn**
+                LoadDanhSachHoaDon(); // <-- Hàm này phải có trong form quản lý hóa đơn
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("❌ Lỗi khi tạo hóa đơn: " + ex.Message);
+            }
+        }
+        private void LoadDanhSachHoaDon()
+        {
+            string sql = "SELECT Id, NhanVienId, NgayTao, TongTien, SoLuongMon, TrangThai FROM HoaDon ORDER BY NgayTao DESC";
+            dgvHoaDon.DataSource = DataAccess.GetDataTable(sql);
+        }
+
     }
 }
