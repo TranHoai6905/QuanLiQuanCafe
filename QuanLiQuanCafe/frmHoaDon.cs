@@ -1,75 +1,89 @@
 ﻿using System;
+using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace QuanLiQuanCafe
 {
     public partial class frmHoaDon : Form
     {
-        private HoaDon currentHoaDon;
+        private DataTable dtHoaDon;
+        private DataTable dtChiTiet;
+        private string nhanVien = "NV01";
 
         public frmHoaDon()
         {
             InitializeComponent();
-            currentHoaDon = new HoaDon() { Id = 1 };
+            LoadData();
         }
 
-        private void frmHoaDon_Load(object sender, EventArgs e)
+        private void LoadData()
         {
-            // Xóa cột cũ và bật AutoGenerateColumns
-            dgvMon.Columns.Clear();
-            dgvMon.AutoGenerateColumns = true;
-            dgvHoaDon.Columns.Clear();
-            dgvHoaDon.AutoGenerateColumns = true;
+            dtHoaDon = new DataTable();
+            dtHoaDon.Columns.Add("Mã HD");
+            dtHoaDon.Columns.Add("Ngày");
+            dtHoaDon.Columns.Add("Nhân viên");
+            dtHoaDon.Columns.Add("Tổng tiền");
+            dtHoaDon.Columns.Add("Số lượng món");
 
-            // Load dữ liệu
-            dgvMon.DataSource = DataManager.LoadMon();
-            dgvHoaDon.DataSource = DataManager.LoadHoaDon(currentHoaDon.Id);
+            dtChiTiet = new DataTable();
+            dtChiTiet.Columns.Add("Loại");
+            dtChiTiet.Columns.Add("Tên món");
+            dtChiTiet.Columns.Add("Giá");
+            dtChiTiet.Columns.Add("Số lượng");
 
-            CapNhatTongTien();
+            dgvHoaDon.DataSource = dtHoaDon;
+            dgvChiTiet.DataSource = dtChiTiet;
+
+            // Dữ liệu mẫu
+            dtHoaDon.Rows.Add("HD001", DateTime.Now.ToString("dd/MM/yyyy"), nhanVien, 0, 0);
+            dtHoaDon.Rows.Add("HD002", DateTime.Now.ToString("dd/MM/yyyy"), nhanVien, 0, 0);
         }
 
-        // Thêm món vào hóa đơn
-        private void btnThemMon_Click(object sender, EventArgs e)
+        private void dgvHoaDon_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvMon.CurrentRow == null) return;
-
-            Mon m = dgvMon.CurrentRow.DataBoundItem as Mon;
-            if (m != null)
+            dtChiTiet.Clear();
+            if (dgvHoaDon.CurrentRow != null)
             {
-                DataManager.ThemMonVaoHD(currentHoaDon, m);
-                dgvHoaDon.DataSource = DataManager.LoadHoaDon(currentHoaDon.Id);
-                CapNhatTongTien();
+                // Lấy dữ liệu món (ví dụ mẫu)
+                dtChiTiet.Rows.Add("Thức uống", "Cà phê sữa", 15000, 1);
             }
         }
 
-        // Xóa món khỏi hóa đơn
+        private void btnThemMon_Click(object sender, EventArgs e)
+        {
+            frmMon frm = new frmMon(admin: false, fromHoaDon: true);
+            frm.ShowDialog();
+            // Sau khi chọn món, giả lập thêm vào chi tiết hóa đơn
+            dtChiTiet.Rows.Add("Thức uống", "Trà đá", 5000, 1);
+        }
+
         private void btnXoaMon_Click(object sender, EventArgs e)
+        {
+            if (dgvChiTiet.CurrentRow != null)
+            {
+                DataRow row = (dgvChiTiet.CurrentRow.DataBoundItem as DataRowView).Row;
+                dtChiTiet.Rows.Remove(row);
+            }
+        }
+
+
+        private void btnThanhToan_Click(object sender, EventArgs e)
         {
             if (dgvHoaDon.CurrentRow == null) return;
 
-            Mon m = dgvHoaDon.CurrentRow.DataBoundItem as Mon;
-            if (m != null)
+            decimal tong = 0;
+            int soLuong = 0;
+            foreach (DataRow r in dtChiTiet.Rows)
             {
-                DataManager.XoaMonKhoiHD(currentHoaDon, m);
-                dgvHoaDon.DataSource = DataManager.LoadHoaDon(currentHoaDon.Id);
-                CapNhatTongTien();
+                tong += Convert.ToDecimal(r["Giá"]) * Convert.ToInt32(r["Số lượng"]);
+                soLuong += Convert.ToInt32(r["Số lượng"]);
             }
-        }
 
-        // Thanh toán hóa đơn
-        private void btnThanhToan_Click(object sender, EventArgs e)
-        {
-            DataManager.ThanhToanHD(currentHoaDon);
-            dgvHoaDon.DataSource = DataManager.LoadHoaDon(currentHoaDon.Id);
-            CapNhatTongTien();
-            MessageBox.Show("Thanh toán thành công!");
-        }
-
-        // Cập nhật tổng tiền
-        private void CapNhatTongTien()
-        {
-            decimal tong = DataManager.TinhTongTien(currentHoaDon);
-            lblTongTien.Text = "Tổng tiền: " + tong.ToString("C");
+            dgvHoaDon.CurrentRow.Cells["Tổng tiền"].Value = tong;
+            dgvHoaDon.CurrentRow.Cells["Số lượng món"].Value = soLuong;
+            MessageBox.Show($"Thanh toán thành công: {tong} VND");
+            dtChiTiet.Clear();
         }
     }
 }
