@@ -22,6 +22,7 @@ namespace QuanLiQuanCafe
             this.btnThemMon = new System.Windows.Forms.Button();
             this.btnXoaMon = new System.Windows.Forms.Button();
             this.btnThanhToan = new System.Windows.Forms.Button();
+            this.btnXoaHoaDon = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHoaDon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChiTietHoaDon)).BeginInit();
             this.SuspendLayout();
@@ -33,6 +34,9 @@ namespace QuanLiQuanCafe
             this.dgvHoaDon.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvHoaDon.Size = new System.Drawing.Size(651, 173);
             this.dgvHoaDon.TabIndex = 0;
+            this.dgvHoaDon.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHoaDon_CellClick_1);
+            this.dgvHoaDon.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvHoaDon_CellFormatting);
+            this.dgvHoaDon.SelectionChanged += new System.EventHandler(this.dgvHoaDon_SelectionChanged);
             // 
             // dgvChiTietHoaDon
             // 
@@ -82,11 +86,22 @@ namespace QuanLiQuanCafe
             this.btnThanhToan.UseVisualStyleBackColor = true;
             this.btnThanhToan.Click += new System.EventHandler(this.btnThanhToan_Click);
             // 
+            // btnXoaHoaDon
+            // 
+            this.btnXoaHoaDon.Location = new System.Drawing.Point(170, 12);
+            this.btnXoaHoaDon.Name = "btnXoaHoaDon";
+            this.btnXoaHoaDon.Size = new System.Drawing.Size(75, 23);
+            this.btnXoaHoaDon.TabIndex = 6;
+            this.btnXoaHoaDon.Text = "Xóa hóa đơn";
+            this.btnXoaHoaDon.UseVisualStyleBackColor = true;
+            this.btnXoaHoaDon.Click += new System.EventHandler(this.btnXoaHoaDon_Click);
+            // 
             // frmHoaDon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(672, 417);
+            this.Controls.Add(this.btnXoaHoaDon);
             this.Controls.Add(this.btnThanhToan);
             this.Controls.Add(this.btnXoaMon);
             this.Controls.Add(this.btnThemMon);
@@ -110,5 +125,6 @@ namespace QuanLiQuanCafe
         private System.Windows.Forms.Button btnThemMon;
         private System.Windows.Forms.Button btnXoaMon;
         private System.Windows.Forms.Button btnThanhToan;
+        private Button btnXoaHoaDon;
     }
 }

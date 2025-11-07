@@ -15,7 +15,6 @@ namespace QuanLiQuanCafe
         {
             string taiKhoan = txtTaiKhoan.Text.Trim();
             string matKhau = txtMatKhau.Text.Trim();
-
             string sql = "SELECT * FROM TaiKhoan WHERE TaiKhoan=@tk AND MatKhau=@mk";
 
             using (SqlConnection conn = new SqlConnection(DataAccess.ConnectionString))
@@ -29,23 +28,42 @@ namespace QuanLiQuanCafe
                 if (reader.Read())
                 {
                     int nhanVienId = Convert.ToInt32(reader["Id"]);
-                    string vaiTro = reader["VaiTro"].ToString();
+                    string vaiTro = reader["VaiTro"].ToString().Trim().ToLower(); // Chuẩn hóa
+
                     reader.Close();
 
-                    // Tạo hóa đơn mới cho nhân viên đăng nhập
-                    int hoaDonId = TaoHoaDonMoi(conn, nhanVienId);
+                    MessageBox.Show(
+                        $"Đăng nhập thành công!\nVai trò: {(vaiTro == "admin" ? "Quản trị viên (chỉ xem)" : "Nhân viên (đầy đủ quyền)")}",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    frmHoaDon frm = new frmHoaDon(nhanVienId, vaiTro, hoaDonId);
-                    this.Hide();
-                    frm.ShowDialog();
-                    this.Show();
+                    if (vaiTro == "admin")
+                    {
+                        // Admin mở frmThemMon
+                        frmThemMon frmAdmin = new frmThemMon();
+                        this.Hide();
+                        frmAdmin.ShowDialog();
+                        this.Show();
+                    }
+                    else
+                    {
+                        // Nhân viên tạo hóa đơn và mở frmHoaDon
+                        int hoaDonId = TaoHoaDonMoi(conn, nhanVienId);
+                        frmHoaDon frm = new frmHoaDon(nhanVienId, vaiTro, hoaDonId);
+                        this.Hide();
+                        frm.ShowDialog();
+                        this.Show();
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Tên đăng nhập hoặc mật khẩu sai!", "Đăng nhập thất bại", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    reader.Close();
+                    MessageBox.Show("Tên đăng nhập hoặc mật khẩu sai!", "Đăng nhập thất bại",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+
             }
         }
+
 
         private int TaoHoaDonMoi(SqlConnection conn, int nhanVienId)
         {

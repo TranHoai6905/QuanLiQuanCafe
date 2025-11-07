@@ -79,22 +79,30 @@ namespace QuanLiQuanCafe
             if (dgvMon.SelectedRows.Count == 0) return;
 
             int id = Convert.ToInt32(dgvMon.SelectedRows[0].Cells["Id"].Value);
-            int result = DataAccess.ExecuteNonQuery(
-                "DELETE FROM Mon WHERE Id=@id",
-                new SqlParameter("@id", id)
-            );
+            try
+            {
+                int result = DataAccess.ExecuteNonQuery(
+                    "DELETE FROM Mon WHERE Id=@id",
+                    new SqlParameter("@id", id)
+                );
 
-            if (result > 0)
-            {
-                LoadMon();
-                ClearInputs();
-                MessageBox.Show("✅ Xóa món thành công!");
+                if (result > 0)
+                {
+                    LoadMon();
+                    ClearInputs();
+                    MessageBox.Show("✅ Xóa món thành công!");
+                }
+                else
+                {
+                    MessageBox.Show("❌ Không xóa được món (có thể bị ràng buộc FK)!");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("❌ Lỗi khi xóa!");
+                MessageBox.Show("❌ Lỗi khi xóa: " + ex.Message);
             }
         }
+
 
         private void btnSuaMon_Click(object sender, EventArgs e)
         {

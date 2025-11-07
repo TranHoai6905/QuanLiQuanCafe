@@ -27,8 +27,10 @@
             this.dgvMon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMon.Location = new System.Drawing.Point(200, 84);
             this.dgvMon.Name = "dgvMon";
+            this.dgvMon.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMon.Size = new System.Drawing.Size(389, 274);
             this.dgvMon.TabIndex = 0;
+            this.dgvMon.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMon_CellClick);
             // 
             // txtTimKiem
             // 

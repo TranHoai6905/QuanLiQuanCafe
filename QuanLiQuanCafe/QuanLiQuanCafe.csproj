@@ -73,7 +73,9 @@
     <Compile Include="frmThemMon.Designer.cs">
       <DependentUpon>frmThemMon.cs</DependentUpon>
     </Compile>
+    <Compile Include="HoaDon.cs" />
     <Compile Include="Mon.cs" />
+    <Compile Include="MonDAO.cs" />
     <Compile Include="MonInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
