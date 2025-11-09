@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TaiKhoanBUS = QuanLiQuanCafe.TaiKhoanBUS;
 
 namespace QuanLiQuanCafe
 {
@@ -39,7 +40,12 @@ namespace QuanLiQuanCafe
 
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
+            bool ketQua = TaiKhoanBUS.KiemTraDangNhap(txtTenDangNhap.Text, txtMatKhau.Text);
 
+            if (ketQua)
+                MessageBox.Show("Đăng nhập thành công!");
+            else
+                MessageBox.Show("Sai tài khoản hoặc mật khẩu!");
         }
 
         private void lnkDangKy_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

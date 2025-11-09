@@ -51,9 +51,10 @@
             this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(324, 276);
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(432, 340);
+            this.guna2HtmlLabel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            this.guna2HtmlLabel4.Size = new System.Drawing.Size(98, 22);
+            this.guna2HtmlLabel4.Size = new System.Drawing.Size(120, 27);
             this.guna2HtmlLabel4.TabIndex = 33;
             this.guna2HtmlLabel4.Text = "Mật khẩu mới";
             // 
@@ -69,22 +70,24 @@
             this.txtSoDienThoai.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.txtSoDienThoai.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.txtSoDienThoai.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSoDienThoai.Location = new System.Drawing.Point(324, 305);
-            this.txtSoDienThoai.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSoDienThoai.Location = new System.Drawing.Point(432, 375);
+            this.txtSoDienThoai.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.txtSoDienThoai.Name = "txtSoDienThoai";
             this.txtSoDienThoai.PlaceholderText = "";
             this.txtSoDienThoai.SelectedText = "";
-            this.txtSoDienThoai.Size = new System.Drawing.Size(253, 33);
+            this.txtSoDienThoai.Size = new System.Drawing.Size(337, 41);
             this.txtSoDienThoai.TabIndex = 32;
+            this.txtSoDienThoai.TextChanged += new System.EventHandler(this.txtSoDienThoai_TextChanged);
             // 
             // guna2HtmlLabel3
             // 
             this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.guna2HtmlLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.guna2HtmlLabel3.Location = new System.Drawing.Point(84, 276);
+            this.guna2HtmlLabel3.Location = new System.Drawing.Point(112, 340);
+            this.guna2HtmlLabel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            this.guna2HtmlLabel3.Size = new System.Drawing.Size(90, 22);
+            this.guna2HtmlLabel3.Size = new System.Drawing.Size(110, 27);
             this.guna2HtmlLabel3.TabIndex = 31;
             this.guna2HtmlLabel3.Text = "Mật khẩu cũ";
             // 
@@ -100,22 +103,24 @@
             this.txtMatKhauCu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.txtMatKhauCu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.txtMatKhauCu.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtMatKhauCu.Location = new System.Drawing.Point(82, 305);
-            this.txtMatKhauCu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMatKhauCu.Location = new System.Drawing.Point(109, 375);
+            this.txtMatKhauCu.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.txtMatKhauCu.Name = "txtMatKhauCu";
             this.txtMatKhauCu.PlaceholderText = "";
             this.txtMatKhauCu.SelectedText = "";
-            this.txtMatKhauCu.Size = new System.Drawing.Size(234, 33);
+            this.txtMatKhauCu.Size = new System.Drawing.Size(312, 41);
             this.txtMatKhauCu.TabIndex = 30;
+            this.txtMatKhauCu.TextChanged += new System.EventHandler(this.txtMatKhauCu_TextChanged);
             // 
             // lblDangKy
             // 
             this.lblDangKy.BackColor = System.Drawing.Color.Transparent;
             this.lblDangKy.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.lblDangKy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.lblDangKy.Location = new System.Drawing.Point(322, 80);
+            this.lblDangKy.Location = new System.Drawing.Point(429, 98);
+            this.lblDangKy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblDangKy.Name = "lblDangKy";
-            this.lblDangKy.Size = new System.Drawing.Size(219, 41);
+            this.lblDangKy.Size = new System.Drawing.Size(272, 54);
             this.lblDangKy.TabIndex = 28;
             this.lblDangKy.Text = "Đổi mật khẩu";
             // 
@@ -131,23 +136,25 @@
             this.txtMatKhauMoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.txtMatKhauMoi.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.txtMatKhauMoi.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtMatKhauMoi.Location = new System.Drawing.Point(82, 374);
-            this.txtMatKhauMoi.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMatKhauMoi.Location = new System.Drawing.Point(109, 460);
+            this.txtMatKhauMoi.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.txtMatKhauMoi.Name = "txtMatKhauMoi";
             this.txtMatKhauMoi.PasswordChar = '*';
             this.txtMatKhauMoi.PlaceholderText = "";
             this.txtMatKhauMoi.SelectedText = "";
-            this.txtMatKhauMoi.Size = new System.Drawing.Size(493, 33);
+            this.txtMatKhauMoi.Size = new System.Drawing.Size(657, 41);
             this.txtMatKhauMoi.TabIndex = 27;
+            this.txtMatKhauMoi.TextChanged += new System.EventHandler(this.txtMatKhauMoi_TextChanged);
             // 
             // guna2HtmlLabel2
             // 
             this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.guna2HtmlLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.guna2HtmlLabel2.Location = new System.Drawing.Point(84, 345);
+            this.guna2HtmlLabel2.Location = new System.Drawing.Point(112, 425);
+            this.guna2HtmlLabel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            this.guna2HtmlLabel2.Size = new System.Drawing.Size(159, 22);
+            this.guna2HtmlLabel2.Size = new System.Drawing.Size(195, 27);
             this.guna2HtmlLabel2.TabIndex = 26;
             this.guna2HtmlLabel2.Text = "Nhập lại mật khẩu mới";
             // 
@@ -156,9 +163,10 @@
             this.lblHoTen.BackColor = System.Drawing.Color.Transparent;
             this.lblHoTen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.lblHoTen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.lblHoTen.Location = new System.Drawing.Point(82, 203);
+            this.lblHoTen.Location = new System.Drawing.Point(109, 250);
+            this.lblHoTen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblHoTen.Name = "lblHoTen";
-            this.lblHoTen.Size = new System.Drawing.Size(71, 22);
+            this.lblHoTen.Size = new System.Drawing.Size(86, 27);
             this.lblHoTen.TabIndex = 25;
             this.lblHoTen.Text = "Họ và tên";
             // 
@@ -174,13 +182,14 @@
             this.txtTenDangNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.txtTenDangNhap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.txtTenDangNhap.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTenDangNhap.Location = new System.Drawing.Point(82, 232);
-            this.txtTenDangNhap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTenDangNhap.Location = new System.Drawing.Point(109, 286);
+            this.txtTenDangNhap.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.txtTenDangNhap.Name = "txtTenDangNhap";
             this.txtTenDangNhap.PlaceholderText = "";
             this.txtTenDangNhap.SelectedText = "";
-            this.txtTenDangNhap.Size = new System.Drawing.Size(495, 33);
+            this.txtTenDangNhap.Size = new System.Drawing.Size(660, 41);
             this.txtTenDangNhap.TabIndex = 24;
+            this.txtTenDangNhap.TextChanged += new System.EventHandler(this.txtTenDangNhap_TextChanged);
             // 
             // btnDoiMatKhau
             // 
@@ -192,11 +201,13 @@
             this.btnDoiMatKhau.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.btnDoiMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnDoiMatKhau.ForeColor = System.Drawing.Color.White;
-            this.btnDoiMatKhau.Location = new System.Drawing.Point(440, 432);
+            this.btnDoiMatKhau.Location = new System.Drawing.Point(587, 532);
+            this.btnDoiMatKhau.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDoiMatKhau.Name = "btnDoiMatKhau";
-            this.btnDoiMatKhau.Size = new System.Drawing.Size(135, 41);
+            this.btnDoiMatKhau.Size = new System.Drawing.Size(180, 50);
             this.btnDoiMatKhau.TabIndex = 34;
             this.btnDoiMatKhau.Text = "Cập nhật";
+            this.btnDoiMatKhau.Click += new System.EventHandler(this.btnDoiMatKhau_Click);
             // 
             // btnHuy
             // 
@@ -208,28 +219,31 @@
             this.btnHuy.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.btnHuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnHuy.ForeColor = System.Drawing.Color.White;
-            this.btnHuy.Location = new System.Drawing.Point(84, 432);
+            this.btnHuy.Location = new System.Drawing.Point(112, 532);
+            this.btnHuy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnHuy.Name = "btnHuy";
-            this.btnHuy.Size = new System.Drawing.Size(135, 41);
+            this.btnHuy.Size = new System.Drawing.Size(180, 50);
             this.btnHuy.TabIndex = 35;
             this.btnHuy.Text = "Hủy";
+            this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // 
             // picLogo
             // 
             this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
             this.picLogo.ImageRotate = 0F;
-            this.picLogo.Location = new System.Drawing.Point(39, 9);
+            this.picLogo.Location = new System.Drawing.Point(52, 11);
+            this.picLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(277, 158);
+            this.picLogo.Size = new System.Drawing.Size(369, 194);
             this.picLogo.TabIndex = 9;
             this.picLogo.TabStop = false;
             // 
             // FormDoiMatKhau
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(239)))), ((int)(((byte)(233)))));
-            this.ClientSize = new System.Drawing.Size(637, 497);
+            this.ClientSize = new System.Drawing.Size(849, 612);
             this.Controls.Add(this.btnHuy);
             this.Controls.Add(this.btnDoiMatKhau);
             this.Controls.Add(this.guna2HtmlLabel4);
@@ -242,6 +256,7 @@
             this.Controls.Add(this.lblHoTen);
             this.Controls.Add(this.txtTenDangNhap);
             this.Controls.Add(this.picLogo);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormDoiMatKhau";
             this.Text = "FormDoiMatKhau";
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
