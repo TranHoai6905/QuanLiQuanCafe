@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLiQuanCafe", "QuanLiQuanCafe\QuanLiQuanCafe.csproj", "{8D82FD2A-0991-4298-89B5-DA58CA2BD32E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLiQuanCafe.Test", "QuanLiQuanCafe.Test\QuanLiQuanCafe.Test.csproj", "{D8F6EBC6-2656-408E-8FC0-72AC1FF83890}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8D82FD2A-0991-4298-89B5-DA58CA2BD32E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D82FD2A-0991-4298-89B5-DA58CA2BD32E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D82FD2A-0991-4298-89B5-DA58CA2BD32E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8F6EBC6-2656-408E-8FC0-72AC1FF83890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8F6EBC6-2656-408E-8FC0-72AC1FF83890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8F6EBC6-2656-408E-8FC0-72AC1FF83890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8F6EBC6-2656-408E-8FC0-72AC1FF83890}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

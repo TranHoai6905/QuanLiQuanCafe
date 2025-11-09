@@ -16,5 +16,40 @@ namespace QuanLiQuanCafe
         {
             InitializeComponent();
         }
+
+        private void FormDangNhap_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTenDangNhap_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtMatKhau_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkGhiNho_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDangNhap_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lnkDangKy_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
+        private void lnkQuenMatKhau_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
     }
 }
