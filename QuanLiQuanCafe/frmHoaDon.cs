@@ -3,52 +3,52 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
+using QuanLiQuanCafe.Models;
 
 namespace QuanLiQuanCafe
 {
     public partial class frmHoaDon : Form
     {
-        private int nhanVienId;
-        private string vaiTro;
-        private int hoaDonId;
-        private bool isNhanVien;
+        private int nhanVienId;       // ID nhân viên đăng nhập
+        private string vaiTro;        // Vai trò (nhanvien/admin)
+        private int hoaDonId;         // ID hóa đơn đang chọn
+        private bool isNhanVien;      // Biến phân quyền
+
         public frmHoaDon(int nhanVienId, string vaiTro, int hoaDonId)
         {
             InitializeComponent();
             this.nhanVienId = nhanVienId;
             this.vaiTro = vaiTro.Trim().ToLower();
             this.hoaDonId = hoaDonId;
-            this.isNhanVien = this.vaiTro == "nhanvien"; // QUAN TRỌNG
+            this.isNhanVien = this.vaiTro == "nhanvien"; // Dùng 1 biến duy nhất cho phân quyền
         }
 
         private void frmHoaDon_Load(object sender, EventArgs e)
         {
-            LoadDanhSachHoaDon();
-            LoadChiTietHoaDon();
-            KiemTraTrangThaiHoaDon();
+            LoadDanhSachHoaDon(); // Load danh sách hóa đơn
+            LoadChiTietHoaDon();   // Load chi tiết hóa đơn
+            UpdateButtonStatus();  // Cập nhật trạng thái nút theo phân quyền và trạng thái
 
+            // Nút chỉ hiển thị cho nhân viên
             btnThemHoaDonMoi.Visible = isNhanVien;
             btnThemHoaDonMoi.Enabled = isNhanVien;
             btnXoaHoaDon.Visible = isNhanVien;
-
-            // SỬA DÒNG NÀY: Gọi hàm kiểm tra xóa
             btnXoaHoaDon.Enabled = isNhanVien && KiemTraCoTheXoa();
 
-            if (!isNhanVien) // Admin
+            // Admin không được thao tác thêm/xóa món
+            if (!isNhanVien)
             {
                 btnThemMon.Enabled = false;
                 btnXoaMon.Enabled = false;
                 btnThanhToan.Enabled = false;
             }
         }
-        private bool KiemTraCoTheXoa()
-        {
-            if (dgvHoaDon.SelectedRows.Count == 0) return false;
 
-            string trangThai = dgvHoaDon.SelectedRows[0].Cells["TrangThai"].Value?.ToString().Trim();
-            return trangThai == "Chưa thanh toán";
-        }
+        // ===========================
+        // LOAD DATA
+        // ===========================
 
+        // Load chi tiết hóa đơn hiện tại
         private void LoadChiTietHoaDon()
         {
             string sql = @"SELECT c.Id, m.TenMon, c.SoLuong, m.Gia, (c.SoLuong * m.Gia) AS ThanhTien
@@ -58,84 +58,9 @@ namespace QuanLiQuanCafe
             dgvChiTietHoaDon.DataSource = DataAccess.GetDataTable(sql, new SqlParameter("@id", hoaDonId));
         }
 
-        private void KiemTraTrangThaiHoaDon()
-        {
-            string sql = "SELECT TrangThai FROM HoaDon WHERE Id = @id";
-            object kq = DataAccess.ExecuteScalar(sql, new SqlParameter("@id", hoaDonId));
-            string trangThai = kq?.ToString() ?? "";
-
-            bool chuaThanhToan = trangThai == "Chưa thanh toán";
-            bool isNhanVien = vaiTro.Trim().ToLower() == "nhanvien";
-
-            // Chỉ nhân viên + hóa đơn chưa thanh toán mới được thao tác
-            btnThemMon.Enabled = isNhanVien && chuaThanhToan;
-            btnXoaMon.Enabled = isNhanVien && chuaThanhToan;
-            btnThanhToan.Enabled = isNhanVien && chuaThanhToan;
-        }
-        private void btnThemMon_Click(object sender, EventArgs e)
-        {
-            if (!isNhanVien)
-            {
-                MessageBox.Show("Chỉ nhân viên mới được thêm món!");
-                return;
-            }
-
-            frmMon frm = new frmMon(hoaDonId);
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                LoadChiTietHoaDon();
-                LoadDanhSachHoaDon();
-                KiemTraTrangThaiHoaDon();
-
-                // CÁCH 2: HIỆN THÔNG BÁO CỐ ĐỊNH – KHÔNG DÙNG dgvMon
-                MessageBox.Show("Đã thêm món vào hóa đơn!",
-                                "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-        private void btnXoaMon_Click(object sender, EventArgs e)
-        {
-            if (vaiTro.Trim().ToLower() != "nhanvien")
-            {
-                MessageBox.Show("Chỉ nhân viên mới được xóa món!", "Phân quyền", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (dgvChiTietHoaDon.SelectedRows.Count > 0)
-            {
-                int id = Convert.ToInt32(dgvChiTietHoaDon.SelectedRows[0].Cells["Id"].Value);
-                string sql = "DELETE FROM ChiTietHoaDon WHERE Id=@id";
-                DataAccess.ExecuteNonQuery(sql, new SqlParameter("@id", id));
-                LoadChiTietHoaDon();
-                KiemTraTrangThaiHoaDon();
-            }
-        }
-
-        private void btnThanhToan_Click(object sender, EventArgs e)
-        {
-            string sqlUpdate = @"UPDATE HoaDon 
-                         SET TrangThai = N'Đã thanh toán',
-                             TongTien = ISNULL((SELECT SUM(ct.SoLuong * m.Gia) 
-                                                FROM ChiTietHoaDon ct 
-                                                JOIN Mon m ON ct.MonId = m.Id 
-                                                WHERE ct.HoaDonId = @id), 0),
-                             SoLuongMon = ISNULL((SELECT SUM(SoLuong) 
-                                                  FROM ChiTietHoaDon 
-                                                  WHERE HoaDonId = @id), 0)
-                         WHERE Id = @id";
-
-            DataAccess.ExecuteNonQuery(sqlUpdate, new SqlParameter("@id", hoaDonId));
-
-            MessageBox.Show("Thanh toán thành công!");
-            LoadChiTietHoaDon();
-            KiemTraTrangThaiHoaDon();
-            LoadDanhSachHoaDon(); // CẬP NHẬT LẠI DANH SÁCH
-        }
-
-
-
+        // Load danh sách hóa đơn
         private void LoadDanhSachHoaDon()
         {
-            // XÓA HOÀN TOÀN DỮ LIỆU CŨ
             dgvHoaDon.DataSource = null;
             dgvHoaDon.Rows.Clear();
             dgvHoaDon.Columns.Clear();
@@ -155,29 +80,57 @@ namespace QuanLiQuanCafe
             DataTable dt = DataAccess.GetDataTable(sql);
             dgvHoaDon.DataSource = dt;
 
-            // Định dạng cột
+            // Format tiền
             if (dgvHoaDon.Columns["TongTien"] != null)
                 dgvHoaDon.Columns["TongTien"].DefaultCellStyle.Format = "N0";
         }
+
+        // ===========================
+        // BUTTON / EVENT HANDLER
+        // ===========================
+
+        // Phân quyền: chỉ nhân viên + chưa thanh toán mới thao tác được
+        private void UpdateButtonStatus()
+        {
+            bool chuaThanhToan = GetTrangThaiHoaDon() == "Chưa thanh toán";
+            btnThemMon.Enabled = isNhanVien && chuaThanhToan;
+            btnXoaMon.Enabled = isNhanVien && chuaThanhToan;
+            btnThanhToan.Enabled = isNhanVien && chuaThanhToan;
+            btnXoaHoaDon.Enabled = isNhanVien && KiemTraCoTheXoa();
+        }
+
+        private string GetTrangThaiHoaDon()
+        {
+            string sql = "SELECT TrangThai FROM HoaDon WHERE Id = @id";
+            object kq = DataAccess.ExecuteScalar(sql, new SqlParameter("@id", hoaDonId));
+            return kq?.ToString().Trim() ?? "";
+        }
+
+        // Kiểm tra xem hóa đơn có thể xóa hay không
+        private bool KiemTraCoTheXoa()
+        {
+            if (dgvHoaDon.SelectedRows.Count == 0) return false;
+            string trangThai = dgvHoaDon.SelectedRows[0].Cells["TrangThai"].Value?.ToString().Trim();
+            return trangThai == "Chưa thanh toán";
+        }
+
+        // Click chọn hóa đơn
         private void dgvHoaDon_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                int selectedHoaDonId = Convert.ToInt32(dgvHoaDon.Rows[e.RowIndex].Cells["Id"].Value);
-                hoaDonId = selectedHoaDonId;
-
+                hoaDonId = Convert.ToInt32(dgvHoaDon.Rows[e.RowIndex].Cells["Id"].Value);
                 LoadChiTietHoaDon();
-                KiemTraTrangThaiHoaDon();
+                UpdateButtonStatus();
             }
         }
 
+        // Format màu cột trạng thái
         private void dgvHoaDon_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            // Kiểm tra cột "TrangThai" và có giá trị
             if (dgvHoaDon.Columns[e.ColumnIndex].Name == "TrangThai" && e.Value != null)
             {
                 string trangThai = e.Value.ToString().Trim();
-
                 if (trangThai == "Đã thanh toán")
                 {
                     e.CellStyle.ForeColor = Color.Green;
@@ -190,16 +143,96 @@ namespace QuanLiQuanCafe
                 }
             }
         }
+
+        // Chọn dòng trong dgvHoaDon
+        private void dgvHoaDon_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvHoaDon.SelectedRows.Count > 0)
+            {
+                hoaDonId = Convert.ToInt32(dgvHoaDon.SelectedRows[0].Cells["Id"].Value);
+                LoadChiTietHoaDon();
+                UpdateButtonStatus();
+            }
+        }
+
+        // ===========================
+        // THÊM / XÓA MÓN
+        // ===========================
+
+        // Thêm món vào hóa đơn
+        private void btnThemMon_Click(object sender, EventArgs e)
+        {
+            if (!isNhanVien)
+            {
+                MessageBox.Show("Chỉ nhân viên mới được thêm món!");
+                return;
+            }
+
+            frmMon frm = new frmMon(hoaDonId);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                LoadChiTietHoaDon();
+                LoadDanhSachHoaDon();
+                UpdateButtonStatus();
+                MessageBox.Show("Đã thêm món vào hóa đơn!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        // Xóa món từ hóa đơn
+        private void btnXoaMon_Click(object sender, EventArgs e)
+        {
+            if (!isNhanVien)
+            {
+                MessageBox.Show("Chỉ nhân viên mới được xóa món!", "Phân quyền", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (dgvChiTietHoaDon.SelectedRows.Count > 0)
+            {
+                int id = Convert.ToInt32(dgvChiTietHoaDon.SelectedRows[0].Cells["Id"].Value);
+                string sql = "DELETE FROM ChiTietHoaDon WHERE Id=@id";
+                DataAccess.ExecuteNonQuery(sql, new SqlParameter("@id", id));
+                LoadChiTietHoaDon();
+                UpdateButtonStatus();
+            }
+        }
+
+        // ===========================
+        // THANH TOÁN / XÓA HÓA ĐƠN
+        // ===========================
+
+        // Thanh toán hóa đơn
+        private void btnThanhToan_Click(object sender, EventArgs e)
+        {
+            string sqlUpdate = @"
+                UPDATE HoaDon 
+                SET TrangThai = N'Đã thanh toán',
+                    TongTien = ISNULL((SELECT SUM(ct.SoLuong * m.Gia) 
+                                       FROM ChiTietHoaDon ct 
+                                       JOIN Mon m ON ct.MonId = m.Id 
+                                       WHERE ct.HoaDonId = @id), 0),
+                    SoLuongMon = ISNULL((SELECT SUM(SoLuong) 
+                                         FROM ChiTietHoaDon 
+                                         WHERE HoaDonId = @id), 0)
+                WHERE Id = @id";
+
+            DataAccess.ExecuteNonQuery(sqlUpdate, new SqlParameter("@id", hoaDonId));
+
+            MessageBox.Show("Thanh toán thành công!");
+            LoadChiTietHoaDon();
+            UpdateButtonStatus();
+            LoadDanhSachHoaDon(); // Cập nhật lại danh sách
+        }
+
+        // Xóa hóa đơn
         private void btnXoaHoaDon_Click(object sender, EventArgs e)
         {
-            // 1. Phân quyền: chỉ nhân viên
-            if (vaiTro.Trim().ToLower() != "nhanvien")
+            if (!isNhanVien)
             {
                 MessageBox.Show("Chỉ nhân viên mới được xóa hóa đơn!", "Phân quyền", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // 2. Kiểm tra có chọn dòng không
             if (dgvHoaDon.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Vui lòng chọn hóa đơn cần xóa!", "Chọn hóa đơn", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -209,38 +242,31 @@ namespace QuanLiQuanCafe
             int selectedId = Convert.ToInt32(dgvHoaDon.SelectedRows[0].Cells["Id"].Value);
             string trangThai = dgvHoaDon.SelectedRows[0].Cells["TrangThai"].Value.ToString().Trim();
 
-            // 3. Không cho xóa nếu đã thanh toán
             if (trangThai == "Đã thanh toán")
             {
                 MessageBox.Show("Không thể xóa hóa đơn đã thanh toán!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
-            // 4. Xác nhận xóa
-            var confirm = MessageBox.Show(
-                $"Bạn có chắc muốn xóa hóa đơn #{selectedId}?\nTất cả món sẽ bị xóa!",
-                "Xác nhận xóa",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
+            var confirm = MessageBox.Show($"Bạn có chắc muốn xóa hóa đơn #{selectedId}?\nTất cả món sẽ bị xóa!",
+                                          "Xác nhận xóa",
+                                          MessageBoxButtons.YesNo,
+                                          MessageBoxIcon.Question);
             if (confirm == DialogResult.Yes)
             {
                 try
                 {
                     string sql = "DELETE FROM HoaDon WHERE Id = @id";
                     int result = DataAccess.ExecuteNonQuery(sql, new SqlParameter("@id", selectedId));
-
                     if (result > 0)
                     {
                         MessageBox.Show("Xóa hóa đơn thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadDanhSachHoaDon(); // Cập nhật lại bảng
-
-                        // Nếu hóa đơn đang xem bị xóa → reset
+                        LoadDanhSachHoaDon();
                         if (hoaDonId == selectedId)
                         {
                             hoaDonId = -1;
                             dgvChiTietHoaDon.DataSource = null;
-                            KiemTraTrangThaiHoaDon();
+                            UpdateButtonStatus();
                         }
                     }
                 }
@@ -249,69 +275,69 @@ namespace QuanLiQuanCafe
                     MessageBox.Show("Lỗi khi xóa: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+
         }
-
-        private void dgvHoaDon_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvHoaDon.SelectedRows.Count > 0)
-            {
-                hoaDonId = Convert.ToInt32(dgvHoaDon.SelectedRows[0].Cells["Id"].Value);
-                LoadChiTietHoaDon();
-                KiemTraTrangThaiHoaDon();
-
-                btnXoaHoaDon.Enabled = isNhanVien && KiemTraCoTheXoa();
-            }
-        }
-
         private void btnThemHoaDonMoi_Click(object sender, EventArgs e)
         {
-            if (dgvChiTietHoaDon.SelectedRows.Count == 0) return;
-
-            int monId = Convert.ToInt32(dgvChiTietHoaDon.SelectedRows[0].Cells["Id"].Value);
-
-            using (SqlConnection conn = new SqlConnection(DataAccess.ConnectionString))
+            // Chỉ nhân viên mới được thêm hóa đơn
+            if (!isNhanVien)
             {
-                conn.Open();
-                using (SqlTransaction transaction = conn.BeginTransaction())
+                MessageBox.Show("Chỉ nhân viên mới được thêm hóa đơn!", "Phân quyền", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                // Mở kết nối và transaction
+                using (SqlConnection conn = new SqlConnection(DataAccess.ConnectionString))
                 {
-                    try
+                    conn.Open();
+                    using (SqlTransaction transaction = conn.BeginTransaction())
                     {
-                        // 1. Thêm món vào chi tiết
-                        string sqlInsert = "INSERT INTO ChiTietHoaDon (HoaDonId, MonId, SoLuong) VALUES (@hd, @m, 1)";
-                        SqlCommand cmdInsert = new SqlCommand(sqlInsert, conn, transaction);
-                        cmdInsert.Parameters.AddWithValue("@hd", hoaDonId);
-                        cmdInsert.Parameters.AddWithValue("@m", monId);
-                        cmdInsert.ExecuteNonQuery();
+                        try
+                        {
+                            // 1. Tạo hóa đơn mới
+                            string sqlInsert = "INSERT INTO HoaDon (NhanVienId, NgayTao, TrangThai) VALUES (@nv, GETDATE(), N'Chưa thanh toán'); SELECT SCOPE_IDENTITY();";
+                            SqlCommand cmdInsert = new SqlCommand(sqlInsert, conn, transaction);
+                            cmdInsert.Parameters.AddWithValue("@nv", nhanVienId);
+                            object result = cmdInsert.ExecuteScalar();
+                            int newHoaDonId = Convert.ToInt32(result);
 
-                        // 2. CẬP NHẬT TỔNG TIỀN & SỐ LƯỢNG MÓN
-                        string sqlUpdate = @"
-                            UPDATE HoaDon 
-                            SET 
-                                TongTien = ISNULL((SELECT SUM(ct.SoLuong * m.Gia) 
-                                                   FROM ChiTietHoaDon ct 
-                                                   JOIN Mon m ON ct.MonId = m.Id 
-                                                   WHERE ct.HoaDonId = @hd), 0),
-                                SoLuongMon = ISNULL((SELECT SUM(SoLuong) 
-                                                     FROM ChiTietHoaDon 
-                                                     WHERE HoaDonId = @hd), 0)
-                            WHERE Id = @hd";
+                            // 2. Commit transaction
+                            transaction.Commit();
 
-                        SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, conn, transaction);
-                        cmdUpdate.Parameters.AddWithValue("@hd", hoaDonId);
-                        cmdUpdate.ExecuteNonQuery();
+                            // 3. Thông báo thành công
+                            MessageBox.Show($"Đã tạo hóa đơn mới #{newHoaDonId}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        transaction.Commit();
-                    }
-                    catch
-                    {
-                        transaction.Rollback();
-                        throw;
+                            // 4. Cập nhật danh sách hóa đơn
+                            LoadDanhSachHoaDon();
+
+                            // 5. Chọn hóa đơn mới trong DataGridView
+                            foreach (DataGridViewRow row in dgvHoaDon.Rows)
+                            {
+                                if (Convert.ToInt32(row.Cells["Id"].Value) == newHoaDonId)
+                                {
+                                    row.Selected = true;
+                                    hoaDonId = newHoaDonId;
+                                    LoadChiTietHoaDon();
+                                    GetTrangThaiHoaDon();
+                                    break;
+                                }
+                            }
+                        }
+                        catch
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
                     }
                 }
             }
-
-            MessageBox.Show("Đã thêm món vào hóa đơn!");
-            this.DialogResult = DialogResult.OK; // Đóng form
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tạo hóa đơn mới: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
     }
 }

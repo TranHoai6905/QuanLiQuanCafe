@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.IO;
+using System.Data.SqlClient;
+using static System.Environment;
 
+
+using System.Configuration;
 namespace QuanLiQuanCafe
 {
     static class Program

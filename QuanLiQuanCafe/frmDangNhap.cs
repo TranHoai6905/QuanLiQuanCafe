@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLiQuanCafe.Models;
+using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -78,6 +79,13 @@ namespace QuanLiQuanCafe
         private void btnThoat_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnXemMon_Click(object sender, EventArgs e)
+        {
+            frmMon frm = new frmMon();
+            frm.ShowDialog();
+
         }
     }
 }
