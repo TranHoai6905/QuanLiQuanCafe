@@ -77,7 +77,8 @@
             this.txtSoDienThoai.SelectedText = "";
             this.txtSoDienThoai.Size = new System.Drawing.Size(337, 41);
             this.txtSoDienThoai.TabIndex = 32;
-            this.txtSoDienThoai.TextChanged += new System.EventHandler(this.txtSoDienThoai_TextChanged);
+
+
             // 
             // guna2HtmlLabel3
             // 
@@ -110,7 +111,8 @@
             this.txtMatKhauCu.SelectedText = "";
             this.txtMatKhauCu.Size = new System.Drawing.Size(312, 41);
             this.txtMatKhauCu.TabIndex = 30;
-            this.txtMatKhauCu.TextChanged += new System.EventHandler(this.txtMatKhauCu_TextChanged);
+
+
             // 
             // lblDangKy
             // 
@@ -144,7 +146,7 @@
             this.txtMatKhauMoi.SelectedText = "";
             this.txtMatKhauMoi.Size = new System.Drawing.Size(657, 41);
             this.txtMatKhauMoi.TabIndex = 27;
-            this.txtMatKhauMoi.TextChanged += new System.EventHandler(this.txtMatKhauMoi_TextChanged);
+
             // 
             // guna2HtmlLabel2
             // 
@@ -189,7 +191,8 @@
             this.txtTenDangNhap.SelectedText = "";
             this.txtTenDangNhap.Size = new System.Drawing.Size(660, 41);
             this.txtTenDangNhap.TabIndex = 24;
-            this.txtTenDangNhap.TextChanged += new System.EventHandler(this.txtTenDangNhap_TextChanged);
+
+
             // 
             // btnDoiMatKhau
             // 
@@ -207,7 +210,6 @@
             this.btnDoiMatKhau.Size = new System.Drawing.Size(180, 50);
             this.btnDoiMatKhau.TabIndex = 34;
             this.btnDoiMatKhau.Text = "Cập nhật";
-            this.btnDoiMatKhau.Click += new System.EventHandler(this.btnDoiMatKhau_Click);
             // 
             // btnHuy
             // 

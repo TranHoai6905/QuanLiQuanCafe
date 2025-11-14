@@ -1,61 +1,97 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using log4net;
+using QuanLiQuanCafe.Models;
+using System;
 using System.Windows.Forms;
-using TaiKhoanBUS = QuanLiQuanCafe.TaiKhoanBUS;
 
 namespace QuanLiQuanCafe
 {
     public partial class FormDangNhap : Form
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(FormDangNhap));
+        private readonly TaiKhoanBUS _taiKhoanBus = new TaiKhoanBUS();
+
         public FormDangNhap()
         {
             InitializeComponent();
         }
 
-        private void FormDangNhap_Load(object sender, EventArgs e)
+        private LoginFormData LayDuLieuDangNhap()
+            => new LoginFormData(txtTenDangNhap.Text.Trim(), txtMatKhau.Text.Trim());
+
+        private bool KiemTraHopLe(LoginFormData data, out string thongBao)
         {
-
-        }
-
-        private void txtTenDangNhap_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtMatKhau_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chkGhiNho_CheckedChanged(object sender, EventArgs e)
-        {
-
+            if (string.IsNullOrWhiteSpace(data.Username) || string.IsNullOrWhiteSpace(data.Password))
+            {
+                thongBao = "Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu!";
+                return false;
+            }
+            thongBao = string.Empty;
+            return true;
         }
 
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
-            bool ketQua = TaiKhoanBUS.KiemTraDangNhap(txtTenDangNhap.Text, txtMatKhau.Text);
+            var data = LayDuLieuDangNhap();
 
-            if (ketQua)
-                MessageBox.Show("Đăng nhập thành công!");
-            else
-                MessageBox.Show("Sai tài khoản hoặc mật khẩu!");
+            if (!KiemTraHopLe(data, out string thongBao))
+            {
+                ShowWarning(thongBao);
+                return;
+            }
+
+            try
+            {
+                LoginResult ketQua = _taiKhoanBus.DangNhap(data.Username, data.Password);
+
+                switch (ketQua)
+                {
+                    case LoginResult.Success:
+                        DangNhapThanhCong(data.Username);
+                        break;
+                    case LoginResult.WrongPassword:
+                        ShowError("Sai mật khẩu!");
+                        log.Warn($"Đăng nhập thất bại - Sai mật khẩu: '{data.Username}'");
+                        break;
+                    case LoginResult.AccountNotFound:
+                        ShowError("Tài khoản không tồn tại!");
+                        log.Warn($"Đăng nhập thất bại - Tài khoản không tồn tại: '{data.Username}'");
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowError("Lỗi kết nối cơ sở dữ liệu: " + ex.Message);
+                log.Error("Lỗi trong quá trình đăng nhập", ex);
+            }
+        }
+
+        private void DangNhapThanhCong(string tenDangNhap)
+        {
+            MessageBox.Show("Đăng nhập thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            log.Info($"Người dùng '{tenDangNhap}' đã đăng nhập thành công.");
+
+            // TODO: Mở form chính
+            // new FormMain().Show();
+            this.Hide();
         }
 
         private void lnkDangKy_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            Hide();
+            new FormDangKy().ShowDialog();
+            Show();
         }
 
         private void lnkQuenMatKhau_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            MessageBox.Show("Chức năng quên mật khẩu đang được phát triển.", "Thông báo",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void ShowError(string msg)
+            => MessageBox.Show(msg, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+        private void ShowWarning(string msg)
+            => MessageBox.Show(msg, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
     }
 }

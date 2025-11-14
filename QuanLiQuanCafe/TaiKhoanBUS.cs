@@ -1,57 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QuanLiQuanCafe.Models;
+using System;
 
 namespace QuanLiQuanCafe
 {
     public class TaiKhoanBUS
     {
-        public static bool KiemTraDangNhap(string tenDangNhap, string matKhau)
+        private readonly TaiKhoanDAL _dal = new TaiKhoanDAL();
+
+        public LoginResult DangNhap(string tenDangNhap, string matKhau)
         {
-            if (string.IsNullOrEmpty(tenDangNhap) || string.IsNullOrEmpty(matKhau))
-                return false;
+            if (!_dal.KiemTraTaiKhoanTonTai(tenDangNhap))
+                return LoginResult.AccountNotFound;
 
-            return (tenDangNhap == "admin" && matKhau == "123456");
-        }
-        // Dữ liệu tạm để test
-        private static Dictionary<string, (string matKhau, string sdt)> taiKhoans =
-     new Dictionary<string, (string matKhau, string sdt)>()
-
-         {
-            { "admin", ("123", "0909123456") },
-            { "user", ("456", "0987654321") }
-        };
-
-        public static bool DoiMatKhau(string tenDangNhap, string matKhauCu, string sdt, string matKhauMoi)
-        {
-            // Kiểm tra rỗng
-            if (string.IsNullOrWhiteSpace(tenDangNhap) ||
-                string.IsNullOrWhiteSpace(matKhauCu) ||
-                string.IsNullOrWhiteSpace(sdt) ||
-                string.IsNullOrWhiteSpace(matKhauMoi))
-                return false;
-
-            // Không tồn tại tài khoản
-            if (!taiKhoans.ContainsKey(tenDangNhap))
-                return false;
-
-            var tk = taiKhoans[tenDangNhap];
-
-            // Sai mật khẩu cũ hoặc số điện thoại
-            if (tk.matKhau != matKhauCu || tk.sdt != sdt)
-                return false;
-
-            // Đổi mật khẩu
-            taiKhoans[tenDangNhap] = (matKhauMoi, tk.sdt);
-            return true;
+            return _dal.KiemTraMatKhau(tenDangNhap, matKhau)
+                ? LoginResult.Success
+                : LoginResult.WrongPassword;
         }
 
-        // Dùng cho Unit Test để lấy mật khẩu hiện tại
-        public static string LayMatKhau(string tenDangNhap)
+        public RegisterResult DangKy(string hoTen, string matKhau, string sdt,
+            string diaChi, DateTime ngaySinh, string vaiTro)
         {
-            return taiKhoans.ContainsKey(tenDangNhap) ? taiKhoans[tenDangNhap].matKhau : null;
+            if (string.IsNullOrWhiteSpace(hoTen) ||
+                string.IsNullOrWhiteSpace(matKhau) ||
+                string.IsNullOrWhiteSpace(sdt))
+                return RegisterResult.Failed;
+
+            return _dal.DangKy(hoTen, matKhau, sdt, diaChi, ngaySinh, vaiTro);
         }
     }
 }

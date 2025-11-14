@@ -54,7 +54,7 @@
             this.btnDangNhap.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.btnDangNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnDangNhap.ForeColor = System.Drawing.Color.White;
-            this.btnDangNhap.Location = new System.Drawing.Point(313, 570);
+            this.btnDangNhap.Location = new System.Drawing.Point(307, 570);
             this.btnDangNhap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDangNhap.Name = "btnDangNhap";
             this.btnDangNhap.Size = new System.Drawing.Size(180, 50);
@@ -74,21 +74,20 @@
             this.txtTenDangNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.txtTenDangNhap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.txtTenDangNhap.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTenDangNhap.Location = new System.Drawing.Point(123, 367);
+            this.txtTenDangNhap.Location = new System.Drawing.Point(120, 367);
             this.txtTenDangNhap.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.txtTenDangNhap.Name = "txtTenDangNhap";
             this.txtTenDangNhap.PlaceholderText = "";
             this.txtTenDangNhap.SelectedText = "";
             this.txtTenDangNhap.Size = new System.Drawing.Size(503, 41);
             this.txtTenDangNhap.TabIndex = 2;
-            this.txtTenDangNhap.TextChanged += new System.EventHandler(this.txtTenDangNhap_TextChanged);
             // 
             // lblHoTen
             // 
             this.lblHoTen.BackColor = System.Drawing.Color.Transparent;
             this.lblHoTen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.lblHoTen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.lblHoTen.Location = new System.Drawing.Point(123, 331);
+            this.lblHoTen.Location = new System.Drawing.Point(120, 331);
             this.lblHoTen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblHoTen.Name = "lblHoTen";
             this.lblHoTen.Size = new System.Drawing.Size(86, 27);
@@ -101,7 +100,7 @@
             this.lnkDangKy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.lnkDangKy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.lnkDangKy.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.lnkDangKy.Location = new System.Drawing.Point(41, 671);
+            this.lnkDangKy.Location = new System.Drawing.Point(39, 671);
             this.lnkDangKy.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkDangKy.Name = "lnkDangKy";
             this.lnkDangKy.Size = new System.Drawing.Size(213, 20);
@@ -115,7 +114,7 @@
             this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.guna2HtmlLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.guna2HtmlLabel2.Location = new System.Drawing.Point(123, 439);
+            this.guna2HtmlLabel2.Location = new System.Drawing.Point(120, 439);
             this.guna2HtmlLabel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             this.guna2HtmlLabel2.Size = new System.Drawing.Size(84, 27);
@@ -134,7 +133,7 @@
             this.txtMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.txtMatKhau.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.txtMatKhau.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtMatKhau.Location = new System.Drawing.Point(123, 475);
+            this.txtMatKhau.Location = new System.Drawing.Point(120, 475);
             this.txtMatKhau.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.txtMatKhau.Name = "txtMatKhau";
             this.txtMatKhau.PasswordChar = '*';
@@ -142,7 +141,6 @@
             this.txtMatKhau.SelectedText = "";
             this.txtMatKhau.Size = new System.Drawing.Size(503, 41);
             this.txtMatKhau.TabIndex = 7;
-            this.txtMatKhau.TextChanged += new System.EventHandler(this.txtMatKhau_TextChanged);
             // 
             // chkGhiNho
             // 
@@ -153,7 +151,7 @@
             this.chkGhiNho.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(115)))), ((int)(((byte)(67)))));
             this.chkGhiNho.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.chkGhiNho.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.chkGhiNho.Location = new System.Drawing.Point(32, 543);
+            this.chkGhiNho.Location = new System.Drawing.Point(29, 543);
             this.chkGhiNho.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkGhiNho.Name = "chkGhiNho";
             this.chkGhiNho.Size = new System.Drawing.Size(200, 29);
@@ -163,14 +161,13 @@
             this.chkGhiNho.UncheckedState.BorderRadius = 0;
             this.chkGhiNho.UncheckedState.BorderThickness = 0;
             this.chkGhiNho.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.chkGhiNho.CheckedChanged += new System.EventHandler(this.chkGhiNho_CheckedChanged);
             // 
             // lblDangNhap
             // 
             this.lblDangNhap.BackColor = System.Drawing.Color.Transparent;
             this.lblDangNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.lblDangNhap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.lblDangNhap.Location = new System.Drawing.Point(284, 249);
+            this.lblDangNhap.Location = new System.Drawing.Point(281, 249);
             this.lblDangNhap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblDangNhap.Name = "lblDangNhap";
             this.lblDangNhap.Size = new System.Drawing.Size(177, 40);
@@ -183,7 +180,7 @@
             this.lnkQuenMatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.lnkQuenMatKhau.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.lnkQuenMatKhau.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.lnkQuenMatKhau.Location = new System.Drawing.Point(560, 671);
+            this.lnkQuenMatKhau.Location = new System.Drawing.Point(557, 671);
             this.lnkQuenMatKhau.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkQuenMatKhau.Name = "lnkQuenMatKhau";
             this.lnkQuenMatKhau.Size = new System.Drawing.Size(131, 20);
@@ -196,7 +193,7 @@
             // 
             this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
             this.picLogo.ImageRotate = 0F;
-            this.picLogo.Location = new System.Drawing.Point(201, 26);
+            this.picLogo.Location = new System.Drawing.Point(199, 26);
             this.picLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.picLogo.Name = "picLogo";
             this.picLogo.Size = new System.Drawing.Size(389, 225);
@@ -222,7 +219,6 @@
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormDangNhap";
             this.Text = "FormDangNhap";
-            this.Load += new System.EventHandler(this.FormDangNhap_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
