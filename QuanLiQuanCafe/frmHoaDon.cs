@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using QuanLiQuanCafe.Models;
 using log4net;
+using System.Collections.Generic;
 
 namespace QuanLiQuanCafe
 {
@@ -49,6 +50,7 @@ namespace QuanLiQuanCafe
                 btnThanhToan.Enabled = false;
             }
             log.Debug("frmHoaDon_Load kết thúc"); // DEBUG log 2
+
         }
 
         // ===========================
@@ -87,6 +89,9 @@ namespace QuanLiQuanCafe
 
             if (dgvHoaDon.Columns["TongTien"] != null)
                 dgvHoaDon.Columns["TongTien"].DefaultCellStyle.Format = "N0";
+
+          
+
         }
 
         // ===========================
@@ -128,20 +133,7 @@ namespace QuanLiQuanCafe
 
         private void dgvHoaDon_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dgvHoaDon.Columns[e.ColumnIndex].Name == "TrangThai" && e.Value != null)
-            {
-                string trangThai = e.Value.ToString().Trim();
-                if (trangThai == "Đã thanh toán")
-                {
-                    e.CellStyle.ForeColor = Color.Green;
-                    e.CellStyle.Font = new Font(dgvHoaDon.Font, FontStyle.Bold);
-                }
-                else if (trangThai == "Chưa thanh toán")
-                {
-                    e.CellStyle.ForeColor = Color.Red;
-                    e.CellStyle.Font = new Font(dgvHoaDon.Font, FontStyle.Bold);
-                }
-            }
+
         }
 
         private void dgvHoaDon_SelectionChanged(object sender, EventArgs e)
@@ -349,6 +341,136 @@ namespace QuanLiQuanCafe
                 MessageBox.Show("Lỗi khi tạo hóa đơn mới!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void LocHoaDon(string trangThai = "", string ngay = "")
+        {
+            string sql = @"
+        SELECT 
+            h.Id,
+            h.NgayTao,
+            tk.TenNV AS NhanVien,
+            ISNULL((SELECT SUM(ct.SoLuong * m.Gia) 
+                    FROM ChiTietHoaDon ct 
+                    JOIN Mon m ON ct.MonId = m.Id 
+                    WHERE ct.HoaDonId = h.Id), 0) AS TongTien,
+            ISNULL((SELECT SUM(SoLuong) FROM ChiTietHoaDon WHERE HoaDonId = h.Id), 0) AS SoLuongMon,
+            h.TrangThai
+        FROM HoaDon h
+        LEFT JOIN TaiKhoan tk ON h.NhanVienId = tk.Id
+        WHERE 1 = 1";
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            // Only add filter trạng thái if it is not empty
+            if (!string.IsNullOrEmpty(trangThai))
+            {
+                sql += " AND h.TrangThai = @tt";
+                parameters.Add(new SqlParameter("@tt", trangThai));
+            }
+
+            // Only add filter date if not empty
+            if (!string.IsNullOrEmpty(ngay))
+            {
+                sql += " AND CONVERT(date, h.NgayTao) = @date";
+                parameters.Add(new SqlParameter("@date", ngay));
+            }
+
+            sql += " ORDER BY h.NgayTao DESC";
+
+            DataTable dt = DataAccess.GetDataTable(sql, parameters.ToArray());
+            dgvHoaDon.DataSource = dt;
+
+            if (dgvHoaDon.Columns["TongTien"] != null)
+                dgvHoaDon.Columns["TongTien"].DefaultCellStyle.Format = "N0";
+        }
+
+
+        private bool TryParseNgayLinhHoat(string input, out string ngayFormat)
+        {
+            ngayFormat = "";
+
+            if (string.IsNullOrWhiteSpace(input))
+                return false;
+
+            input = input.Trim();
+
+            DateTime date;
+
+            // Nếu nhập đúng dd/MM/yyyy hoặc yyyy-MM-dd
+            if (DateTime.TryParse(input, out date))
+            {
+                ngayFormat = date.ToString("yyyy-MM-dd");
+                return true;
+            }
+
+            // Nhập 1 số → hiểu là ngày trong tháng/năm hiện tại
+            if (int.TryParse(input, out int dayOnly) && dayOnly >= 1 && dayOnly <= 31)
+            {
+                date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, dayOnly);
+                ngayFormat = date.ToString("yyyy-MM-dd");
+                return true;
+            }
+
+            return false;
+        }
+
+
+        private void txtTimNgay_TextChanged(object sender, EventArgs e)
+        {
+            string input = txtTimNgay.Text.Trim();
+
+            if (string.IsNullOrEmpty(input))
+            {
+                LoadDanhSachHoaDon();
+                return;
+            }
+
+            string ngay;
+            if (TryParseNgayLinhHoat(input, out ngay))
+            {
+                LocHoaDon("", ngay);
+            }
+        }
+
+
+        private void btnTatCa_Click(object sender, EventArgs e)
+        {
+            txtTimNgay.Clear();
+            LoadDanhSachHoaDon();
+        }
+        private void btnChuaThanhToan_Click(object sender, EventArgs e)
+        {
+            txtTimNgay.Clear();
+            LocHoaDon("Chưa thanh toán");
+        }
+
+        private void btnDaThanhToan_Click(object sender, EventArgs e)
+        {
+            txtTimNgay.Clear();
+            LocHoaDon("Đã thanh toán");
+        }
+
+        private void btnTimNgay_Click(object sender, EventArgs e)
+        {
+            string input = txtTimNgay.Text.Trim();
+
+            if (string.IsNullOrEmpty(input))
+            {
+                MessageBox.Show("Vui lòng nhập ngày để tìm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            string ngay;
+            if (TryParseNgayLinhHoat(input, out ngay))
+            {
+                LocHoaDon("", ngay);
+            }
+            else
+            {
+                MessageBox.Show("Ngày không hợp lệ! Vui lòng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
 
     }
 }

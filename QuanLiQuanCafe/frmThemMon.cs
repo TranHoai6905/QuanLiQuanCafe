@@ -10,10 +10,12 @@ namespace QuanLiQuanCafe
 
         private void frmThemMon_Load(object sender, EventArgs e)
         {
+            cmbLoai.DropDownStyle = ComboBoxStyle.DropDown; // cho phép nhập loại mới
             cmbLoai.Items.AddRange(new[] { "Đồ uống", "Đồ ăn" });
             cmbLoai.SelectedIndex = 0;
             LoadMon();
         }
+
 
         private void LoadMon()
         {
@@ -40,21 +42,29 @@ namespace QuanLiQuanCafe
         {
             if (!ValidateInputs(out decimal gia)) return;
 
+            string loai = cmbLoai.Text.Trim(); // Lấy text nhập từ người dùng
+
             int result = DataAccess.ExecuteNonQuery(
                 "INSERT INTO Mon (TenMon, Gia, Loai) VALUES (@ten, @gia, @loai)",
                 new SqlParameter("@ten", txtTenMon.Text.Trim()),
                 new SqlParameter("@gia", gia),
-                new SqlParameter("@loai", cmbLoai.SelectedItem.ToString())
+                new SqlParameter("@loai", loai)
             );
 
             if (result > 0)
             {
+                // Nếu loại mới chưa có trong ComboBox, thêm vào
+                if (!cmbLoai.Items.Contains(loai))
+                    cmbLoai.Items.Add(loai);
+
                 LoadMon();
                 ClearInputs();
                 MessageBox.Show("✅ Thêm món thành công!");
             }
-            else MessageBox.Show("❌ Lỗi khi thêm món!");
+            else
+                MessageBox.Show("❌ Lỗi khi thêm món!");
         }
+
 
         private void btnXoaMon_Click(object sender, EventArgs e)
         {
