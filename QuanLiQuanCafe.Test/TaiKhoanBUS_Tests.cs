@@ -1,87 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuanLiQuanCafe;
+using QuanLiQuanCafe.Models;
 
 namespace QuanLiQuanCafe.Test
 {
     [TestClass]
-    public class TaiKhoanBUS_Tests
+    public class TaiKhoanBUS_SimpleTests
     {
-        [TestMethod]
-        public void DangNhap_DungTaiKhoanVaMatKhau()
+        private TaiKhoanBUS _bus;
+
+        [TestInitialize]
+        public void Setup()
         {
-            bool result = TaiKhoanBUS.KiemTraDangNhap("admin", "123456");
-            Assert.IsTrue(result); // mong đợi là TRUE
+            _bus = new TaiKhoanBUS();
         }
 
         [TestMethod]
-        public void DangNhap_SaiMatKhau()
+        public void DangNhap_ThieuThongTin()
         {
-            bool result = TaiKhoanBUS.KiemTraDangNhap("admin", "abcdef");
-            Assert.IsFalse(result);
+            var result = _bus.DangNhap("", "123");
+            Assert.AreEqual(LoginResult.InvalidInput, result);
         }
 
         [TestMethod]
-        public void DangNhap_BoTrongTaiKhoan()
+        public void DangNhap_ThieuThongTin2()
         {
-            bool result = TaiKhoanBUS.KiemTraDangNhap("", "123456");
-            Assert.IsFalse(result);
+            var result = _bus.DangNhap("admin", "");
+            Assert.AreEqual(LoginResult.InvalidInput, result);
         }
 
         [TestMethod]
-        public void DangNhap_BoTrongMatKhau()
+        public void DangNhap_KhongTonTai()
         {
-            bool result = TaiKhoanBUS.KiemTraDangNhap("admin", "");
-            Assert.IsFalse(result);
-        }
-        [TestMethod]
-        public void DoiMatKhau_ThanhCong()
-        {
-            // Arrange
-            string tenDN = "admin";
-            string mkCu = "123";
-            string sdt = "0909123456";
-            string mkMoi = "789";
-
-            // Act
-            bool ketQua = TaiKhoanBUS.DoiMatKhau(tenDN, mkCu, sdt, mkMoi);
-
-            // Assert
-            Assert.IsTrue(ketQua);
-            Assert.AreEqual("789", TaiKhoanBUS.LayMatKhau(tenDN));
+            var result = _bus.DangNhap("user_khong_co", "123");
+            Assert.AreEqual(LoginResult.AccountNotFound, result);
         }
 
         [TestMethod]
-        public void DoiMatKhau_SaiMatKhauCu()
+        public void KiemTraTenDangNhapTonTai_Thieu()
         {
-            bool ketQua = TaiKhoanBUS.DoiMatKhau("admin", "saimk", "0909123456", "999");
-            Assert.IsFalse(ketQua);
+            bool kq = _bus.KiemTraTenDangNhapTonTai("");
+            Assert.IsFalse(kq);
         }
 
         [TestMethod]
-        public void DoiMatKhau_SaiSoDienThoai()
+        public void KiemTraTenDangNhapTonTai_KhongTonTai()
         {
-            bool ketQua = TaiKhoanBUS.DoiMatKhau("admin", "123", "0000000000", "999");
-            Assert.IsFalse(ketQua);
-        }
-
-        [TestMethod]
-        public void DoiMatKhau_TenDangNhapKhongTonTai()
-        {
-            bool ketQua = TaiKhoanBUS.DoiMatKhau("khongco", "123", "0909123456", "789");
-            Assert.IsFalse(ketQua);
-        }
-
-        [TestMethod]
-        public void DoiMatKhau_ThieuThongTin()
-        {
-            bool ketQua = TaiKhoanBUS.DoiMatKhau("", "", "", "");
-            Assert.IsFalse(ketQua);
+            bool kq = _bus.KiemTraTenDangNhapTonTai("random_user");
+            Assert.IsFalse(kq);
         }
     }
 }
-
