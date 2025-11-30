@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Data.SqlClient;
+using System.Data;
 using System.Windows.Forms;
 
 namespace QuanLiQuanCafe
@@ -10,30 +10,50 @@ namespace QuanLiQuanCafe
 
         private void frmThemMon_Load(object sender, EventArgs e)
         {
-            cmbLoai.DropDownStyle = ComboBoxStyle.DropDown; // cho phép nhập loại mới
-            cmbLoai.Items.AddRange(new[] { "Đồ uống", "Đồ ăn" });
-            cmbLoai.SelectedIndex = 0;
+            LoadLoaiMon();
             LoadMon();
         }
 
+        private void LoadLoaiMon()
+        {
+            DataTable dt = MonQueries.GetLoaiMon();
+            cmbLoaiMon.Items.Clear();
+            cmbLoaiMon.Items.Add("Tất cả");
+
+            foreach (DataRow row in dt.Rows)
+                cmbLoaiMon.Items.Add(row["Loai"].ToString());
+
+            cmbLoaiMon.SelectedIndex = 0;
+        }
 
         private void LoadMon()
         {
-            string sql = "SELECT Id, TenMon, Gia, Loai FROM Mon ORDER BY TenMon";
-            dgvMon.DataSource = DataAccess.GetDataTable(sql);
+            dgvMon.DataSource = MonQueries.GetMon(txtTimKiem.Text.Trim(), cmbLoaiMon.Text.Trim());
             dgvMon.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvMon.AllowUserToAddRows = false;
+
             if (dgvMon.Columns.Contains("Gia"))
-                dgvMon.Columns["Gia"].DefaultCellStyle.Format = "N0"; // Format tiền
+                dgvMon.Columns["Gia"].DefaultCellStyle.Format = "N0";
         }
+
+        private void LocMon()
+        {
+            dgvMon.DataSource = MonQueries.GetMon(txtTimKiem.Text.Trim(), cmbLoaiMon.Text.Trim());
+        }
+
+        private void btnTimMon_Click(object sender, EventArgs e) => LocMon();
+        private void txtTimKiem_TextChanged(object sender, EventArgs e) => LocMon();
+        private void cmbLoaiMon_SelectedIndexChanged(object sender, EventArgs e) => LocMon();
 
         private void dgvMon_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvMon.SelectedRows.Count == 0) return;
+
             var row = dgvMon.SelectedRows[0];
             txtTenMon.Text = row.Cells["TenMon"].Value.ToString();
             txtGia.Text = row.Cells["Gia"].Value.ToString();
             cmbLoai.Text = row.Cells["Loai"].Value.ToString();
+
             btnSuaMon.Enabled = true;
             btnXoaMon.Enabled = true;
         }
@@ -42,49 +62,18 @@ namespace QuanLiQuanCafe
         {
             if (!ValidateInputs(out decimal gia)) return;
 
-            string loai = cmbLoai.Text.Trim(); // Lấy text nhập từ người dùng
-
-            int result = DataAccess.ExecuteNonQuery(
-                "INSERT INTO Mon (TenMon, Gia, Loai) VALUES (@ten, @gia, @loai)",
-                new SqlParameter("@ten", txtTenMon.Text.Trim()),
-                new SqlParameter("@gia", gia),
-                new SqlParameter("@loai", loai)
-            );
+            string loai = cmbLoai.Text.Trim();
+            int result = MonQueries.ThemMon(txtTenMon.Text.Trim(), gia, loai);
 
             if (result > 0)
             {
-                // Nếu loại mới chưa có trong ComboBox, thêm vào
-                if (!cmbLoai.Items.Contains(loai))
-                    cmbLoai.Items.Add(loai);
-
+                if (!cmbLoai.Items.Contains(loai)) cmbLoai.Items.Add(loai);
+                LoadLoaiMon();
                 LoadMon();
                 ClearInputs();
                 MessageBox.Show("✅ Thêm món thành công!");
             }
-            else
-                MessageBox.Show("❌ Lỗi khi thêm món!");
-        }
-
-
-        private void btnXoaMon_Click(object sender, EventArgs e)
-        {
-            if (dgvMon.SelectedRows.Count == 0) return;
-            int id = Convert.ToInt32(dgvMon.SelectedRows[0].Cells["Id"].Value);
-            try
-            {
-                int result = DataAccess.ExecuteNonQuery("DELETE FROM Mon WHERE Id=@id", new SqlParameter("@id", id));
-                if (result > 0)
-                {
-                    LoadMon();
-                    ClearInputs();
-                    MessageBox.Show("✅ Xóa món thành công!");
-                }
-                else MessageBox.Show("❌ Không xóa được món (có thể bị ràng buộc FK)!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("❌ Lỗi khi xóa: " + ex.Message);
-            }
+            else MessageBox.Show("❌ Lỗi khi thêm món!");
         }
 
         private void btnSuaMon_Click(object sender, EventArgs e)
@@ -92,21 +81,33 @@ namespace QuanLiQuanCafe
             if (dgvMon.SelectedRows.Count == 0 || !ValidateInputs(out decimal gia)) return;
 
             int id = Convert.ToInt32(dgvMon.SelectedRows[0].Cells["Id"].Value);
-            int result = DataAccess.ExecuteNonQuery(
-                "UPDATE Mon SET TenMon=@ten, Gia=@gia, Loai=@loai WHERE Id=@id",
-                new SqlParameter("@ten", txtTenMon.Text.Trim()),
-                new SqlParameter("@gia", gia),
-                new SqlParameter("@loai", cmbLoai.SelectedItem.ToString()),
-                new SqlParameter("@id", id)
-            );
+            int result = MonQueries.SuaMon(id, txtTenMon.Text.Trim(), gia, cmbLoai.Text.Trim());
 
             if (result > 0)
             {
+                LoadLoaiMon();
                 LoadMon();
                 ClearInputs();
                 MessageBox.Show("✅ Sửa món thành công!");
             }
             else MessageBox.Show("❌ Lỗi khi sửa món!");
+        }
+
+        private void btnXoaMon_Click(object sender, EventArgs e)
+        {
+            if (dgvMon.SelectedRows.Count == 0) return;
+
+            int id = Convert.ToInt32(dgvMon.SelectedRows[0].Cells["Id"].Value);
+            int result = MonQueries.XoaMon(id);
+
+            if (result > 0)
+            {
+                LoadLoaiMon();
+                LoadMon();
+                ClearInputs();
+                MessageBox.Show("✅ Xóa món thành công!");
+            }
+            else MessageBox.Show("❌ Không xóa được món!");
         }
 
         private void ClearInputs()
@@ -118,7 +119,6 @@ namespace QuanLiQuanCafe
             btnXoaMon.Enabled = false;
         }
 
-        // Validate input, dùng chung cho Thêm/Sửa
         private bool ValidateInputs(out decimal gia)
         {
             gia = 0;
@@ -133,6 +133,7 @@ namespace QuanLiQuanCafe
                 MessageBox.Show("Giá phải là số dương!");
                 return false;
             }
+
             return true;
         }
     }

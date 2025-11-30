@@ -12,6 +12,8 @@ namespace QuanLiQuanCafe
         private int hoaDonId; // ID hóa đơn hiện tại
         private List<int> danhSachMonDaChon = new List<int>(); // Danh sách món đã chọn
         private int? hoaDonDangChonId = null; // ID hóa đơn đang chọn từ dgvHoaDonChuaThanhToan
+                                              // Thông báo món vừa được thêm vào hóa đơn
+        public event Action<int> OnMonDaDuocThem; // int = Id của hóa đơn vừa thêm món
 
         public frmMon(int hoaDonId)
         {
@@ -34,12 +36,8 @@ namespace QuanLiQuanCafe
 
         private void LoadHoaDonChuaThanhToan()
         {
-            string sql = "SELECT Id, NgayTao, TongTien, SoLuongMon, TrangThai FROM HoaDon WHERE TrangThai = N'Chưa thanh toán'";
-            DataTable dt = DataAccess.GetDataTable(sql);
-            dgvHoaDonChuaThanhToan.DataSource = dt;
+            dgvHoaDonChuaThanhToan.DataSource = MonQueries.GetHoaDonChuaThanhToan();
 
-            // Tùy chỉnh hiển thị
-            dgvHoaDonChuaThanhToan.Columns["Id"].Visible = false;
             dgvHoaDonChuaThanhToan.Columns["NgayTao"].HeaderText = "Ngày tạo";
             dgvHoaDonChuaThanhToan.Columns["TongTien"].HeaderText = "Tổng tiền";
             dgvHoaDonChuaThanhToan.Columns["SoLuongMon"].HeaderText = "Số lượng món";
@@ -50,12 +48,11 @@ namespace QuanLiQuanCafe
         // ==========================
         // Load danh sách loại món ComboBox
         // ==========================
+
         private void LoadLoaiMon()
         {
-            string sql = "SELECT DISTINCT Loai FROM Mon WHERE Loai IS NOT NULL";
-            DataTable dt = DataAccess.GetDataTable(sql);
+            DataTable dt = MonQueries.GetLoaiMon();
 
-            // Thêm mục "Tất cả"
             DataRow row = dt.NewRow();
             row["Loai"] = "Tất cả";
             dt.Rows.InsertAt(row, 0);
@@ -65,27 +62,15 @@ namespace QuanLiQuanCafe
             cmbLoaiMon.ValueMember = "Loai";
         }
 
+
         // ==========================
         // Load danh sách món
         // ==========================
         private void LoadMon(string keyword = "", string loai = "Tất cả")
         {
-            string sql = "SELECT * FROM Mon WHERE TenMon LIKE @kw";
-            List<SqlParameter> parameters = new List<SqlParameter>
-            {
-                new SqlParameter("@kw", "%" + keyword + "%")
-            };
-
-            if (loai != "Tất cả")
-            {
-                sql += " AND Loai = @loai";
-                parameters.Add(new SqlParameter("@loai", loai));
-            }
-
-            DataTable dt = DataAccess.GetDataTable(sql, parameters.ToArray());
+            DataTable dt = MonQueries.GetMon(keyword, loai);
             dgvMon.DataSource = dt;
 
-            // Highlight món đã chọn
             foreach (DataGridViewRow row in dgvMon.Rows)
             {
                 int monId = Convert.ToInt32(row.Cells["Id"].Value);
@@ -171,65 +156,22 @@ namespace QuanLiQuanCafe
         // ==========================
         private void btnThemMonVaoDon_Click(object sender, EventArgs e)
         {
-            if (hoaDonDangChonId == null)
-            {
-                MessageBox.Show("Vui lòng chọn 1 hóa đơn chưa thanh toán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if (hoaDonDangChonId == null || danhSachMonDaChon.Count == 0)
                 return;
-            }
-
-            if (danhSachMonDaChon.Count == 0)
-            {
-                MessageBox.Show("Vui lòng chọn ít nhất 1 món!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(DataAccess.ConnectionString))
-                {
-                    conn.Open();
-                    using (SqlTransaction transaction = conn.BeginTransaction())
-                    {
-                        string sqlInsert = "INSERT INTO ChiTietHoaDon (HoaDonId, MonId, SoLuong) VALUES (@hd, @m, 1)";
-                        string sqlUpdate = @"
-                    UPDATE HoaDon 
-                    SET TongTien = ISNULL((SELECT SUM(ct.SoLuong * m.Gia) 
-                                           FROM ChiTietHoaDon ct 
-                                           JOIN Mon m ON ct.MonId = m.Id 
-                                           WHERE ct.HoaDonId = @hd), 0),
-                        SoLuongMon = ISNULL((SELECT SUM(SoLuong) 
-                                             FROM ChiTietHoaDon 
-                                             WHERE HoaDonId = @hd), 0)
-                    WHERE Id = @hd";
+                MonQueries.ThemMonVaoHoaDon(hoaDonDangChonId.Value, danhSachMonDaChon);
 
-                        foreach (int monId in danhSachMonDaChon)
-                        {
-                            using (SqlCommand cmd = new SqlCommand(sqlInsert, conn, transaction))
-                            {
-                                cmd.Parameters.AddWithValue("@hd", hoaDonDangChonId.Value);
-                                cmd.Parameters.AddWithValue("@m", monId);
-                                cmd.ExecuteNonQuery();
-                            }
-                        }
+                // Thông báo frmHoaDon reload dữ liệu ngay
+                OnMonDaDuocThem?.Invoke(hoaDonDangChonId.Value);
 
-                        using (SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, conn, transaction))
-                        {
-                            cmdUpdate.Parameters.AddWithValue("@hd", hoaDonDangChonId.Value);
-                            cmdUpdate.ExecuteNonQuery();
-                        }
-
-                        transaction.Commit();
-                    }
-                }
-
-                MessageBox.Show($"Đã thêm {danhSachMonDaChon.Count} món vào hóa đơn {hoaDonDangChonId}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // Refresh hóa đơn chưa thanh toán
-                LoadHoaDonChuaThanhToan();
-
-                // Xóa danh sách món chọn
+                // Xóa danh sách món đã chọn, load lại DataGridView món
                 danhSachMonDaChon.Clear();
                 LoadMon();
+                LoadHoaDonChuaThanhToan();
+
+                MessageBox.Show("Đã thêm món vào hóa đơn!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -237,13 +179,78 @@ namespace QuanLiQuanCafe
             }
         }
 
-
         private void dgvHoaDonChuaThanhToan_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
                 hoaDonDangChonId = Convert.ToInt32(dgvHoaDonChuaThanhToan.Rows[e.RowIndex].Cells["Id"].Value);
                 UpdateButtonStatus(); // Enable nút thêm món nếu đã chọn hóa đơn
+            }
+        }
+
+        // ===========================
+        // Thêm hóa đơn mới vào dgvHoaDonChuaThanhToan
+        // ===========================
+        private void btnThemHoaDonMoi_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int nhanVienId = 1; // Lấy từ session/login nếu có
+                int newId = MonQueries.ThemHoaDonMoi(nhanVienId);
+                MessageBox.Show($"Đã tạo hóa đơn mới #{newId}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                LoadHoaDonChuaThanhToan();
+                foreach (DataGridViewRow row in dgvHoaDonChuaThanhToan.Rows)
+                {
+                    if (Convert.ToInt32(row.Cells["Id"].Value) == newId)
+                    {
+                        row.Selected = true;
+                        hoaDonDangChonId = newId;
+                        UpdateButtonStatus();
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tạo hóa đơn mới: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // ===========================
+        // Xóa hóa đơn đã chọn từ dgvHoaDonChuaThanhToan
+        // ===========================
+        private void btnXoaHoaDon_Click(object sender, EventArgs e)
+        {
+            if (hoaDonDangChonId == null)
+            {
+                MessageBox.Show("Vui lòng chọn 1 hóa đơn để xóa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string trangThai = dgvHoaDonChuaThanhToan.SelectedRows[0].Cells["TrangThai"].Value?.ToString().Trim();
+            if (trangThai == "Đã thanh toán")
+            {
+                MessageBox.Show("Không thể xóa hóa đơn đã thanh toán!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
+            var confirm = MessageBox.Show($"Bạn có chắc muốn xóa hóa đơn #{hoaDonDangChonId}?\nTất cả món sẽ bị xóa!",
+                                          "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirm == DialogResult.Yes)
+            {
+                try
+                {
+                    MonQueries.XoaHoaDon(hoaDonDangChonId.Value);
+                    MessageBox.Show($"Đã xóa hóa đơn #{hoaDonDangChonId}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadHoaDonChuaThanhToan();
+                    hoaDonDangChonId = null;
+                    UpdateButtonStatus();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi xóa hóa đơn: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

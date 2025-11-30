@@ -9,27 +9,36 @@ namespace QuanLiQuanCafe
 {
     internal static class Program
     {
-        // Logger chinh
+        // Logger chính
         private static readonly ILog log = LogManager.GetLogger(typeof(Program));
 
-        // Logger rieng cho FATAL
+        // Logger riêng cho FATAL
         private static readonly ILog fatalLog = LogManager.GetLogger("FatalLogger");
 
         [STAThread]
         static void Main()
         {
             // ==============================
-            // 1) Load file log4net.xml
+            // 1) Load file log4net.xml nếu có
             // ==============================
             var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
-            XmlConfigurator.Configure(logRepository, new FileInfo("log4net.xml"));
+            string logFile = "log4net.xml";
+
+            if (File.Exists(logFile))
+            {
+                XmlConfigurator.Configure(logRepository, new FileInfo(logFile));
+            }
+            else
+            {
+                MessageBox.Show($"Không tìm thấy file log4net.xml!\nỨng dụng vẫn chạy nhưng không ghi log.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
             // ==============================
-            // 2) Ghi log test de kiem tra
+            // 2) Ghi log test để kiểm tra
             // ==============================
-            log.Debug("Ung dung bat dau chay (DEBUG)");
-            log.Info("Ung dung bat dau chay (INFO)");
-            fatalLog.Fatal("TEST FATAL: Ghi log FATAL ngay khi khoi chay");
+            log.Debug("Ứng dụng bắt đầu chạy (DEBUG)");
+            log.Info("Ứng dụng bắt đầu chạy (INFO)");
+            fatalLog.Fatal("TEST FATAL: Ghi log FATAL ngay khi khởi chạy");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -37,27 +46,27 @@ namespace QuanLiQuanCafe
             try
             {
                 // ==============================
-                // 3) Chay form dau tien
+                // 3) Chạy form đầu tiên: Trang chủ
                 // ==============================
-                Application.Run(new frmDangNhap());
+                Application.Run(new frmTrangChu());
             }
             catch (Exception ex)
             {
-                // Ghi log loi nghiem trong
-                fatalLog.Fatal("FATAL: Loi khong xu ly trong Main()", ex);
+                // Ghi log lỗi nghiêm trọng
+                fatalLog.Fatal("FATAL: Lỗi không xử lý trong Main()", ex);
 
                 MessageBox.Show(
-                    "Co loi nghiem trong xay ra trong ung dung.\nHay kiem tra file Fatal.log!",
-                    "Loi nghiem trong",
+                    "Có lỗi nghiêm trọng xảy ra trong ứng dụng.\nHãy kiểm tra file Fatal.log nếu có!",
+                    "Lỗi nghiêm trọng",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
             finally
             {
                 // ==============================
-                // 4) Log khi ung dung thoat
+                // 4) Log khi ứng dụng thoát
                 // ==============================
-                log.Info("Ung dung da thoat");
+                log.Info("Ứng dụng đã thoát");
             }
         }
     }
