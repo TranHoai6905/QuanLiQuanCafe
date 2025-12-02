@@ -89,7 +89,7 @@
             this.btnThem.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(109)))), ((int)(((byte)(67)))));
             this.btnThem.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnThem.ForeColor = System.Drawing.Color.White;
-            this.btnThem.Location = new System.Drawing.Point(494, 422);
+            this.btnThem.Location = new System.Drawing.Point(491, 431);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(92, 45);
             this.btnThem.TabIndex = 15;
@@ -102,7 +102,7 @@
             this.btnHuy.FillColor = System.Drawing.Color.Gray;
             this.btnHuy.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnHuy.ForeColor = System.Drawing.Color.White;
-            this.btnHuy.Location = new System.Drawing.Point(636, 422);
+            this.btnHuy.Location = new System.Drawing.Point(633, 431);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(92, 45);
             this.btnHuy.TabIndex = 16;
@@ -205,6 +205,7 @@
             this.txtHoTen.DefaultText = "";
             this.txtHoTen.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtHoTen.Location = new System.Drawing.Point(49, 148);
+            this.txtHoTen.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtHoTen.Name = "txtHoTen";
             this.txtHoTen.PlaceholderText = "Họ và tên";
             this.txtHoTen.SelectedText = "";
@@ -218,6 +219,7 @@
             this.txtDiaChi.DefaultText = "";
             this.txtDiaChi.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtDiaChi.Location = new System.Drawing.Point(467, 148);
+            this.txtDiaChi.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.PlaceholderText = "Địa chỉ";
             this.txtDiaChi.SelectedText = "";
@@ -231,6 +233,7 @@
             this.txtSoDienThoai.DefaultText = "";
             this.txtSoDienThoai.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtSoDienThoai.Location = new System.Drawing.Point(49, 241);
+            this.txtSoDienThoai.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtSoDienThoai.Name = "txtSoDienThoai";
             this.txtSoDienThoai.PlaceholderText = "Số điện thoại";
             this.txtSoDienThoai.SelectedText = "";
@@ -277,6 +280,7 @@
             this.txtMatKhau.DefaultText = "";
             this.txtMatKhau.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtMatKhau.Location = new System.Drawing.Point(49, 341);
+            this.txtMatKhau.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtMatKhau.Name = "txtMatKhau";
             this.txtMatKhau.PasswordChar = '●';
             this.txtMatKhau.PlaceholderText = "Mật khẩu";
@@ -291,6 +295,7 @@
             this.txtNhapLaiMatKhau.DefaultText = "";
             this.txtNhapLaiMatKhau.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtNhapLaiMatKhau.Location = new System.Drawing.Point(467, 341);
+            this.txtNhapLaiMatKhau.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtNhapLaiMatKhau.Name = "txtNhapLaiMatKhau";
             this.txtNhapLaiMatKhau.PasswordChar = '●';
             this.txtNhapLaiMatKhau.PlaceholderText = "Nhập lại mật khẩu";

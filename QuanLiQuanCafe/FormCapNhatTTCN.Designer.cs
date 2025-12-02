@@ -67,7 +67,7 @@ namespace QuanLiQuanCafe
             this.btnDoiMatKhau.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(194)))), ((int)(((byte)(161)))));
             this.btnDoiMatKhau.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnDoiMatKhau.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.btnDoiMatKhau.Location = new System.Drawing.Point(735, 140);
+            this.btnDoiMatKhau.Location = new System.Drawing.Point(726, 157);
             this.btnDoiMatKhau.Name = "btnDoiMatKhau";
             this.btnDoiMatKhau.Size = new System.Drawing.Size(150, 52);
             this.btnDoiMatKhau.TabIndex = 16;
@@ -91,9 +91,9 @@ namespace QuanLiQuanCafe
             this.panelInfo.Controls.Add(this.txtSoDienThoai);
             this.panelInfo.Controls.Add(this.btnXacNhan);
             this.panelInfo.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(220)))));
-            this.panelInfo.Location = new System.Drawing.Point(66, 224);
+            this.panelInfo.Location = new System.Drawing.Point(66, 253);
             this.panelInfo.Name = "panelInfo";
-            this.panelInfo.Size = new System.Drawing.Size(785, 402);
+            this.panelInfo.Size = new System.Drawing.Size(785, 455);
             this.panelInfo.TabIndex = 0;
             // 
             // lblThongTinTaiKhoan
@@ -105,7 +105,7 @@ namespace QuanLiQuanCafe
             this.lblThongTinTaiKhoan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.lblThongTinTaiKhoan.Location = new System.Drawing.Point(3, 3);
             this.lblThongTinTaiKhoan.Name = "lblThongTinTaiKhoan";
-            this.lblThongTinTaiKhoan.Size = new System.Drawing.Size(779, 48);
+            this.lblThongTinTaiKhoan.Size = new System.Drawing.Size(779, 61);
             this.lblThongTinTaiKhoan.TabIndex = 16;
             this.lblThongTinTaiKhoan.Text = "Thông tin tài khoản";
             this.lblThongTinTaiKhoan.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -124,9 +124,9 @@ namespace QuanLiQuanCafe
             this.cboVaiTro.Items.AddRange(new object[] {
             "Nhân viên ",
             "Quản lý"});
-            this.cboVaiTro.Location = new System.Drawing.Point(28, 326);
+            this.cboVaiTro.Location = new System.Drawing.Point(105, 328);
             this.cboVaiTro.Name = "cboVaiTro";
-            this.cboVaiTro.Size = new System.Drawing.Size(124, 36);
+            this.cboVaiTro.Size = new System.Drawing.Size(156, 36);
             this.cboVaiTro.TabIndex = 16;
             // 
             // lblHoTen
@@ -134,7 +134,7 @@ namespace QuanLiQuanCafe
             this.lblHoTen.BackColor = System.Drawing.Color.Transparent;
             this.lblHoTen.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblHoTen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.lblHoTen.Location = new System.Drawing.Point(28, 94);
+            this.lblHoTen.Location = new System.Drawing.Point(44, 94);
             this.lblHoTen.Name = "lblHoTen";
             this.lblHoTen.Size = new System.Drawing.Size(77, 23);
             this.lblHoTen.TabIndex = 4;
@@ -147,11 +147,12 @@ namespace QuanLiQuanCafe
             this.txtHoTen.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtHoTen.DefaultText = "";
             this.txtHoTen.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.txtHoTen.Location = new System.Drawing.Point(28, 123);
+            this.txtHoTen.Location = new System.Drawing.Point(35, 124);
+            this.txtHoTen.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtHoTen.Name = "txtHoTen";
             this.txtHoTen.PlaceholderText = "";
             this.txtHoTen.SelectedText = "";
-            this.txtHoTen.Size = new System.Drawing.Size(369, 50);
+            this.txtHoTen.Size = new System.Drawing.Size(382, 50);
             this.txtHoTen.TabIndex = 5;
             // 
             // lblDiaChi
@@ -159,7 +160,7 @@ namespace QuanLiQuanCafe
             this.lblDiaChi.BackColor = System.Drawing.Color.Transparent;
             this.lblDiaChi.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblDiaChi.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.lblDiaChi.Location = new System.Drawing.Point(28, 181);
+            this.lblDiaChi.Location = new System.Drawing.Point(44, 207);
             this.lblDiaChi.Name = "lblDiaChi";
             this.lblDiaChi.Size = new System.Drawing.Size(55, 23);
             this.lblDiaChi.TabIndex = 6;
@@ -172,11 +173,12 @@ namespace QuanLiQuanCafe
             this.txtDiaChi.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtDiaChi.DefaultText = "";
             this.txtDiaChi.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.txtDiaChi.Location = new System.Drawing.Point(28, 220);
+            this.txtDiaChi.Location = new System.Drawing.Point(35, 237);
+            this.txtDiaChi.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.PlaceholderText = "";
             this.txtDiaChi.SelectedText = "";
-            this.txtDiaChi.Size = new System.Drawing.Size(369, 50);
+            this.txtDiaChi.Size = new System.Drawing.Size(382, 50);
             this.txtDiaChi.TabIndex = 7;
             // 
             // lblNgaySinh
@@ -184,7 +186,7 @@ namespace QuanLiQuanCafe
             this.lblNgaySinh.BackColor = System.Drawing.Color.Transparent;
             this.lblNgaySinh.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblNgaySinh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.lblNgaySinh.Location = new System.Drawing.Point(466, 94);
+            this.lblNgaySinh.Location = new System.Drawing.Point(491, 208);
             this.lblNgaySinh.Name = "lblNgaySinh";
             this.lblNgaySinh.Size = new System.Drawing.Size(78, 23);
             this.lblNgaySinh.TabIndex = 8;
@@ -198,11 +200,11 @@ namespace QuanLiQuanCafe
             this.dtpNgaySinh.FillColor = System.Drawing.Color.PapayaWhip;
             this.dtpNgaySinh.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.dtpNgaySinh.Format = System.Windows.Forms.DateTimePickerFormat.Long;
-            this.dtpNgaySinh.Location = new System.Drawing.Point(471, 123);
+            this.dtpNgaySinh.Location = new System.Drawing.Point(491, 237);
             this.dtpNgaySinh.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpNgaySinh.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpNgaySinh.Name = "dtpNgaySinh";
-            this.dtpNgaySinh.Size = new System.Drawing.Size(294, 50);
+            this.dtpNgaySinh.Size = new System.Drawing.Size(258, 50);
             this.dtpNgaySinh.TabIndex = 9;
             this.dtpNgaySinh.Value = new System.DateTime(2025, 11, 24, 15, 44, 30, 515);
             // 
@@ -211,7 +213,7 @@ namespace QuanLiQuanCafe
             this.lblVaiTro.BackColor = System.Drawing.Color.Transparent;
             this.lblVaiTro.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblVaiTro.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.lblVaiTro.Location = new System.Drawing.Point(28, 297);
+            this.lblVaiTro.Location = new System.Drawing.Point(44, 328);
             this.lblVaiTro.Name = "lblVaiTro";
             this.lblVaiTro.Size = new System.Drawing.Size(55, 23);
             this.lblVaiTro.TabIndex = 10;
@@ -222,7 +224,7 @@ namespace QuanLiQuanCafe
             this.lblSoDienThoai.BackColor = System.Drawing.Color.Transparent;
             this.lblSoDienThoai.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSoDienThoai.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.lblSoDienThoai.Location = new System.Drawing.Point(466, 191);
+            this.lblSoDienThoai.Location = new System.Drawing.Point(491, 94);
             this.lblSoDienThoai.Name = "lblSoDienThoai";
             this.lblSoDienThoai.Size = new System.Drawing.Size(103, 23);
             this.lblSoDienThoai.TabIndex = 12;
@@ -235,11 +237,12 @@ namespace QuanLiQuanCafe
             this.txtSoDienThoai.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSoDienThoai.DefaultText = "";
             this.txtSoDienThoai.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.txtSoDienThoai.Location = new System.Drawing.Point(471, 220);
+            this.txtSoDienThoai.Location = new System.Drawing.Point(491, 124);
+            this.txtSoDienThoai.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtSoDienThoai.Name = "txtSoDienThoai";
             this.txtSoDienThoai.PlaceholderText = "";
             this.txtSoDienThoai.SelectedText = "";
-            this.txtSoDienThoai.Size = new System.Drawing.Size(294, 50);
+            this.txtSoDienThoai.Size = new System.Drawing.Size(258, 50);
             this.txtSoDienThoai.TabIndex = 13;
             // 
             // btnXacNhan
@@ -249,7 +252,7 @@ namespace QuanLiQuanCafe
             this.btnXacNhan.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
             this.btnXacNhan.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnXacNhan.ForeColor = System.Drawing.Color.White;
-            this.btnXacNhan.Location = new System.Drawing.Point(345, 326);
+            this.btnXacNhan.Location = new System.Drawing.Point(347, 391);
             this.btnXacNhan.Name = "btnXacNhan";
             this.btnXacNhan.Size = new System.Drawing.Size(157, 55);
             this.btnXacNhan.TabIndex = 14;
@@ -261,11 +264,11 @@ namespace QuanLiQuanCafe
             this.lblTitle.BackColor = System.Drawing.Color.Transparent;
             this.lblTitle.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold);
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.lblTitle.Location = new System.Drawing.Point(66, 27);
+            this.lblTitle.Location = new System.Drawing.Point(66, 37);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(380, 38);
+            this.lblTitle.Size = new System.Drawing.Size(406, 38);
             this.lblTitle.TabIndex = 1;
-            this.lblTitle.Text = "Cập nhật thông tin cá nhân";
+            this.lblTitle.Text = "> Cập nhật thông tin cá nhân";
             this.lblTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblTenTK
@@ -273,7 +276,7 @@ namespace QuanLiQuanCafe
             this.lblTenTK.BackColor = System.Drawing.Color.Transparent;
             this.lblTenTK.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.lblTenTK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.lblTenTK.Location = new System.Drawing.Point(69, 100);
+            this.lblTenTK.Location = new System.Drawing.Point(69, 128);
             this.lblTenTK.Name = "lblTenTK";
             this.lblTenTK.Size = new System.Drawing.Size(183, 24);
             this.lblTenTK.TabIndex = 2;
@@ -284,7 +287,7 @@ namespace QuanLiQuanCafe
             this.lblMatKhau.BackColor = System.Drawing.Color.Transparent;
             this.lblMatKhau.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.lblMatKhau.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
-            this.lblMatKhau.Location = new System.Drawing.Point(69, 157);
+            this.lblMatKhau.Location = new System.Drawing.Point(69, 185);
             this.lblMatKhau.Name = "lblMatKhau";
             this.lblMatKhau.Size = new System.Drawing.Size(133, 24);
             this.lblMatKhau.TabIndex = 3;
@@ -297,7 +300,7 @@ namespace QuanLiQuanCafe
             this.btnDangXuat.FillColor = System.Drawing.Color.Gray;
             this.btnDangXuat.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnDangXuat.ForeColor = System.Drawing.Color.White;
-            this.btnDangXuat.Location = new System.Drawing.Point(735, 69);
+            this.btnDangXuat.Location = new System.Drawing.Point(726, 86);
             this.btnDangXuat.Name = "btnDangXuat";
             this.btnDangXuat.Size = new System.Drawing.Size(150, 55);
             this.btnDangXuat.TabIndex = 15;

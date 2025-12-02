@@ -499,5 +499,7 @@ namespace QuanLiQuanCafe
             XuLyDangXuat();
         }
         #endregion
+
+        
     }
 }
