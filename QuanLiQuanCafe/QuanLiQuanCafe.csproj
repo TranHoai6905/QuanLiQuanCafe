@@ -57,7 +57,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess.cs" />
+    <Compile Include="BUS\HoaDonBUS.cs" />
+    <Compile Include="BUS\MonBUS.cs" />
+    <Compile Include="DAL\DataAccess.cs" />
     <Compile Include="frmTrangChu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,9 +86,9 @@
     </Compile>
     <Compile Include="Models\ChiTietHoaDon.cs" />
     <Compile Include="Models\HoaDon.cs" />
-    <Compile Include="Models\HoaDonQueries.cs" />
+    <Compile Include="DAL\HoaDonQueries.cs" />
     <Compile Include="Models\Mon.cs" />
-    <Compile Include="Models\MonQueries.cs" />
+    <Compile Include="DAL\MonQueries.cs" />
     <Compile Include="MonDAO.cs" />
     <Compile Include="MonInfo.cs" />
     <Compile Include="Program.cs" />
@@ -132,5 +134,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

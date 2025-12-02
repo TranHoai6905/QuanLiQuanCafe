@@ -1,26 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
+using QuanLiQuanCafe.BUS;
 
 namespace QuanLiQuanCafe
 {
     public partial class frmMon : Form
     {
-        private int hoaDonId; // ID hóa đơn hiện tại
-        private List<int> danhSachMonDaChon = new List<int>(); // Danh sách món đã chọn
-        private int? hoaDonDangChonId = null; // ID hóa đơn đang chọn từ dgvHoaDonChuaThanhToan
-                                              // Thông báo món vừa được thêm vào hóa đơn
-        public event Action<int> OnMonDaDuocThem; // int = Id của hóa đơn vừa thêm món
+        private int hoaDonId;
+        private int? hoaDonDangChonId = null;
+        private string loaiMonDangChon = "Tất cả";
+        private List<int> danhSachMonDaChon = new List<int>();
 
+        private readonly string connStr = @"Data Source=HOAI\MSSQLSERVER01;Initial Catalog=QuanLyQuanCafe1;Integrated Security=True";
+
+        // Khai báo BUS
+        private MonBUS monBUS;
+        private HoaDonBUS hoaDonBUS;
+
+        public event Action<int> OnMonDaDuocThem;
+
+        // Constructor khi truyền hoaDonId
         public frmMon(int hoaDonId)
         {
             InitializeComponent();
             this.hoaDonId = hoaDonId;
         }
 
+        // Constructor mặc định
         public frmMon()
         {
             InitializeComponent();
@@ -28,47 +37,91 @@ namespace QuanLiQuanCafe
 
         private void frmMon_Load(object sender, EventArgs e)
         {
-            LoadLoaiMon();
-            LoadMon(); // Load tất cả món
-            LoadHoaDonChuaThanhToan(); // Load danh sách hóa đơn chưa thanh toán
-        }
+            // Khởi tạo BUS đúng cách
+            monBUS = new MonBUS(connStr);
 
+            // Nếu HoaDonBUS không có constructor nhận connStr, dùng mặc định
+            hoaDonBUS = new HoaDonBUS();
+
+            // Load dữ liệu
+            LoadLoaiMon();
+            LoadMon();
+            LoadHoaDonChuaThanhToan();
+        }
 
         private void LoadHoaDonChuaThanhToan()
         {
-            dgvHoaDonChuaThanhToan.DataSource = MonQueries.GetHoaDonChuaThanhToan();
-
+            dgvHoaDonChuaThanhToan.DataSource = hoaDonBUS.GetHoaDonChuaThanhToan();
             dgvHoaDonChuaThanhToan.Columns["NgayTao"].HeaderText = "Ngày tạo";
             dgvHoaDonChuaThanhToan.Columns["TongTien"].HeaderText = "Tổng tiền";
             dgvHoaDonChuaThanhToan.Columns["SoLuongMon"].HeaderText = "Số lượng món";
             dgvHoaDonChuaThanhToan.Columns["TrangThai"].HeaderText = "Trạng thái";
         }
 
-
-        // ==========================
-        // Load danh sách loại món ComboBox
-        // ==========================
-
         private void LoadLoaiMon()
         {
-            DataTable dt = MonQueries.GetLoaiMon();
+            flpLoaiMon.Controls.Clear();
 
-            DataRow row = dt.NewRow();
-            row["Loai"] = "Tất cả";
-            dt.Rows.InsertAt(row, 0);
+            DataTable dt = monBUS.GetLoaiMon();
 
-            cmbLoaiMon.DataSource = dt;
-            cmbLoaiMon.DisplayMember = "Loai";
-            cmbLoaiMon.ValueMember = "Loai";
+            AddLoaiButton("Tất cả");
+
+            foreach (DataRow row in dt.Rows)
+            {
+                AddLoaiButton(row["Loai"].ToString());
+            }
         }
 
+        private void AddLoaiButton(string tenLoai)
+        {
+            var btn = new Guna.UI2.WinForms.Guna2Button
+            {
+                Text = tenLoai,
+                Tag = tenLoai,
+                Height = 40,
+                BorderRadius = 8,
+                FillColor = ColorTranslator.FromHtml("#D9C2A1"),
+                ForeColor = Color.White,
+                BorderThickness = 0,
+                AutoSize = false,
+                Padding = new Padding(20, 5, 20, 5)
+            };
 
-        // ==========================
-        // Load danh sách món
-        // ==========================
+            Size textSize = TextRenderer.MeasureText(tenLoai, btn.Font);
+            btn.Width = textSize.Width + 60;
+
+            btn.HoverState.FillColor = btn.FillColor;
+            btn.Click += BtnLoai_Click;
+
+            flpLoaiMon.Controls.Add(btn);
+        }
+
+        private void BtnLoai_Click(object sender, EventArgs e)
+        {
+            var clicked = sender as Guna.UI2.WinForms.Guna2Button;
+            loaiMonDangChon = clicked.Tag.ToString();
+
+            foreach (Control c in flpLoaiMon.Controls)
+            {
+                if (c is Guna.UI2.WinForms.Guna2Button btn)
+                {
+                    btn.FillColor = ColorTranslator.FromHtml("#D9C2A1");
+                    btn.ForeColor = Color.White;
+                    btn.BorderThickness = 0;
+                }
+            }
+
+            clicked.FillColor = Color.White;
+            clicked.ForeColor = Color.Black;
+            clicked.BorderColor = Color.Black;
+            clicked.BorderThickness = 2;
+
+            LoadMon(txtTimKiem.Text.Trim(), loaiMonDangChon);
+        }
+
         private void LoadMon(string keyword = "", string loai = "Tất cả")
         {
-            DataTable dt = MonQueries.GetMon(keyword, loai);
+            DataTable dt = monBUS.GetMon(keyword, loai);
             dgvMon.DataSource = dt;
 
             foreach (DataGridViewRow row in dgvMon.Rows)
@@ -81,13 +134,9 @@ namespace QuanLiQuanCafe
             UpdateButtonStatus();
         }
 
-        // ==========================
-        // TextBox tìm kiếm
-        // ==========================
         private void txtTimKiem_TextChanged(object sender, EventArgs e)
         {
-            string loai = cmbLoaiMon.SelectedValue?.ToString() ?? "Tất cả";
-            LoadMon(txtTimKiem.Text.Trim(), loai);
+            LoadMon(txtTimKiem.Text.Trim(), loaiMonDangChon);
         }
 
         private void btnTimMon_Click(object sender, EventArgs e)
@@ -98,24 +147,9 @@ namespace QuanLiQuanCafe
                 MessageBox.Show("Vui lòng nhập từ khóa để tìm món!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-
-            string loai = cmbLoaiMon.SelectedValue?.ToString() ?? "Tất cả";
-            LoadMon(keyword, loai);
+            LoadMon(keyword, loaiMonDangChon);
         }
 
-        // ==========================
-        // ComboBox chọn loại món
-        // ==========================
-        private void cmbLoaiMon_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbLoaiMon.SelectedValue == null) return;
-            string loai = cmbLoaiMon.SelectedValue.ToString();
-            LoadMon(txtTimKiem.Text.Trim(), loai);
-        }
-
-        // ==========================
-        // Toggle chọn món
-        // ==========================
         private void ToggleSelection(DataGridViewRow row)
         {
             int monId = Convert.ToInt32(row.Cells["Id"].Value);
@@ -142,35 +176,21 @@ namespace QuanLiQuanCafe
             }
         }
 
-        // ==========================
-        // Cập nhật trạng thái nút thêm món
-        // ==========================
         private void UpdateButtonStatus()
         {
-            // Bật nút nếu đã chọn món và đã chọn hóa đơn
             btnThemMonVaoDon.Enabled = danhSachMonDaChon.Count > 0 && hoaDonDangChonId.HasValue;
         }
 
-        // ==========================
-        // Thêm món vào hóa đơn
-        // ==========================
         private void btnThemMonVaoDon_Click(object sender, EventArgs e)
         {
-            if (hoaDonDangChonId == null || danhSachMonDaChon.Count == 0)
-                return;
-
+            if (hoaDonDangChonId == null || danhSachMonDaChon.Count == 0) return;
             try
             {
-                MonQueries.ThemMonVaoHoaDon(hoaDonDangChonId.Value, danhSachMonDaChon);
-
-                // Thông báo frmHoaDon reload dữ liệu ngay
+                monBUS.ThemMonVaoHoaDon(hoaDonDangChonId.Value, danhSachMonDaChon);
                 OnMonDaDuocThem?.Invoke(hoaDonDangChonId.Value);
-
-                // Xóa danh sách món đã chọn, load lại DataGridView món
                 danhSachMonDaChon.Clear();
                 LoadMon();
                 LoadHoaDonChuaThanhToan();
-
                 MessageBox.Show("Đã thêm món vào hóa đơn!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -184,19 +204,16 @@ namespace QuanLiQuanCafe
             if (e.RowIndex >= 0)
             {
                 hoaDonDangChonId = Convert.ToInt32(dgvHoaDonChuaThanhToan.Rows[e.RowIndex].Cells["Id"].Value);
-                UpdateButtonStatus(); // Enable nút thêm món nếu đã chọn hóa đơn
+                UpdateButtonStatus();
             }
         }
 
-        // ===========================
-        // Thêm hóa đơn mới vào dgvHoaDonChuaThanhToan
-        // ===========================
         private void btnThemHoaDonMoi_Click(object sender, EventArgs e)
         {
             try
             {
-                int nhanVienId = 1; // Lấy từ session/login nếu có
-                int newId = MonQueries.ThemHoaDonMoi(nhanVienId);
+                int nhanVienId = 1; // Hoặc lấy từ session
+                int newId = hoaDonBUS.ThemHoaDonMoi(nhanVienId);
                 MessageBox.Show($"Đã tạo hóa đơn mới #{newId}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 LoadHoaDonChuaThanhToan();
@@ -217,9 +234,6 @@ namespace QuanLiQuanCafe
             }
         }
 
-        // ===========================
-        // Xóa hóa đơn đã chọn từ dgvHoaDonChuaThanhToan
-        // ===========================
         private void btnXoaHoaDon_Click(object sender, EventArgs e)
         {
             if (hoaDonDangChonId == null)
@@ -241,7 +255,7 @@ namespace QuanLiQuanCafe
             {
                 try
                 {
-                    MonQueries.XoaHoaDon(hoaDonDangChonId.Value);
+                    hoaDonBUS.XoaHoaDon(hoaDonDangChonId.Value);
                     MessageBox.Show($"Đã xóa hóa đơn #{hoaDonDangChonId}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadHoaDonChuaThanhToan();
                     hoaDonDangChonId = null;
@@ -253,6 +267,5 @@ namespace QuanLiQuanCafe
                 }
             }
         }
-
     }
 }

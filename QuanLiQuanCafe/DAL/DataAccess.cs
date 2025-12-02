@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace QuanLiQuanCafe
+namespace QuanLiQuanCafe.DAL
 {
     public static class DataAccess
     {
@@ -12,23 +13,15 @@ namespace QuanLiQuanCafe
         public static DataTable GetDataTable(string sql, params SqlParameter[] parameters)
         {
             var dt = new DataTable();
-
             using (SqlConnection conn = new SqlConnection(ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                if (parameters != null) cmd.Parameters.AddRange(parameters);
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                 {
-                    cmd.CommandType = CommandType.Text;
-
-                    if (parameters != null && parameters.Length > 0)
-                        cmd.Parameters.AddRange(parameters);
-
-                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                    {
-                        da.Fill(dt);
-                    }
+                    da.Fill(dt);
                 }
             }
-
             return dt;
         }
 
@@ -38,11 +31,7 @@ namespace QuanLiQuanCafe
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
                 conn.Open();
-                cmd.CommandType = CommandType.Text;
-
-                if (parameters != null)
-                    cmd.Parameters.AddRange(parameters);
-
+                if (parameters != null) cmd.Parameters.AddRange(parameters);
                 return cmd.ExecuteNonQuery();
             }
         }
@@ -53,11 +42,7 @@ namespace QuanLiQuanCafe
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
                 conn.Open();
-                cmd.CommandType = CommandType.Text;
-
-                if (parameters != null)
-                    cmd.Parameters.AddRange(parameters);
-
+                if (parameters != null) cmd.Parameters.AddRange(parameters);
                 return cmd.ExecuteScalar();
             }
         }

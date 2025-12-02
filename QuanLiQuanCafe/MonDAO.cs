@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using QuanLiQuanCafe.DAL;
 
 namespace QuanLiQuanCafe.Models
 {

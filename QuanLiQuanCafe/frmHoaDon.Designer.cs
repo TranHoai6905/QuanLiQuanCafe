@@ -246,7 +246,7 @@ namespace QuanLiQuanCafe
             this.btnTatCa.Name = "btnTatCa";
             this.btnTatCa.Size = new System.Drawing.Size(119, 36);
             this.btnTatCa.TabIndex = 11;
-            this.btnTatCa.Text = "Tất cả ";
+            this.btnTatCa.Text = " Tất cả ";
             this.btnTatCa.Click += new System.EventHandler(this.btnTatCa_Click);
             // 
             // txtTimNgay
