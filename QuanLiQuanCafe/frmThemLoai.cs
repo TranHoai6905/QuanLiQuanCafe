@@ -139,20 +139,36 @@ namespace QuanLiQuanCafe
                 MessageBox.Show("Vui lòng chọn loại cần xóa!");
                 return;
             }
+
             string loai = dgvLoai.SelectedRows[0].Cells["Loai"].Value.ToString();
+
+            int soLuongMon = loaiBUS.SoLuongMon(loai);
+            if (soLuongMon > 0)
+            {
+                MessageBox.Show(
+                    $"❌ Không thể xóa loại '{loai}' vì đang có {soLuongMon} món.\n" +
+                    "Vui lòng xóa các món thuộc loại này trước khi xóa loại.",
+                    "Lỗi xóa",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
             var confirm = MessageBox.Show(
-                $"Bạn có chắc muốn xóa loại '{loai}'?\n⚠ Tất cả món thuộc loại này sẽ bị xóa vĩnh viễn!",
+                $"Bạn có chắc muốn xóa loại '{loai}'?",
                 "Xác nhận xóa",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning
             );
             if (confirm != DialogResult.Yes) return;
+
             try
             {
                 int kq = loaiBUS.XoaLoai(loai);
                 if (kq > 0)
                 {
-                    MessageBox.Show("✅ Xóa loại và món thuộc loại thành công!");
+                    MessageBox.Show($"✅ Loại '{loai}' đã được xóa!");
                     LoadLoai();
                 }
                 else
@@ -165,12 +181,13 @@ namespace QuanLiQuanCafe
                 MessageBox.Show("❌ Lỗi: " + ex.Message);
             }
         }
+
+        // Quay lại và refresh frmThemMon
         private void btnQuayLai_Click(object sender, EventArgs e)
         {
-            // Gọi lại LoadLoaiMon() để cập nhật danh sách loại trong frmThemMon
-            _parentForm.LoadLoaiMon(); // <- cần public phương thức này trong frmThemMon
-            _parentForm.Show();        // Hiện lại frmThemMon
-            this.Close();              // Đóng frmThemLoai
+            _parentForm.LoadLoaiMon(); // Load lại danh sách loại
+            _parentForm.Show();
+            this.Close();
         }
 
     }

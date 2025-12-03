@@ -167,6 +167,13 @@
     <Content Include="log4net.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\stars.png" />
+    <None Include="Resources\need-assessment.png" />
+    <None Include="Resources\menu %283%29.png" />
+    <None Include="Resources\direction.png" />
+    <None Include="Resources\open.png" />
+    <None Include="Resources\cafe %281%29.png" />
+    <None Include="Resources\sign.png" />
     <None Include="Resources\back.png" />
     <None Include="Resources\undo.png" />
     <None Include="Resources\menu %282%29.png" />

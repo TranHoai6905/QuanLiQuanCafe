@@ -19,21 +19,17 @@ namespace QuanLiQuanCafe
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmThemMon));
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.btnThemLoai = new Guna.UI2.WinForms.Guna2Button();
             this.cmbLoai = new System.Windows.Forms.ComboBox();
             this.txtGia = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtTenMon = new Guna.UI2.WinForms.Guna2TextBox();
-            this.btnSuaMon = new Guna.UI2.WinForms.Guna2Button();
-            this.btnXoaMon = new Guna.UI2.WinForms.Guna2Button();
-            this.btnThemMonMoi = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.dgvMon = new Guna.UI2.WinForms.Guna2DataGridView();
@@ -42,11 +38,29 @@ namespace QuanLiQuanCafe
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.flpLoaiMon = new System.Windows.Forms.FlowLayoutPanel();
+            this.guna2PictureBox4 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.guna2PictureBox2 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.guna2PictureBox3 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.btnTimMon = new Guna.UI2.WinForms.Guna2ImageButton();
+            this.btnThemLoai = new Guna.UI2.WinForms.Guna2Button();
+            this.btnSuaMon = new Guna.UI2.WinForms.Guna2Button();
+            this.btnXoaMon = new Guna.UI2.WinForms.Guna2Button();
+            this.btnThemMonMoi = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2PictureBox5 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.guna2PictureBox6 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.guna2PictureBox7 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMon)).BeginInit();
             this.guna2Panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox7)).BeginInit();
             this.SuspendLayout();
             // 
             // label3
@@ -92,29 +106,10 @@ namespace QuanLiQuanCafe
             this.guna2Panel1.Controls.Add(this.label1);
             this.guna2Panel1.Controls.Add(this.label3);
             this.guna2Panel1.Controls.Add(this.label2);
-            this.guna2Panel1.Location = new System.Drawing.Point(51, 130);
+            this.guna2Panel1.Location = new System.Drawing.Point(33, 130);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(420, 364);
+            this.guna2Panel1.Size = new System.Drawing.Size(447, 350);
             this.guna2Panel1.TabIndex = 21;
-            // 
-            // btnThemLoai
-            // 
-            this.btnThemLoai.BorderRadius = 23;
-            this.btnThemLoai.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnThemLoai.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnThemLoai.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnThemLoai.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnThemLoai.FillColor = System.Drawing.Color.Teal;
-            this.btnThemLoai.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnThemLoai.ForeColor = System.Drawing.Color.White;
-            this.btnThemLoai.Image = global::QuanLiQuanCafe.Resource1.notepad;
-            this.btnThemLoai.ImageSize = new System.Drawing.Size(30, 30);
-            this.btnThemLoai.Location = new System.Drawing.Point(269, 96);
-            this.btnThemLoai.Name = "btnThemLoai";
-            this.btnThemLoai.Size = new System.Drawing.Size(133, 45);
-            this.btnThemLoai.TabIndex = 26;
-            this.btnThemLoai.Text = "Thêm loại ";
-            this.btnThemLoai.Click += new System.EventHandler(this.btnThemLoai_Click);
             // 
             // cmbLoai
             // 
@@ -160,77 +155,21 @@ namespace QuanLiQuanCafe
             this.txtTenMon.Size = new System.Drawing.Size(288, 36);
             this.txtTenMon.TabIndex = 23;
             // 
-            // btnSuaMon
-            // 
-            this.btnSuaMon.BorderRadius = 23;
-            this.btnSuaMon.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnSuaMon.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnSuaMon.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnSuaMon.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnSuaMon.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(196)))), ((int)(((byte)(15)))));
-            this.btnSuaMon.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnSuaMon.ForeColor = System.Drawing.Color.White;
-            this.btnSuaMon.Image = global::QuanLiQuanCafe.Resource1.office_material;
-            this.btnSuaMon.ImageSize = new System.Drawing.Size(30, 30);
-            this.btnSuaMon.Location = new System.Drawing.Point(150, 290);
-            this.btnSuaMon.Name = "btnSuaMon";
-            this.btnSuaMon.Size = new System.Drawing.Size(129, 45);
-            this.btnSuaMon.TabIndex = 22;
-            this.btnSuaMon.Text = "Sửa món ";
-            this.btnSuaMon.Click += new System.EventHandler(this.btnSuaMon_Click);
-            // 
-            // btnXoaMon
-            // 
-            this.btnXoaMon.BorderRadius = 23;
-            this.btnXoaMon.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnXoaMon.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnXoaMon.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnXoaMon.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnXoaMon.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.btnXoaMon.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnXoaMon.ForeColor = System.Drawing.Color.White;
-            this.btnXoaMon.Image = global::QuanLiQuanCafe.Resource1.cross;
-            this.btnXoaMon.ImageSize = new System.Drawing.Size(30, 30);
-            this.btnXoaMon.Location = new System.Drawing.Point(285, 290);
-            this.btnXoaMon.Name = "btnXoaMon";
-            this.btnXoaMon.Size = new System.Drawing.Size(132, 45);
-            this.btnXoaMon.TabIndex = 21;
-            this.btnXoaMon.Text = "Xóa món";
-            this.btnXoaMon.Click += new System.EventHandler(this.btnXoaMon_Click);
-            // 
-            // btnThemMonMoi
-            // 
-            this.btnThemMonMoi.BorderRadius = 23;
-            this.btnThemMonMoi.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnThemMonMoi.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnThemMonMoi.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnThemMonMoi.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnThemMonMoi.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
-            this.btnThemMonMoi.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnThemMonMoi.ForeColor = System.Drawing.Color.White;
-            this.btnThemMonMoi.Image = global::QuanLiQuanCafe.Resource1.plus;
-            this.btnThemMonMoi.ImageSize = new System.Drawing.Size(30, 30);
-            this.btnThemMonMoi.Location = new System.Drawing.Point(3, 290);
-            this.btnThemMonMoi.Name = "btnThemMonMoi";
-            this.btnThemMonMoi.Size = new System.Drawing.Size(145, 45);
-            this.btnThemMonMoi.TabIndex = 20;
-            this.btnThemMonMoi.Text = "Thêm món mới ";
-            this.btnThemMonMoi.Click += new System.EventHandler(this.btnThemMonMoi_Click);
-            // 
             // guna2Panel2
             // 
             this.guna2Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.guna2Panel2.Controls.Add(this.guna2PictureBox3);
             this.guna2Panel2.Controls.Add(this.label4);
-            this.guna2Panel2.Location = new System.Drawing.Point(51, 130);
+            this.guna2Panel2.Location = new System.Drawing.Point(36, 130);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(420, 56);
+            this.guna2Panel2.Size = new System.Drawing.Size(444, 56);
             this.guna2Panel2.TabIndex = 22;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Consolas", 14.25F);
-            this.label4.Location = new System.Drawing.Point(157, 26);
+            this.label4.Location = new System.Drawing.Point(174, 26);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(140, 22);
             this.label4.TabIndex = 23;
@@ -238,29 +177,29 @@ namespace QuanLiQuanCafe
             // 
             // dgvMon
             // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.dgvMon.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.dgvMon.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvMon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMon.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMon.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvMon.ColumnHeadersHeight = 30;
             this.dgvMon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMon.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvMon.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvMon.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvMon.Location = new System.Drawing.Point(489, 192);
+            this.dgvMon.Location = new System.Drawing.Point(506, 192);
             this.dgvMon.MultiSelect = false;
             this.dgvMon.Name = "dgvMon";
             this.dgvMon.ReadOnly = true;
@@ -316,7 +255,7 @@ namespace QuanLiQuanCafe
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Consolas", 14.25F);
-            this.label5.Location = new System.Drawing.Point(48, 69);
+            this.label5.Location = new System.Drawing.Point(150, 37);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(90, 22);
             this.label5.TabIndex = 24;
@@ -325,9 +264,10 @@ namespace QuanLiQuanCafe
             // guna2Panel3
             // 
             this.guna2Panel3.BackColor = System.Drawing.Color.IndianRed;
+            this.guna2Panel3.Controls.Add(this.guna2PictureBox2);
             this.guna2Panel3.Controls.Add(this.guna2HtmlLabel2);
             this.guna2Panel3.ForeColor = System.Drawing.SystemColors.Control;
-            this.guna2Panel3.Location = new System.Drawing.Point(489, 130);
+            this.guna2Panel3.Location = new System.Drawing.Point(506, 130);
             this.guna2Panel3.Name = "guna2Panel3";
             this.guna2Panel3.Size = new System.Drawing.Size(364, 56);
             this.guna2Panel3.TabIndex = 29;
@@ -337,7 +277,7 @@ namespace QuanLiQuanCafe
             this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel2.Font = new System.Drawing.Font("Consolas", 14.25F);
             this.guna2HtmlLabel2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2HtmlLabel2.Location = new System.Drawing.Point(125, 24);
+            this.guna2HtmlLabel2.Location = new System.Drawing.Point(144, 24);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             this.guna2HtmlLabel2.Size = new System.Drawing.Size(133, 24);
             this.guna2HtmlLabel2.TabIndex = 0;
@@ -346,10 +286,55 @@ namespace QuanLiQuanCafe
             // flpLoaiMon
             // 
             this.flpLoaiMon.AutoScroll = true;
+            this.flpLoaiMon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flpLoaiMon.Location = new System.Drawing.Point(363, 12);
             this.flpLoaiMon.Name = "flpLoaiMon";
             this.flpLoaiMon.Size = new System.Drawing.Size(490, 93);
             this.flpLoaiMon.TabIndex = 30;
+            // 
+            // guna2PictureBox4
+            // 
+            this.guna2PictureBox4.Image = global::QuanLiQuanCafe.Resource1.stars;
+            this.guna2PictureBox4.ImageRotate = 0F;
+            this.guna2PictureBox4.Location = new System.Drawing.Point(33, 486);
+            this.guna2PictureBox4.Name = "guna2PictureBox4";
+            this.guna2PictureBox4.Size = new System.Drawing.Size(115, 102);
+            this.guna2PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox4.TabIndex = 34;
+            this.guna2PictureBox4.TabStop = false;
+            // 
+            // guna2PictureBox1
+            // 
+            this.guna2PictureBox1.Image = global::QuanLiQuanCafe.Resource1.sign;
+            this.guna2PictureBox1.ImageRotate = 0F;
+            this.guna2PictureBox1.Location = new System.Drawing.Point(54, 13);
+            this.guna2PictureBox1.Name = "guna2PictureBox1";
+            this.guna2PictureBox1.Size = new System.Drawing.Size(78, 92);
+            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox1.TabIndex = 31;
+            this.guna2PictureBox1.TabStop = false;
+            // 
+            // guna2PictureBox2
+            // 
+            this.guna2PictureBox2.Image = global::QuanLiQuanCafe.Resource1.menu__3_;
+            this.guna2PictureBox2.ImageRotate = 0F;
+            this.guna2PictureBox2.Location = new System.Drawing.Point(90, 7);
+            this.guna2PictureBox2.Name = "guna2PictureBox2";
+            this.guna2PictureBox2.Size = new System.Drawing.Size(48, 41);
+            this.guna2PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox2.TabIndex = 32;
+            this.guna2PictureBox2.TabStop = false;
+            // 
+            // guna2PictureBox3
+            // 
+            this.guna2PictureBox3.Image = global::QuanLiQuanCafe.Resource1.need_assessment;
+            this.guna2PictureBox3.ImageRotate = 0F;
+            this.guna2PictureBox3.Location = new System.Drawing.Point(118, 5);
+            this.guna2PictureBox3.Name = "guna2PictureBox3";
+            this.guna2PictureBox3.Size = new System.Drawing.Size(50, 48);
+            this.guna2PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox3.TabIndex = 33;
+            this.guna2PictureBox3.TabStop = false;
             // 
             // btnTimMon
             // 
@@ -366,12 +351,126 @@ namespace QuanLiQuanCafe
             this.btnTimMon.TabIndex = 26;
             this.btnTimMon.Click += new System.EventHandler(this.btnTimMon_Click);
             // 
+            // btnThemLoai
+            // 
+            this.btnThemLoai.BorderRadius = 23;
+            this.btnThemLoai.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnThemLoai.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnThemLoai.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnThemLoai.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnThemLoai.FillColor = System.Drawing.Color.Teal;
+            this.btnThemLoai.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.btnThemLoai.ForeColor = System.Drawing.Color.White;
+            this.btnThemLoai.Image = global::QuanLiQuanCafe.Resource1.notepad;
+            this.btnThemLoai.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnThemLoai.Location = new System.Drawing.Point(269, 96);
+            this.btnThemLoai.Name = "btnThemLoai";
+            this.btnThemLoai.Size = new System.Drawing.Size(133, 45);
+            this.btnThemLoai.TabIndex = 26;
+            this.btnThemLoai.Text = "Thêm loại ";
+            this.btnThemLoai.Click += new System.EventHandler(this.btnThemLoai_Click);
+            // 
+            // btnSuaMon
+            // 
+            this.btnSuaMon.BorderRadius = 23;
+            this.btnSuaMon.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSuaMon.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSuaMon.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSuaMon.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSuaMon.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(196)))), ((int)(((byte)(15)))));
+            this.btnSuaMon.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.btnSuaMon.ForeColor = System.Drawing.Color.White;
+            this.btnSuaMon.Image = global::QuanLiQuanCafe.Resource1.office_material;
+            this.btnSuaMon.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnSuaMon.Location = new System.Drawing.Point(167, 290);
+            this.btnSuaMon.Name = "btnSuaMon";
+            this.btnSuaMon.Size = new System.Drawing.Size(129, 45);
+            this.btnSuaMon.TabIndex = 22;
+            this.btnSuaMon.Text = "Sửa món ";
+            this.btnSuaMon.Click += new System.EventHandler(this.btnSuaMon_Click);
+            // 
+            // btnXoaMon
+            // 
+            this.btnXoaMon.BorderRadius = 23;
+            this.btnXoaMon.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnXoaMon.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnXoaMon.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnXoaMon.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnXoaMon.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.btnXoaMon.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.btnXoaMon.ForeColor = System.Drawing.Color.White;
+            this.btnXoaMon.Image = global::QuanLiQuanCafe.Resource1.cross;
+            this.btnXoaMon.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnXoaMon.Location = new System.Drawing.Point(302, 290);
+            this.btnXoaMon.Name = "btnXoaMon";
+            this.btnXoaMon.Size = new System.Drawing.Size(132, 45);
+            this.btnXoaMon.TabIndex = 21;
+            this.btnXoaMon.Text = "Xóa món";
+            this.btnXoaMon.Click += new System.EventHandler(this.btnXoaMon_Click);
+            // 
+            // btnThemMonMoi
+            // 
+            this.btnThemMonMoi.BorderRadius = 23;
+            this.btnThemMonMoi.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnThemMonMoi.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnThemMonMoi.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnThemMonMoi.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnThemMonMoi.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
+            this.btnThemMonMoi.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.btnThemMonMoi.ForeColor = System.Drawing.Color.White;
+            this.btnThemMonMoi.Image = global::QuanLiQuanCafe.Resource1.plus;
+            this.btnThemMonMoi.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnThemMonMoi.Location = new System.Drawing.Point(16, 290);
+            this.btnThemMonMoi.Name = "btnThemMonMoi";
+            this.btnThemMonMoi.Size = new System.Drawing.Size(145, 45);
+            this.btnThemMonMoi.TabIndex = 20;
+            this.btnThemMonMoi.Text = "Thêm món mới ";
+            this.btnThemMonMoi.Click += new System.EventHandler(this.btnThemMonMoi_Click);
+            // 
+            // guna2PictureBox5
+            // 
+            this.guna2PictureBox5.Image = global::QuanLiQuanCafe.Resource1.stars;
+            this.guna2PictureBox5.ImageRotate = 0F;
+            this.guna2PictureBox5.Location = new System.Drawing.Point(154, 486);
+            this.guna2PictureBox5.Name = "guna2PictureBox5";
+            this.guna2PictureBox5.Size = new System.Drawing.Size(115, 102);
+            this.guna2PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox5.TabIndex = 35;
+            this.guna2PictureBox5.TabStop = false;
+            // 
+            // guna2PictureBox6
+            // 
+            this.guna2PictureBox6.Image = global::QuanLiQuanCafe.Resource1.stars;
+            this.guna2PictureBox6.ImageRotate = 0F;
+            this.guna2PictureBox6.Location = new System.Drawing.Point(275, 486);
+            this.guna2PictureBox6.Name = "guna2PictureBox6";
+            this.guna2PictureBox6.Size = new System.Drawing.Size(107, 102);
+            this.guna2PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox6.TabIndex = 36;
+            this.guna2PictureBox6.TabStop = false;
+            // 
+            // guna2PictureBox7
+            // 
+            this.guna2PictureBox7.Image = global::QuanLiQuanCafe.Resource1.stars;
+            this.guna2PictureBox7.ImageRotate = 0F;
+            this.guna2PictureBox7.Location = new System.Drawing.Point(373, 486);
+            this.guna2PictureBox7.Name = "guna2PictureBox7";
+            this.guna2PictureBox7.Size = new System.Drawing.Size(105, 102);
+            this.guna2PictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox7.TabIndex = 37;
+            this.guna2PictureBox7.TabStop = false;
+            // 
             // frmThemMon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(238)))), ((int)(((byte)(225)))));
             this.ClientSize = new System.Drawing.Size(910, 679);
+            this.Controls.Add(this.guna2PictureBox7);
+            this.Controls.Add(this.guna2PictureBox6);
+            this.Controls.Add(this.guna2PictureBox5);
+            this.Controls.Add(this.guna2PictureBox4);
+            this.Controls.Add(this.guna2PictureBox1);
             this.Controls.Add(this.flpLoaiMon);
             this.Controls.Add(this.guna2Panel3);
             this.Controls.Add(this.guna2Panel2);
@@ -390,6 +489,13 @@ namespace QuanLiQuanCafe
             ((System.ComponentModel.ISupportInitialize)(this.dgvMon)).EndInit();
             this.guna2Panel3.ResumeLayout(false);
             this.guna2Panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox7)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -414,5 +520,12 @@ namespace QuanLiQuanCafe
         private System.Windows.Forms.FlowLayoutPanel flpLoaiMon;
         private ComboBox cmbLoai;
         private Guna.UI2.WinForms.Guna2Button btnThemLoai;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox2;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox3;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox4;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox5;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox6;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox7;
     }
 }

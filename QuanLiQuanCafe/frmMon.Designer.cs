@@ -252,6 +252,7 @@
             // flpLoaiMon
             // 
             this.flpLoaiMon.AutoScroll = true;
+            this.flpLoaiMon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flpLoaiMon.Location = new System.Drawing.Point(367, 12);
             this.flpLoaiMon.Name = "flpLoaiMon";
             this.flpLoaiMon.Size = new System.Drawing.Size(496, 95);
@@ -378,6 +379,7 @@
             this.Controls.Add(this.txtTimKiem);
             this.Controls.Add(this.dgvMon);
             this.Controls.Add(this.label4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmMon";
             this.Load += new System.EventHandler(this.frmMon_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMon)).EndInit();
