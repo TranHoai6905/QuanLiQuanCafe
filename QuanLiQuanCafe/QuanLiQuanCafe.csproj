@@ -246,9 +246,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\result_result_OIP.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Log4netconfig.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -256,6 +253,9 @@
   <ItemGroup>
     <Analyzer Include="..\packages\MSTest.Analyzers.4.0.1\analyzers\dotnet\cs\MSTest.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\MSTest.Analyzers.4.0.1\analyzers\dotnet\cs\MSTest.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
