@@ -1,55 +1,55 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using Guna.UI2.WinForms; // Guna UI2 namespace
 
 namespace QuanLiQuanCafe.Helpers
 {
     public static class ButtonHelper
     {
-        public static void EnableHoverShadow(Form form)
+        public static void EnableShadow(Form form)
         {
-            AddHoverEffectToButtons(form);
+            foreach (Control ctrl in form.Controls)
+            {
+                AddShadow(ctrl);
+            }
         }
 
-        private static void AddHoverEffectToButtons(Control parent)
+        private static void AddShadow(Control control)
         {
-            foreach (Control ctrl in parent.Controls)
+            if (control is Button)
             {
-                if (ctrl is Guna2Button btn)
+                control.Paint += Control_PaintShadow;
+            }
+
+            foreach (Control child in control.Controls)
+            {
+                AddShadow(child);
+            }
+        }
+
+        private static void Control_PaintShadow(object sender, PaintEventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn == null) return;
+
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            int shadowWidth = btn.Width - 4;
+            int shadowHeight = 6;
+            int shadowX = 2;
+            int shadowY = btn.Height - shadowHeight + 1;
+
+            // Tạo gradient ellipse để bóng mềm, mờ dần
+            using (GraphicsPath path = new GraphicsPath())
+            {
+                path.AddEllipse(shadowX, shadowY, shadowWidth, shadowHeight);
+                using (PathGradientBrush brush = new PathGradientBrush(path))
                 {
-                    btn.MouseEnter += Button_MouseEnter;
-                    btn.MouseLeave += Button_MouseLeave;
+                    brush.CenterColor = Color.FromArgb(100, 0, 0, 0); // Đen mờ
+                    brush.SurroundColors = new Color[] { Color.FromArgb(0, 0, 0, 0) }; // Trong suốt ra ngoài
+                    e.Graphics.FillEllipse(brush, shadowX, shadowY, shadowWidth, shadowHeight);
                 }
-
-                if (ctrl.HasChildren)
-                    AddHoverEffectToButtons(ctrl);
-            }
-        }
-
-        private static void Button_MouseEnter(object sender, EventArgs e)
-        {
-            if (sender is Guna2Button btn)
-            {
-                // Màu nền khi hover
-                btn.FillColor = Color.LightBlue;
-
-                // Bật shadow
-                btn.ShadowDecoration.Enabled = true;
-                btn.ShadowDecoration.Shadow = new Padding(5); // độ lớn đổ bóng
-                btn.ShadowDecoration.Color = Color.Gray;
-            }
-        }
-
-        private static void Button_MouseLeave(object sender, EventArgs e)
-        {
-            if (sender is Guna2Button btn)
-            {
-                // Trả về màu gốc
-                btn.FillColor = Color.White;
-
-                // Tắt shadow
-                btn.ShadowDecoration.Enabled = false;
             }
         }
     }

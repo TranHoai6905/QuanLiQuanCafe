@@ -14,6 +14,7 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using QuanLiQuanCafe.DAL;
 using System.Drawing;
+using QuanLiQuanCafe.Helpers;
 
 namespace QuanLiQuanCafe
 {
@@ -54,6 +55,9 @@ namespace QuanLiQuanCafe
         /// </summary>
         private void frmHoaDon_Load(object sender, EventArgs e)
         {
+            ButtonHelper.EnableShadow(this);
+            DataGridViewHelper.SetHeaderColor(dgvHoaDon);
+            DataGridViewHelper.SetHeaderColor(dgvChiTietHoaDon);
             LoadDanhSachHoaDon();
             SelectFirstHoaDon();
             UpdateButtonStatus();

@@ -9,7 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using QuanLiQuanCafe.BUS;
-
+using QuanLiQuanCafe.Helpers;
 namespace QuanLiQuanCafe
 {
     public partial class frmMon : Form
@@ -88,6 +88,9 @@ namespace QuanLiQuanCafe
             LoadLoaiMon();
             LoadMon();
             LoadHoaDonChuaThanhToan();
+            ButtonHelper.EnableShadow(this);
+            DataGridViewHelper.SetHeaderColor(dgvMon);
+            DataGridViewHelper.SetHeaderColor(dgvHoaDonChuaThanhToan);
         }
 
         /// <summary>

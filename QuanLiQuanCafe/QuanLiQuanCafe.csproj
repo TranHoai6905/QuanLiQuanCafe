@@ -92,6 +92,7 @@
       <DependentUpon>frmThemMon.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ButtonHelper.cs" />
+    <Compile Include="Helpers\DataGridViewHelper.cs" />
     <Compile Include="Models\ChiTietHoaDon.cs" />
     <Compile Include="Models\HoaDon.cs" />
     <Compile Include="DAL\HoaDonQueries.cs" />
@@ -166,6 +167,15 @@
     <Content Include="log4net.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\back.png" />
+    <None Include="Resources\undo.png" />
+    <None Include="Resources\menu %282%29.png" />
+    <None Include="Resources\add.png" />
+    <None Include="Resources\payment.png" />
+    <None Include="Resources\menu %281%29.png" />
+    <None Include="Resources\pay.png" />
+    <None Include="Resources\menu.png" />
+    <None Include="Resources\cafe.png" />
     <None Include="Resources\notepad.png" />
     <None Include="Resources\highlighter.png" />
     <None Include="Resources\office-material.png" />

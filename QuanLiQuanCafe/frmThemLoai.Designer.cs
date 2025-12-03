@@ -33,20 +33,23 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.btnXoa = new Guna.UI2.WinForms.Guna2Button();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.dgvLoai = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.btnThem = new Guna.UI2.WinForms.Guna2Button();
             this.txtLoai = new Guna.UI2.WinForms.Guna2TextBox();
+            this.btnQuayLai = new Guna.UI2.WinForms.Guna2ImageButton();
+            this.guna2PictureBox3 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.btnXoa = new Guna.UI2.WinForms.Guna2Button();
+            this.btnThem = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoai)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // guna2HtmlLabel1
             // 
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(194, 24);
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(194, 39);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(120, 30);
             this.guna2HtmlLabel1.TabIndex = 0;
@@ -56,6 +59,8 @@
             // 
             this.guna2Panel1.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.guna2Panel1.BorderRadius = 20;
+            this.guna2Panel1.Controls.Add(this.btnQuayLai);
+            this.guna2Panel1.Controls.Add(this.guna2PictureBox3);
             this.guna2Panel1.Controls.Add(this.btnXoa);
             this.guna2Panel1.Controls.Add(this.guna2HtmlLabel2);
             this.guna2Panel1.Controls.Add(this.dgvLoai);
@@ -66,25 +71,6 @@
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(490, 400);
             this.guna2Panel1.TabIndex = 1;
-            // 
-            // btnXoa
-            // 
-            this.btnXoa.BorderRadius = 25;
-            this.btnXoa.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnXoa.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnXoa.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnXoa.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnXoa.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnXoa.ForeColor = System.Drawing.Color.White;
-            this.btnXoa.Image = global::QuanLiQuanCafe.Resource1.cross;
-            this.btnXoa.ImageSize = new System.Drawing.Size(30, 30);
-            this.btnXoa.Location = new System.Drawing.Point(362, 138);
-            this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(98, 51);
-            this.btnXoa.TabIndex = 6;
-            this.btnXoa.Text = "Xóa loại";
-            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // guna2HtmlLabel2
             // 
@@ -147,25 +133,6 @@
             this.dgvLoai.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvLoai.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
-            // btnThem
-            // 
-            this.btnThem.BorderRadius = 25;
-            this.btnThem.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnThem.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnThem.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnThem.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnThem.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
-            this.btnThem.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnThem.ForeColor = System.Drawing.Color.White;
-            this.btnThem.Image = global::QuanLiQuanCafe.Resource1.plus;
-            this.btnThem.ImageSize = new System.Drawing.Size(30, 30);
-            this.btnThem.Location = new System.Drawing.Point(362, 75);
-            this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(98, 52);
-            this.btnThem.TabIndex = 2;
-            this.btnThem.Text = "Thêm";
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
-            // 
             // txtLoai
             // 
             this.txtLoai.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -184,6 +151,71 @@
             this.txtLoai.Size = new System.Drawing.Size(207, 52);
             this.txtLoai.TabIndex = 1;
             // 
+            // btnQuayLai
+            // 
+            this.btnQuayLai.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.btnQuayLai.HoverState.ImageSize = new System.Drawing.Size(64, 64);
+            this.btnQuayLai.Image = global::QuanLiQuanCafe.Resource1.back;
+            this.btnQuayLai.ImageOffset = new System.Drawing.Point(0, 0);
+            this.btnQuayLai.ImageRotate = 0F;
+            this.btnQuayLai.ImageSize = new System.Drawing.Size(55, 55);
+            this.btnQuayLai.Location = new System.Drawing.Point(3, 3);
+            this.btnQuayLai.Name = "btnQuayLai";
+            this.btnQuayLai.PressedState.ImageFlip = Guna.UI2.WinForms.Enums.FlipOrientation.Vertical;
+            this.btnQuayLai.PressedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.btnQuayLai.Size = new System.Drawing.Size(51, 48);
+            this.btnQuayLai.TabIndex = 29;
+            this.btnQuayLai.Click += new System.EventHandler(this.btnQuayLai_Click);
+            // 
+            // guna2PictureBox3
+            // 
+            this.guna2PictureBox3.Image = global::QuanLiQuanCafe.Resource1.menu__2_;
+            this.guna2PictureBox3.ImageRotate = 0F;
+            this.guna2PictureBox3.Location = new System.Drawing.Point(139, 15);
+            this.guna2PictureBox3.Name = "guna2PictureBox3";
+            this.guna2PictureBox3.Size = new System.Drawing.Size(49, 54);
+            this.guna2PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox3.TabIndex = 28;
+            this.guna2PictureBox3.TabStop = false;
+            // 
+            // btnXoa
+            // 
+            this.btnXoa.BorderRadius = 25;
+            this.btnXoa.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnXoa.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnXoa.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnXoa.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnXoa.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.btnXoa.ForeColor = System.Drawing.Color.White;
+            this.btnXoa.Image = global::QuanLiQuanCafe.Resource1.cross;
+            this.btnXoa.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnXoa.Location = new System.Drawing.Point(362, 138);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Size = new System.Drawing.Size(109, 51);
+            this.btnXoa.TabIndex = 6;
+            this.btnXoa.Text = "Xóa loại";
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+            // 
+            // btnThem
+            // 
+            this.btnThem.BorderRadius = 25;
+            this.btnThem.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnThem.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnThem.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnThem.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnThem.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
+            this.btnThem.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.btnThem.ForeColor = System.Drawing.Color.White;
+            this.btnThem.Image = global::QuanLiQuanCafe.Resource1.plus;
+            this.btnThem.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnThem.Location = new System.Drawing.Point(362, 75);
+            this.btnThem.Name = "btnThem";
+            this.btnThem.Size = new System.Drawing.Size(109, 52);
+            this.btnThem.TabIndex = 2;
+            this.btnThem.Text = "Thêm";
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
+            // 
             // frmThemLoai
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -197,6 +229,7 @@
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoai)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -210,5 +243,7 @@
         private Guna.UI2.WinForms.Guna2Button btnThem;
         private Guna.UI2.WinForms.Guna2TextBox txtLoai;
         private Guna.UI2.WinForms.Guna2Button btnXoa;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox3;
+        private Guna.UI2.WinForms.Guna2ImageButton btnQuayLai;
     }
 }

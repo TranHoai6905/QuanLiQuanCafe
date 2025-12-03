@@ -9,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using QuanLiQuanCafe.BUS;
+using QuanLiQuanCafe.Helpers;
 
 namespace QuanLiQuanCafe
 {
@@ -51,12 +52,14 @@ namespace QuanLiQuanCafe
         {
             LoadLoaiMon();
             LoadMon();
+            ButtonHelper.EnableShadow(this);
+            DataGridViewHelper.SetHeaderColor(dgvMon);
         }
 
         /// <summary>
         /// Tải danh sách loại món vào FlowLayoutPanel và ComboBox.
         /// </summary>
-        private void LoadLoaiMon()
+        public void LoadLoaiMon()
         {
             for (int i = flpLoaiMon.Controls.Count - 1; i >= 0; i--)
                 if (flpLoaiMon.Controls[i] is Guna.UI2.WinForms.Guna2Button)
@@ -71,6 +74,7 @@ namespace QuanLiQuanCafe
             if (cmbLoai.Items.Count > 0)
                 cmbLoai.SelectedIndex = 0;
         }
+
 
         /// <summary>
         /// Thêm nút loại món vào FlowLayoutPanel.
@@ -290,11 +294,10 @@ namespace QuanLiQuanCafe
         /// </summary>
         private void btnThemLoai_Click(object sender, EventArgs e)
         {
-            using (var frm = new frmThemLoai())
-            {
-                frm.ShowDialog();
-                LoadLoaiMon();
-            }
+            // Truyền this để frmThemLoai biết form cha
+            frmThemLoai frm = new frmThemLoai(this);
+            frm.Show();
+            this.Hide(); // Ẩn frmThemMon
         }
     }
 }

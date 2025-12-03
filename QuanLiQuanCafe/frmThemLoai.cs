@@ -3,8 +3,10 @@
 // Mục đích: Form Windows để quản lý thêm/xóa loại món.
 // Form này hiển thị danh sách loại kèm số lượng món và hỗ trợ CRUD loại.
 
+using QuanLiQuanCafe.Helpers;
 using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace QuanLiQuanCafe
@@ -21,12 +23,14 @@ namespace QuanLiQuanCafe
         /// </summary>
         private string connStr = @"Data Source=HOAI\MSSQLSERVER01;Initial Catalog=QuanLyQuanCafe1;Integrated Security=True";
 
+        private frmThemMon _parentForm;
         /// <summary>
         /// Constructor cho form.
         /// </summary>
-        public frmThemLoai()
+        public frmThemLoai(frmThemMon parentForm)
         {
             InitializeComponent();
+            _parentForm = parentForm;
         }
 
         /// <summary>
@@ -37,6 +41,8 @@ namespace QuanLiQuanCafe
             loaiBUS = new LoaiMonBUS(connStr);
             SetupDGV();
             LoadLoai();
+            ButtonHelper.EnableShadow(this);
+            DataGridViewHelper.SetHeaderColor(dgvLoai);
         }
 
         /// <summary>
@@ -159,5 +165,13 @@ namespace QuanLiQuanCafe
                 MessageBox.Show("❌ Lỗi: " + ex.Message);
             }
         }
+        private void btnQuayLai_Click(object sender, EventArgs e)
+        {
+            // Gọi lại LoadLoaiMon() để cập nhật danh sách loại trong frmThemMon
+            _parentForm.LoadLoaiMon(); // <- cần public phương thức này trong frmThemMon
+            _parentForm.Show();        // Hiện lại frmThemMon
+            this.Close();              // Đóng frmThemLoai
+        }
+
     }
 }
