@@ -93,6 +93,10 @@
     </Compile>
     <Compile Include="Helpers\ButtonHelper.cs" />
     <Compile Include="Helpers\DataGridViewHelper.cs" />
+    <Compile Include="Helpers\LoaiMonHelper.cs" />
+    <Compile Include="Helpers\MonCard.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Models\ChiTietHoaDon.cs" />
     <Compile Include="Models\HoaDon.cs" />
     <Compile Include="DAL\HoaDonQueries.cs" />

@@ -1,7 +1,6 @@
 ﻿// File: HoaDonQueries.cs
 // Namespace: QuanLiQuanCafe.DAL.Queries
 // Mục đích: Chứa các truy vấn SQL được định nghĩa sẵn cho các hoạt động liên quan đến hóa đơn.
-// Lớp tĩnh này tổ chức các truy vấn để cải thiện tính đọc và bảo trì code.
 
 namespace QuanLiQuanCafe.DAL.Queries
 {
@@ -29,13 +28,12 @@ WHERE 1=1";
 
         /// <summary>
         /// Truy vấn SQL để tải chi tiết hóa đơn theo ID.
+        /// Sử dụng View vw_ChiTietHoaDonDayDu để lấy đầy đủ thông tin.
         /// </summary>
         public static readonly string SQL_LOAD_CHI_TIET = @"
-SELECT c.Id, m.TenMon, c.SoLuong, m.Gia,
-       (c.SoLuong * m.Gia) AS ThanhTien
-FROM ChiTietHoaDon c
-JOIN Mon m ON c.MonId = m.Id
-WHERE c.HoaDonId = @id";
+SELECT *
+FROM vw_ChiTietHoaDonDayDu
+WHERE MaHoaDon = @id";
 
         /// <summary>
         /// Truy vấn SQL để lấy trạng thái hóa đơn theo ID.

@@ -1,4 +1,5 @@
-﻿using QuanLiQuanCafe.DAL.Queries;
+﻿using QuanLiQuanCafe.DAL;
+using QuanLiQuanCafe.DAL.Queries;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -78,5 +79,14 @@ namespace QuanLiQuanCafe.BUS
 
             return rowsAffected;
         }
+
+        public DataTable GetMonTheoLoai(int loaiId)
+        {
+            string sql = "SELECT m.Id, m.TenMon, m.Gia, l.TenLoai AS Loai FROM Mon m " +
+                         "INNER JOIN LoaiMon l ON m.LoaiMonId = l.Id " +
+                         "WHERE l.Id=@loaiId";
+            return DataAccess.GetDataTable(sql, new SqlParameter("@loaiId", loaiId));
+        }
+
     }
 }

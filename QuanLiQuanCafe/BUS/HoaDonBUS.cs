@@ -5,6 +5,7 @@
 
 using System;
 using System.Data;
+using System.Data.SqlClient;
 using QuanLiQuanCafe.DAL;
 
 namespace QuanLiQuanCafe.BUS
@@ -29,10 +30,9 @@ namespace QuanLiQuanCafe.BUS
         /// <returns>ID của hóa đơn vừa được chèn.</returns>
         public int ThemHoaDonMoi(int nhanVienId)
         {
-            string sql = $"INSERT INTO HoaDon (NhanVienId, NgayTao, TrangThai) " +
-                         $"VALUES ({nhanVienId}, GETDATE(), N'Chưa thanh toán'); " +
-                         "SELECT SCOPE_IDENTITY()";
-            return Convert.ToInt32(DataAccess.ExecuteScalar(sql));
+            string sql = "INSERT INTO HoaDon (NhanVienId, NgayTao, TrangThai) VALUES (@nv, GETDATE(), N'Chưa thanh toán'); SELECT SCOPE_IDENTITY();";
+            var param = new SqlParameter("@nv", nhanVienId);
+            return Convert.ToInt32(DataAccess.ExecuteScalar(sql, param));
         }
 
         /// <summary>
@@ -44,5 +44,17 @@ namespace QuanLiQuanCafe.BUS
             DataAccess.ExecuteNonQuery($"DELETE FROM ChiTietHoaDon WHERE HoaDonId={hoaDonId}");
             DataAccess.ExecuteNonQuery($"DELETE FROM HoaDon WHERE Id={hoaDonId}");
         }
+        public DataTable GetChiTietHoaDon(int hoaDonId)
+        {
+            string sql = $@"
+        SELECT c.Id, m.TenMon, c.SoLuong, m.Gia, (m.Gia * c.SoLuong) AS ThanhTien
+        FROM ChiTietHoaDon c
+        INNER JOIN Mon m ON c.MonId = m.Id
+        WHERE c.HoaDonId = {hoaDonId}";
+
+            // Dùng GetDataTable thay vì ExecuteQuery
+            return DataAccess.GetDataTable(sql);
+        }
+
     }
 }
