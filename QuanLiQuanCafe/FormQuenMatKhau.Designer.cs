@@ -81,7 +81,7 @@ namespace QuanLiQuanCafe
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.lblTitle.Location = new System.Drawing.Point(167, 165);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(235, 42);
+            this.lblTitle.Size = new System.Drawing.Size(291, 53);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Quên mật khẩu";
             this.lblTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -93,7 +93,7 @@ namespace QuanLiQuanCafe
             this.lblTenDangNhap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.lblTenDangNhap.Location = new System.Drawing.Point(57, 247);
             this.lblTenDangNhap.Name = "lblTenDangNhap";
-            this.lblTenDangNhap.Size = new System.Drawing.Size(119, 23);
+            this.lblTenDangNhap.Size = new System.Drawing.Size(152, 30);
             this.lblTenDangNhap.TabIndex = 2;
             this.lblTenDangNhap.Text = "Tên đăng nhập :";
             // 
@@ -105,6 +105,7 @@ namespace QuanLiQuanCafe
             this.txtTenDangNhap.DefaultText = "";
             this.txtTenDangNhap.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtTenDangNhap.Location = new System.Drawing.Point(203, 236);
+            this.txtTenDangNhap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTenDangNhap.Name = "txtTenDangNhap";
             this.txtTenDangNhap.PlaceholderText = "Vui lòng nhập tên...";
             this.txtTenDangNhap.SelectedText = "";
@@ -118,7 +119,7 @@ namespace QuanLiQuanCafe
             this.lblSoDienThoai.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.lblSoDienThoai.Location = new System.Drawing.Point(57, 317);
             this.lblSoDienThoai.Name = "lblSoDienThoai";
-            this.lblSoDienThoai.Size = new System.Drawing.Size(107, 23);
+            this.lblSoDienThoai.Size = new System.Drawing.Size(135, 30);
             this.lblSoDienThoai.TabIndex = 4;
             this.lblSoDienThoai.Text = "Số điện thoại :";
             // 
@@ -130,6 +131,7 @@ namespace QuanLiQuanCafe
             this.txtSoDienThoai.DefaultText = "";
             this.txtSoDienThoai.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtSoDienThoai.Location = new System.Drawing.Point(203, 306);
+            this.txtSoDienThoai.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtSoDienThoai.Name = "txtSoDienThoai";
             this.txtSoDienThoai.PlaceholderText = "Nhập số điện thoại đã đăng ký...";
             this.txtSoDienThoai.SelectedText = "";
@@ -143,7 +145,7 @@ namespace QuanLiQuanCafe
             this.lblMatKhauMoi.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.lblMatKhauMoi.Location = new System.Drawing.Point(57, 387);
             this.lblMatKhauMoi.Name = "lblMatKhauMoi";
-            this.lblMatKhauMoi.Size = new System.Drawing.Size(110, 23);
+            this.lblMatKhauMoi.Size = new System.Drawing.Size(141, 30);
             this.lblMatKhauMoi.TabIndex = 6;
             this.lblMatKhauMoi.Text = "Mật khẩu mới :";
             // 
@@ -155,6 +157,7 @@ namespace QuanLiQuanCafe
             this.txtMatKhauMoi.DefaultText = "";
             this.txtMatKhauMoi.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtMatKhauMoi.Location = new System.Drawing.Point(203, 376);
+            this.txtMatKhauMoi.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtMatKhauMoi.Name = "txtMatKhauMoi";
             this.txtMatKhauMoi.PasswordChar = '●';
             this.txtMatKhauMoi.PlaceholderText = "Nhập mật khẩu mới...";
@@ -169,7 +172,7 @@ namespace QuanLiQuanCafe
             this.lblNhapLai.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.lblNhapLai.Location = new System.Drawing.Point(57, 457);
             this.lblNhapLai.Name = "lblNhapLai";
-            this.lblNhapLai.Size = new System.Drawing.Size(140, 23);
+            this.lblNhapLai.Size = new System.Drawing.Size(181, 30);
             this.lblNhapLai.TabIndex = 8;
             this.lblNhapLai.Text = "Nhập lại mật khẩu :";
             // 
@@ -181,6 +184,7 @@ namespace QuanLiQuanCafe
             this.txtNhapLai.DefaultText = "";
             this.txtNhapLai.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtNhapLai.Location = new System.Drawing.Point(203, 446);
+            this.txtNhapLai.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNhapLai.Name = "txtNhapLai";
             this.txtNhapLai.PasswordChar = '●';
             this.txtNhapLai.PlaceholderText = "Nhập lại mật khẩu mới...";
@@ -206,11 +210,11 @@ namespace QuanLiQuanCafe
             // 
             this.lnkTroVe.AutoSize = true;
             this.lnkTroVe.BackColor = System.Drawing.Color.Transparent;
-            this.lnkTroVe.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lnkTroVe.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.lnkTroVe.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(48)))), ((int)(((byte)(33)))));
             this.lnkTroVe.Location = new System.Drawing.Point(228, 590);
             this.lnkTroVe.Name = "lnkTroVe";
-            this.lnkTroVe.Size = new System.Drawing.Size(113, 16);
+            this.lnkTroVe.Size = new System.Drawing.Size(121, 17);
             this.lnkTroVe.TabIndex = 11;
             this.lnkTroVe.TabStop = true;
             this.lnkTroVe.Text = "Trở về đăng nhập";
