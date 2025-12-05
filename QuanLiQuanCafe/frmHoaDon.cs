@@ -20,6 +20,10 @@ namespace QuanLiQuanCafe
 
         private static readonly ILog log = LogManager.GetLogger(typeof(frmHoaDon));
 
+        // Biến trạng thái nút lọc
+        private enum LoaiTrangThai { TatCa, ChuaThanhToan, DaThanhToan }
+        private LoaiTrangThai trangThaiHienTai = LoaiTrangThai.TatCa;
+
         public frmHoaDon(int nhanVienId)
         {
             InitializeComponent();
@@ -37,6 +41,13 @@ namespace QuanLiQuanCafe
             dgvChiTietHoaDon.AutoGenerateColumns = true;
 
             LoadCboNhanVien();
+
+            // Mặc định hiển thị tất cả hóa đơn
+            ResetFilterButtons();
+            SetButtonSelected(btnTatCa);
+            trangThaiHienTai = LoaiTrangThai.TatCa;
+            cboNhanVien.SelectedValue = 0;
+
             ApplyCurrentFilters();
             UpdateButtonStatus();
         }
@@ -64,7 +75,7 @@ namespace QuanLiQuanCafe
             }
         }
 
-        private void LoadDanhSachHoaDon(string trangThai = "", int nhanVienIdLoc = 0, DateTime? ngay = null)
+        private void LoadDanhSachHoaDon(string trangThai = "", int nhanVienIdLoc = 0, int? ngay = null, int? thang = null, int? nam = null)
         {
             try
             {
@@ -85,8 +96,18 @@ namespace QuanLiQuanCafe
 
                 if (ngay.HasValue)
                 {
-                    sql += " AND CAST(h.NgayTao AS DATE) = @ngay";
-                    paramList.Add(new SqlParameter("@ngay", ngay.Value.Date));
+                    sql += " AND DAY(h.NgayTao) = @ngay";
+                    paramList.Add(new SqlParameter("@ngay", ngay.Value));
+                }
+                if (thang.HasValue)
+                {
+                    sql += " AND MONTH(h.NgayTao) = @thang";
+                    paramList.Add(new SqlParameter("@thang", thang.Value));
+                }
+                if (nam.HasValue)
+                {
+                    sql += " AND YEAR(h.NgayTao) = @nam";
+                    paramList.Add(new SqlParameter("@nam", nam.Value));
                 }
 
                 sql += " ORDER BY h.NgayTao DESC";
@@ -113,7 +134,7 @@ namespace QuanLiQuanCafe
             }
             catch (Exception ex)
             {
-                log.Error("Lỗi LoadDanhSachHoaDon", ex);
+                MessageBox.Show("Lỗi LoadDanhSachHoaDon: " + ex.Message);
             }
         }
 
@@ -163,7 +184,7 @@ namespace QuanLiQuanCafe
         }
         #endregion
 
-        #region Xử lý DataGridView
+        #region DataGridView
         private void dgvHoaDon_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvHoaDon.SelectedRows.Count > 0)
@@ -254,7 +275,11 @@ namespace QuanLiQuanCafe
         {
             if (hoaDonId <= 0) return;
             string trangThai = GetTrangThaiHoaDon();
-            if (trangThai == "Đã thanh toán") return;
+            if (trangThai == "Đã thanh toán")
+            {
+                MessageBox.Show("Không thể xóa hóa đơn đã thanh toán!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             var confirm = MessageBox.Show($"Xóa hóa đơn #{hoaDonId}?", "Xác nhận",
                                           MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -278,15 +303,47 @@ namespace QuanLiQuanCafe
                     {
                         SqlCommand cmd = new SqlCommand(HoaDonQueries.SQL_INSERT_HOA_DON, conn, trans);
                         cmd.Parameters.AddWithValue("@nv", nhanVienId);
+
                         object result = cmd.ExecuteScalar();
+                        if (result == null || result == DBNull.Value)
+                        {
+                            MessageBox.Show("Không nhận được ID hóa đơn từ SQL.\nSQL thiếu SELECT SCOPE_IDENTITY().",
+                                            "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            trans.Rollback();
+                            return;
+                        }
+
+                        hoaDonId = Convert.ToInt32(result);
                         trans.Commit();
-                        ApplyCurrentFilters();
                     }
                 }
+
+                // Bỏ mọi filter để hóa đơn mới hiện lên ngay
+                ResetFilterButtons();
+                SetButtonSelected(btnTatCa);
+                trangThaiHienTai = LoaiTrangThai.TatCa;
+                cboNhanVien.SelectedValue = 0;
+
+                ApplyCurrentFilters();
+                ChonDongHoaDon(hoaDonId);
             }
             catch (Exception ex)
             {
-                log.Error("Lỗi btnThemHoaDonMoi_Click", ex);
+                MessageBox.Show("Lỗi khi tạo hóa đơn mới:\n" + ex.Message,
+                                "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ChonDongHoaDon(int id)
+        {
+            foreach (DataGridViewRow row in dgvHoaDon.Rows)
+            {
+                if (Convert.ToInt32(row.Cells["Id"].Value) == id)
+                {
+                    row.Selected = true;
+                    dgvHoaDon.FirstDisplayedScrollingRowIndex = row.Index;
+                    return;
+                }
             }
         }
         #endregion
@@ -294,21 +351,21 @@ namespace QuanLiQuanCafe
         #region Nút lọc
         private void btnTatCa_Click(object sender, EventArgs e)
         {
-            ResetFilterButtons();
+            trangThaiHienTai = LoaiTrangThai.TatCa;
             SetButtonSelected(btnTatCa);
             ApplyCurrentFilters();
         }
 
         private void btnChuaThanhToan_Click(object sender, EventArgs e)
         {
-            ResetFilterButtons();
+            trangThaiHienTai = LoaiTrangThai.ChuaThanhToan;
             SetButtonSelected(btnChuaThanhToan);
             ApplyCurrentFilters();
         }
 
         private void btnDaThanhToan_Click(object sender, EventArgs e)
         {
-            ResetFilterButtons();
+            trangThaiHienTai = LoaiTrangThai.DaThanhToan;
             SetButtonSelected(btnDaThanhToan);
             ApplyCurrentFilters();
         }
@@ -318,40 +375,72 @@ namespace QuanLiQuanCafe
             ApplyCurrentFilters();
         }
 
-        private void dtpNgayTaoHoaDon_ValueChanged(object sender, EventArgs e)
+        private void btnDanhSachDayDu_Click(object sender, EventArgs e)
+        {
+            // Load tất cả hóa đơn, bỏ qua filter
+            ResetFilterButtons();
+            SetButtonSelected(btnTatCa);
+            trangThaiHienTai = LoaiTrangThai.TatCa;
+            cboNhanVien.SelectedValue = 0;
+            txtTimNgay.Text = "";
+            txtTimThang.Text = "";
+            txtTimNam.Text = "";
+            ApplyCurrentFilters();
+        }
+
+        private void btnTimNgay_Click(object sender, EventArgs e)
         {
             ApplyCurrentFilters();
         }
 
         private void ApplyCurrentFilters()
         {
-            string trangThai = "";
-            if (btnChuaThanhToan.FillColor == Color.Transparent) trangThai = "Chưa thanh toán";
-            else if (btnDaThanhToan.FillColor == Color.Transparent) trangThai = "Đã thanh toán";
+            try
+            {
+                // 1. Xác định trạng thái
+                string trangThai = "";
+                switch (trangThaiHienTai)
+                {
+                    case LoaiTrangThai.ChuaThanhToan: trangThai = "Chưa thanh toán"; break;
+                    case LoaiTrangThai.DaThanhToan: trangThai = "Đã thanh toán"; break;
+                    case LoaiTrangThai.TatCa: trangThai = ""; break;
+                }
 
-            int nhanVienIdLoc = cboNhanVien.SelectedValue != null ? Convert.ToInt32(cboNhanVien.SelectedValue) : 0;
-            DateTime? ngay = dtpNgayTaoHoaDon.Checked ? (DateTime?)dtpNgayTaoHoaDon.Value.Date : null;
+                // 2. ID nhân viên
+                int nhanVienIdLoc = 0;
+                if (cboNhanVien.SelectedValue != null)
+                    nhanVienIdLoc = Convert.ToInt32(cboNhanVien.SelectedValue);
 
-            LoadDanhSachHoaDon(trangThai, nhanVienIdLoc, ngay);
+                // 3. Ngày/Tháng/Năm từ textbox
+                int? ngay = string.IsNullOrWhiteSpace(txtTimNgay.Text) ? null : (int?)Convert.ToInt32(txtTimNgay.Text);
+                int? thang = string.IsNullOrWhiteSpace(txtTimThang.Text) ? null : (int?)Convert.ToInt32(txtTimThang.Text);
+                int? nam = string.IsNullOrWhiteSpace(txtTimNam.Text) ? null : (int?)Convert.ToInt32(txtTimNam.Text);
+
+                // 4. Load danh sách
+                LoadDanhSachHoaDon(trangThai, nhanVienIdLoc, ngay, thang, nam);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi ApplyCurrentFilters:\n" + ex.Message);
+            }
         }
         #endregion
 
         #region Định dạng nút lọc
         private void SetButtonSelected(Guna2Button btn)
         {
-            btn.FillColor = Color.Transparent;
+            ResetFilterButtons();
+            btn.FillColor = Color.White;
             btn.ForeColor = Color.Black;
+            btn.BorderColor = Color.Black;
             btn.BorderThickness = 2;
-            btn.BorderColor = Color.FromArgb(150, 75, 0);
-            btn.HoverState.FillColor = Color.Transparent;
-            btn.HoverState.ForeColor = Color.Black;
         }
 
         private void ResetFilterButtons()
         {
-            ResetButton(btnTatCa);
-            ResetButton(btnDaThanhToan);
-            ResetButton(btnChuaThanhToan);
+            btnTatCa.FillColor = Color.FromArgb(217, 194, 161);
+            btnDaThanhToan.FillColor = Color.FromArgb(217, 194, 161);
+            btnChuaThanhToan.FillColor = Color.FromArgb(217, 194, 161);
         }
 
         private void ResetButton(Guna2Button btn)

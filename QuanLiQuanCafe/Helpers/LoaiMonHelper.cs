@@ -57,7 +57,7 @@ namespace QuanLiQuanCafe.Helpers
 
                 // Nút được chọn (KHÔNG VIỀN)
                 var clicked = (Guna2Button)s;
-                clicked.FillColor = ColorTranslator.FromHtml("#C3A27A"); 
+                clicked.FillColor = ColorTranslator.FromHtml("#FFF8EC"); 
                 clicked.ForeColor = Color.Black;
                 clicked.BorderThickness = 0; // Không viền
 

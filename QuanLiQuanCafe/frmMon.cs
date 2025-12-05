@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace QuanLiQuanCafe
@@ -201,14 +202,39 @@ namespace QuanLiQuanCafe
 
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
-            if (!hoaDonDangChonId.HasValue) return;
+            if (!hoaDonDangChonId.HasValue)
+                return;
+
+            // ⭐ KIỂM TRA HÓA ĐƠN CÓ MÓN KHÔNG
+            try
+            {
+                DataTable dt = hoaDonBUS.GetChiTietHoaDon(hoaDonDangChonId.Value);
+
+                if (dt == null || dt.Rows.Count == 0)
+                {
+                    MessageBox.Show("❌ Hóa đơn không có món. Không thể thanh toán!",
+                                    "Không thể thanh toán",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi kiểm tra món trong hóa đơn: " + ex.Message);
+                return;
+            }
 
             try
             {
                 string sql = $"UPDATE HoaDon SET TrangThai=N'Đã thanh toán' WHERE Id={hoaDonDangChonId.Value}";
                 DataAccess.ExecuteNonQuery(sql);
 
-                MessageBox.Show($"Hóa đơn #{hoaDonDangChonId.Value} đã thanh toán!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Hóa đơn #{hoaDonDangChonId.Value} đã thanh toán!",
+                                "Thành công",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
                 LoadCboHoaDon();
                 dgvMon.DataSource = null;
                 txtTongTien.Text = "0";
@@ -216,7 +242,10 @@ namespace QuanLiQuanCafe
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi thanh toán: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi thanh toán: " + ex.Message,
+                                "Lỗi",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
             }
         }
 
@@ -231,11 +260,25 @@ namespace QuanLiQuanCafe
 
             foreach (DataRow row in dtMon.Rows)
             {
+                // Lấy ảnh nếu có
+                Image img = null;
+                if (dtMon.Columns.Contains("Anh"))
+                {
+                    string duongDanAnh = row["Anh"]?.ToString();
+                    if (!string.IsNullOrEmpty(duongDanAnh))
+                    {
+                        string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, duongDanAnh);
+                        if (File.Exists(fullPath))
+                            img = Image.FromFile(fullPath);
+                    }
+                }
+
                 var card = new MonCard(
                     Convert.ToInt32(row["Id"]),
                     row["TenMon"].ToString(),
                     Convert.ToDecimal(row["Gia"]),
-                    row["Loai"]?.ToString() ?? ""
+                    row["Loai"]?.ToString() ?? "",
+                    img  // truyền ảnh vào MonCard
                 );
 
                 card.SetSelected(danhSachMonDaChon.Contains(card.Id));
@@ -243,6 +286,7 @@ namespace QuanLiQuanCafe
                 flpMon.Controls.Add(card);
             }
         }
+
 
         private void ToggleMonCard(MonCard card)
         {
