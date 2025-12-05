@@ -93,7 +93,7 @@ namespace QuanLiQuanCafe
         {
             return _dal.LayVaiTro(tenDangNhap); // trả về "Quản lý" hoặc "Nhân viên"
         }
-        // ←←← THÊM 2 HÀM NÀY VÀO CUỐI CLASS TaiKhoanBUS CỦA BẠN (giữ nguyên hết code cũ)
+      
 
         /// <summary>
         /// Dùng cho FormThemNhanVien - Thêm nhân viên mới
