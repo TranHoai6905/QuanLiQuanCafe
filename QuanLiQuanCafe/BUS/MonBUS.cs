@@ -1,9 +1,10 @@
-﻿using QuanLiQuanCafe.DAL;
-using QuanLiQuanCafe.DAL.Queries;
+﻿using QuanLiQuanCafe.DAL.Queries;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
+using System.Windows.Forms;
 
 namespace QuanLiQuanCafe.BUS
 {
@@ -16,77 +17,74 @@ namespace QuanLiQuanCafe.BUS
             connStr = connectionString;
         }
 
-        // ---------------- LOẠI MÓN ----------------
+        // ================= LOẠI MÓN =================
+        public DataTable GetLoaiMon() => MonQueries.GetLoaiMon(connStr);
+        public int DemMonTheoLoai(string loai) => MonQueries.DemMonTheoLoai(loai, connStr);
+        public int XoaLoaiMon(string loai) => MonQueries.XoaLoaiMon(loai, connStr);
 
-        /// <summary>
-        /// Lấy danh sách loại món duy nhất.
-        /// </summary>
-        public DataTable GetLoaiMon()
+        // ================= CRUD MÓN =================
+        public DataTable GetMon(string keyword = "", string loai = "Tất cả") =>
+            MonQueries.GetMon(keyword, loai, connStr);
+
+        public int ThemMon(string tenMon, decimal gia, string loai, string duongDanAnh = "")
         {
-            return MonQueries.GetLoaiMon(connStr);
+            byte[] anh = null;
+            if (!string.IsNullOrEmpty(duongDanAnh))
+                anh = System.IO.File.ReadAllBytes(duongDanAnh);
+
+            return MonQueries.ThemMon(tenMon, gia, loai, connStr); // chỉ 4 tham số
         }
 
-        /// <summary>
-        /// Đếm số món thuộc 1 loại.
-        /// </summary>
-        public int DemMonTheoLoai(string loai)
+        public int SuaMon(int id, string tenMon, decimal gia, string loai, string duongDanAnh = "")
         {
-            return MonQueries.DemMonTheoLoai(loai, connStr);
+            byte[] anh = null;
+            if (!string.IsNullOrEmpty(duongDanAnh))
+                anh = System.IO.File.ReadAllBytes(duongDanAnh);
+
+            return MonQueries.SuaMon(id, tenMon, gia, loai, connStr); // chỉ 5 tham số
         }
 
-        // ---------------- CRUD MÓN ----------------
+        public int XoaMon(int id) => MonQueries.XoaMon(id, connStr);
 
-        public DataTable GetMon(string keyword = "", string loai = "Tất cả")
+        // ================== CHƯA CÓ ==================
+        public void ThemMonVaoHoaDon(int hoaDonId, List<int> danhSachMon)
         {
-            return MonQueries.GetMon(keyword, loai, connStr);
-        }
-
-        public int ThemMon(string tenMon, decimal gia, string loai)
-        {
-            return MonQueries.ThemMon(tenMon, gia, loai, connStr);
-        }
-
-        public int SuaMon(int id, string tenMon, decimal gia, string loai)
-        {
-            return MonQueries.SuaMon(id, tenMon, gia, loai, connStr);
-        }
-
-        public int XoaMon(int id)
-        {
-            return MonQueries.XoaMon(id, connStr);
-        }
-
-        // ---------------- HOÁ ĐƠN ----------------
-
-        public int ThemMonVaoHoaDon(int hoaDonId, List<int> danhSachMon)
-        {
-            int rowsAffected = 0;
-            string sql = "INSERT INTO ChiTietHoaDon (HoaDonId, MonId, SoLuong) VALUES (@hoaDonId, @monId, 1)";
-
-            using (SqlConnection conn = new SqlConnection(connStr))
+            foreach (var monId in danhSachMon)
             {
-                conn.Open();
-                foreach (int monId in danhSachMon)
+                string sql = @"INSERT INTO ChiTietHoaDon (HoaDonId, MonId, SoLuong) VALUES (@hoaDonId, @monId, 1)";
+                using (var conn = new SqlConnection(connStr))
+                using (var cmd = new SqlCommand(sql, conn))
                 {
-                    using (SqlCommand cmd = new SqlCommand(sql, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@hoaDonId", hoaDonId);
-                        cmd.Parameters.AddWithValue("@monId", monId);
-                        rowsAffected += cmd.ExecuteNonQuery();
-                    }
+                    cmd.Parameters.AddWithValue("@hoaDonId", hoaDonId);
+                    cmd.Parameters.AddWithValue("@monId", monId);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
                 }
             }
-
-            return rowsAffected;
         }
-
-        public DataTable GetMonTheoLoai(int loaiId)
+        public int ThemMon(string ten, decimal gia, string loai, string duongDanAnh, string connStr)
         {
-            string sql = "SELECT m.Id, m.TenMon, m.Gia, l.TenLoai AS Loai FROM Mon m " +
-                         "INNER JOIN LoaiMon l ON m.LoaiMonId = l.Id " +
-                         "WHERE l.Id=@loaiId";
-            return DataAccess.GetDataTable(sql, new SqlParameter("@loaiId", loaiId));
+            // copy ảnh vào thư mục Images của project
+            string tenFile = Path.GetFileName(duongDanAnh);
+            string thuMuc = Path.Combine(Application.StartupPath, "Images");
+            if (!Directory.Exists(thuMuc)) Directory.CreateDirectory(thuMuc);
+            string pathSave = Path.Combine(thuMuc, tenFile);
+            File.Copy(duongDanAnh, pathSave, true); // ghi đè nếu trùng
+
+            // Lưu tên file vào CSDL thay vì đường dẫn gốc
+            string sql = "INSERT INTO Mon (TenMon, Gia, Loai, Anh) VALUES (@ten, @gia, @loai, @anh)";
+            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@ten", ten);
+                cmd.Parameters.AddWithValue("@gia", gia);
+                cmd.Parameters.AddWithValue("@loai", loai);
+                cmd.Parameters.AddWithValue("@anh", tenFile);
+                conn.Open();
+                return cmd.ExecuteNonQuery();
+            }
         }
 
     }
+
 }
