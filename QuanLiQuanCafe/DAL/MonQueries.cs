@@ -47,9 +47,9 @@ namespace QuanLiQuanCafe.DAL.Queries
         {
             // Query mặc định: tìm theo tên món (LIKE)
             string sql = @"
-                SELECT Id, TenMon, Gia, Loai 
-                FROM Mon 
-                WHERE TenMon LIKE @kw";
+        SELECT Id, TenMon, Gia, Loai, Anh
+        FROM Mon 
+        WHERE TenMon LIKE @kw";
 
             // Kiểm tra có lọc theo loại hay không
             bool locLoai = (!string.IsNullOrEmpty(loai) && loai != "Tất cả");
@@ -77,6 +77,7 @@ namespace QuanLiQuanCafe.DAL.Queries
             }
         }
 
+
         // ==================== THÊM MÓN ====================
 
         public static int ThemMon(string tenMon, decimal gia, string loai, string connStr)
@@ -98,24 +99,24 @@ namespace QuanLiQuanCafe.DAL.Queries
         }
 
         // ==================== SỬA MÓN ====================
-
-        public static int SuaMon(int id, string tenMon, decimal gia, string loai, string connStr)
+        public static int SuaMon(int id, string tenMon, decimal gia, string loai, string anh, string connStr)
         {
             const string sql = @"
-                UPDATE Mon 
-                SET TenMon=@ten, Gia=@gia, Loai=@loai 
-                WHERE Id=@id";
+        UPDATE Mon 
+        SET TenMon=@ten, Gia=@gia, Loai=@loai, Anh=@anh
+        WHERE Id=@id";
 
-            using (var conn = CreateConn(connStr))
+            using (var conn = new SqlConnection(connStr))
             using (var cmd = new SqlCommand(sql, conn))
             {
-                AddParam(cmd, "@ten", tenMon);        // tên mới
-                AddParam(cmd, "@gia", gia);           // giá mới
-                AddParam(cmd, "@loai", loai);         // loại mới
-                AddParam(cmd, "@id", id);             // ID món
+                cmd.Parameters.AddWithValue("@ten", tenMon);
+                cmd.Parameters.AddWithValue("@gia", gia);
+                cmd.Parameters.AddWithValue("@loai", loai);
+                cmd.Parameters.AddWithValue("@anh", anh ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@id", id);
 
                 conn.Open();
-                return cmd.ExecuteNonQuery();         // trả kết quả
+                return cmd.ExecuteNonQuery();
             }
         }
 

@@ -25,25 +25,10 @@ namespace QuanLiQuanCafe.BUS
         // ================= CRUD MÓN =================
         public DataTable GetMon(string keyword = "", string loai = "Tất cả") =>
             MonQueries.GetMon(keyword, loai, connStr);
-
-        public int ThemMon(string tenMon, decimal gia, string loai, string duongDanAnh = "")
-        {
-            byte[] anh = null;
-            if (!string.IsNullOrEmpty(duongDanAnh))
-                anh = System.IO.File.ReadAllBytes(duongDanAnh);
-
-            return MonQueries.ThemMon(tenMon, gia, loai, connStr); // chỉ 4 tham số
-        }
-
         public int SuaMon(int id, string tenMon, decimal gia, string loai, string duongDanAnh = "")
         {
-            byte[] anh = null;
-            if (!string.IsNullOrEmpty(duongDanAnh))
-                anh = System.IO.File.ReadAllBytes(duongDanAnh);
-
-            return MonQueries.SuaMon(id, tenMon, gia, loai, connStr); // chỉ 5 tham số
+            return MonQueries.SuaMon(id, tenMon, gia, loai, duongDanAnh, connStr);
         }
-
         public int XoaMon(int id) => MonQueries.XoaMon(id, connStr);
 
         // ================== CHƯA CÓ ==================
@@ -62,29 +47,21 @@ namespace QuanLiQuanCafe.BUS
                 }
             }
         }
-        public int ThemMon(string ten, decimal gia, string loai, string duongDanAnh, string connStr)
+        public int ThemMon(string ten, decimal gia, string loai, string anh)
         {
-            // copy ảnh vào thư mục Images của project
-            string tenFile = Path.GetFileName(duongDanAnh);
-            string thuMuc = Path.Combine(Application.StartupPath, "Images");
-            if (!Directory.Exists(thuMuc)) Directory.CreateDirectory(thuMuc);
-            string pathSave = Path.Combine(thuMuc, tenFile);
-            File.Copy(duongDanAnh, pathSave, true); // ghi đè nếu trùng
+            string sql = "INSERT INTO Mon (TenMon, Gia, Loai, Anh) VALUES (@TenMon, @Gia, @Loai, @Anh)";
 
-            // Lưu tên file vào CSDL thay vì đường dẫn gốc
-            string sql = "INSERT INTO Mon (TenMon, Gia, Loai, Anh) VALUES (@ten, @gia, @loai, @anh)";
             using (SqlConnection conn = new SqlConnection(connStr))
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
-                cmd.Parameters.AddWithValue("@ten", ten);
-                cmd.Parameters.AddWithValue("@gia", gia);
-                cmd.Parameters.AddWithValue("@loai", loai);
-                cmd.Parameters.AddWithValue("@anh", tenFile);
+                cmd.Parameters.AddWithValue("@TenMon", ten);
+                cmd.Parameters.AddWithValue("@Gia", gia);
+                cmd.Parameters.AddWithValue("@Loai", loai);
+                cmd.Parameters.AddWithValue("@Anh", anh);
+
                 conn.Open();
                 return cmd.ExecuteNonQuery();
             }
         }
-
     }
-
 }

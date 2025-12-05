@@ -12,63 +12,61 @@ namespace QuanLiQuanCafe.Helpers
         {
             flp.Controls.Clear();
 
-            // Nút "Tất cả"
             AddLoaiButton(flp, "Tất cả", onClick);
 
             if (dtLoai == null) return;
 
             foreach (DataRow row in dtLoai.Rows)
-            {
-                string tenLoai = row["Loai"].ToString();
-                AddLoaiButton(flp, tenLoai, onClick);
-            }
+                AddLoaiButton(flp, row["Loai"].ToString(), onClick);
         }
 
         private static void AddLoaiButton(FlowLayoutPanel flp, string tenLoai, Action<string> onClick)
         {
-            var btn = new Guna2Button
+            var btn = new Guna2Button()
             {
-                Text = tenLoai,
                 Tag = tenLoai,
-                Height = 40,
-                BorderRadius = 8,
+                Text = tenLoai,
+
+                Width = 110,      // Nhỏ gọn hơn
+                Height = 32,      // Thấp hơn
+                BorderRadius = 17, // Bo tròn nhiều
+
                 FillColor = ColorTranslator.FromHtml("#D9C2A1"),
                 ForeColor = Color.White,
                 BorderThickness = 0,
-                AutoSize = false,
-                Padding = new Padding(20, 5, 20, 5)
-            };
 
-            Size textSize = TextRenderer.MeasureText(tenLoai, btn.Font);
-            btn.Width = textSize.Width + 60;
+                Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                AutoSize = false,
+                Padding = new Padding(5, 2, 5, 2), // Chữ không bị che
+                TextAlign = HorizontalAlignment.Center
+            };
 
             // Không đổi màu khi hover
             btn.HoverState.FillColor = btn.FillColor;
 
             btn.Click += (s, e) =>
             {
-                // Reset màu tất cả nút
+                // Reset tất cả
                 foreach (Control c in flp.Controls)
-                {
                     if (c is Guna2Button b)
                     {
                         b.FillColor = ColorTranslator.FromHtml("#D9C2A1");
                         b.ForeColor = Color.White;
-                        b.BorderThickness = 0;
+                        b.BorderThickness = 0;  // Không viền
                     }
-                }
 
-                // Tô màu nút được chọn
-                var clicked = s as Guna2Button;
-                clicked.FillColor = Color.White;
+                // Nút được chọn (KHÔNG VIỀN)
+                var clicked = (Guna2Button)s;
+                clicked.FillColor = ColorTranslator.FromHtml("#C3A27A"); 
                 clicked.ForeColor = Color.Black;
-                clicked.BorderColor = Color.Black;
-                clicked.BorderThickness = 2;
+                clicked.BorderThickness = 0; // Không viền
 
                 onClick?.Invoke(clicked.Tag.ToString());
             };
 
+
             flp.Controls.Add(btn);
         }
+
     }
 }

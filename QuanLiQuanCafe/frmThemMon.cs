@@ -17,6 +17,7 @@ namespace QuanLiQuanCafe
         private string connStr = @"Data Source=HOAI\MSSQLSERVER01;Initial Catalog=QuanLyQuanCafe1;Integrated Security=True";
         private string duongDanAnh = "";
         private MonCard monDangChon = null;
+        private string anhHienTai = "";
 
         public frmThemMon()
         {
@@ -34,13 +35,16 @@ namespace QuanLiQuanCafe
         #region --- Loại món ---
         public void LoadLoaiMon()
         {
-            flpLoaiMon.Controls.Clear();
-            AddLoaiButton("Tất cả");
-
             DataTable dt = loaiBUS.GetLoai();
-            foreach (DataRow row in dt.Rows)
-                AddLoaiButton(row["Loai"].ToString());
 
+            // Load vào FlowLayoutPanel bằng Helper
+            LoaiMonHelper.LoadLoaiMon(flpLoaiMon, dt, (loai) =>
+            {
+                loaiMonDangChon = loai;
+                LoadMon();
+            });
+
+            // Load vào ComboBox
             cmbLoai.Items.Clear();
             foreach (DataRow row in dt.Rows)
                 cmbLoai.Items.Add(row["Loai"].ToString());
@@ -48,71 +52,64 @@ namespace QuanLiQuanCafe
             if (cmbLoai.Items.Count > 0)
                 cmbLoai.SelectedIndex = 0;
         }
-
-        private void AddLoaiButton(string tenLoai)
-        {
-            var btn = new Guna.UI2.WinForms.Guna2Button
-            {
-                Text = tenLoai,
-                Tag = tenLoai,
-                Height = 40,
-                BorderRadius = 8,
-                FillColor = ColorTranslator.FromHtml("#D9C2A1"),
-                ForeColor = Color.White,
-                BorderThickness = 0,
-                AutoSize = false,
-                Padding = new Padding(20, 5, 20, 5)
-            };
-            Size textSize = TextRenderer.MeasureText(tenLoai, btn.Font);
-            btn.Width = textSize.Width + 60;
-            btn.HoverState.FillColor = btn.FillColor;
-            btn.Click += BtnLoai_Click;
-            flpLoaiMon.Controls.Add(btn);
-        }
-
-        private void BtnLoai_Click(object sender, EventArgs e)
-        {
-            var clicked = sender as Guna.UI2.WinForms.Guna2Button;
-            loaiMonDangChon = clicked.Tag.ToString();
-
-            foreach (Control c in flpLoaiMon.Controls)
-                if (c is Guna.UI2.WinForms.Guna2Button b)
-                {
-                    b.FillColor = ColorTranslator.FromHtml("#D9C2A1");
-                    b.ForeColor = Color.White;
-                    b.BorderThickness = 0;
-                }
-
-            clicked.FillColor = Color.White;
-            clicked.ForeColor = Color.Black;
-            clicked.BorderColor = Color.Black;
-            clicked.BorderThickness = 2;
-
-            LoadMon();
-        }
         #endregion
 
         #region --- Món ---
-        public void LoadMon(string keyword = "")
+        private void LoadMon(string keyword = "")
         {
             flpMon.Controls.Clear();
             DataTable dt = monBUS.GetMon(keyword, loaiMonDangChon);
-            foreach (DataRow row in dt.Rows)
+            if (!dt.Columns.Contains("Anh"))
             {
-                int id = Convert.ToInt32(row["Id"]);
-                string ten = row["TenMon"].ToString();
-                decimal gia = Convert.ToDecimal(row["Gia"]);
-                string loai = row["Loai"].ToString();
-
-                MonCard card = new MonCard(id, ten, gia, loai);
-                card.OnSelect += MonCard_OnSelect;
-                flpMon.Controls.Add(card);
+                MessageBox.Show("❌ Lỗi: DataTable không có cột 'Anh'.\n" +
+                                "Vui lòng kiểm tra lại câu lệnh SELECT trong MonBUS.GetMon()!",
+                                "Lỗi cơ sở dữ liệu",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                return;
             }
 
-            // Reset món đang chọn
-            monDangChon = null;
-            ClearInputs();
+            foreach (DataRow row in dt.Rows)
+            {
+                // Lấy đường dẫn ảnh từ DB hoặc null
+                string duongDanAnh = row["Anh"].ToString();
+                string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, duongDanAnh);
+
+                Image img = null;
+
+                if (File.Exists(fullPath))
+                    img = Image.FromFile(fullPath);
+
+
+                var card = new MonCard(
+                    Convert.ToInt32(row["Id"]),
+                    row["TenMon"].ToString(),
+                    Convert.ToDecimal(row["Gia"]),
+                    row["Loai"].ToString(),
+                    img
+                );
+                card.OnSelect += Card_OnSelect;
+                flpMon.Controls.Add(card);
+            }
         }
+        private MonCard selectedCard = null;
+
+        private void Card_OnSelect(MonCard card)
+        {
+            if (selectedCard != null)
+                selectedCard.SetSelected(false);
+
+            selectedCard = card;
+            card.SetSelected(true);
+
+            txtTenMon.Text = card.TenMon;
+            txtGia.Text = card.Gia.ToString();
+            cmbLoai.Text = card.Loai;
+
+            btnSuaMon.Enabled = true;
+            btnXoaMon.Enabled = true;
+        }
+
 
         private void MonCard_OnSelect(MonCard card)
         {
@@ -147,7 +144,7 @@ namespace QuanLiQuanCafe
                 return;
             }
 
-            int result = monBUS.ThemMon(txtTenMon.Text.Trim(), gia, loai, duongDanAnh, connStr);
+            int result = monBUS.ThemMon(txtTenMon.Text.Trim(), gia, loai, duongDanAnh);
 
             if (result > 0)
             {
@@ -165,7 +162,13 @@ namespace QuanLiQuanCafe
         {
             if (monDangChon == null || !ValidateInputs(out decimal gia)) return;
 
-            int result = monBUS.SuaMon(monDangChon.Id, txtTenMon.Text.Trim(), gia, cmbLoai.Text.Trim(), connStr);
+            int result = monBUS.SuaMon(
+                monDangChon.Id,
+                txtTenMon.Text.Trim(),
+                gia,
+                cmbLoai.Text.Trim(),
+                duongDanAnh   // ảnh mới (nếu có)
+            );
 
             if (result > 0)
             {
@@ -196,37 +199,33 @@ namespace QuanLiQuanCafe
         #region --- Xử lý ảnh ---
         private void btnChonAnh_Click(object sender, EventArgs e)
         {
-            try
+            using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                using (OpenFileDialog ofd = new OpenFileDialog())
+                ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    ofd.Filter = "Ảnh (*.jpg;*.png)|*.jpg;*.png";
-                    ofd.Title = "Chọn ảnh món";
-                    if (ofd.ShowDialog() == DialogResult.OK)
-                    {
-                        duongDanAnh = ofd.FileName;
+                    string source = ofd.FileName;
+                    string fileName = Path.GetFileName(source);
 
-                        if (!File.Exists(duongDanAnh))
-                        {
-                            MessageBox.Show("❌ File ảnh không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
+                    string folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
+                    if (!Directory.Exists(folder))
+                        Directory.CreateDirectory(folder);
 
-                        using (var img = Image.FromFile(duongDanAnh))
-                        {
-                            pbAnhMon.Image = new Bitmap(img);
-                        }
+                    string dest = Path.Combine(folder, fileName);
 
-                        pbAnhMon.SizeMode = PictureBoxSizeMode.Zoom;
-                    }
+                    File.Copy(source, dest, true);
+
+                    // Lưu đường dẫn tương đối vào DB
+                    duongDanAnh = Path.Combine("Images", fileName);
+
+                    pbAnhMon.Image = Image.FromFile(dest);
+                    pbAnhMon.SizeMode = PictureBoxSizeMode.Zoom;
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"❌ Lỗi khi tải ảnh: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
+
 
         #region --- Các hàm tiện ích ---
         private void txtTimKiem_TextChanged(object sender, EventArgs e) => LoadMon(txtTimKiem.Text.Trim());
@@ -257,6 +256,7 @@ namespace QuanLiQuanCafe
             return true;
         }
         #endregion
+
 
         #region --- Thêm / Xóa loại ---
         private void btnThemLoai_Click(object sender, EventArgs e)
@@ -297,5 +297,7 @@ namespace QuanLiQuanCafe
             else MessageBox.Show("❌ Xóa loại thất bại!");
         }
         #endregion
+
+
     }
 }

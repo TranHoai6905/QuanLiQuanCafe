@@ -298,60 +298,11 @@ namespace QuanLiQuanCafe
         {
             DataTable dtLoai = monBUS.GetLoaiMon();
 
-            flpLoaiMon.Controls.Clear();
-
-            // Nút "Tất cả"
-            AddLoaiButton(flpLoaiMon, "Tất cả", (loai) => LoadMon(loai));
-
-            foreach (DataRow row in dtLoai.Rows)
+            LoaiMonHelper.LoadLoaiMon(flpLoaiMon, dtLoai, (loai) =>
             {
-                string tenLoai = row["Loai"].ToString();
-                AddLoaiButton(flpLoaiMon, tenLoai, (loai) => LoadMon(loai));
-            }
+                LoadMon(loai);
+            });
         }
-
-        private static void AddLoaiButton(FlowLayoutPanel flp, string text, Action<string> onClick)
-        {
-            var btn = new Guna2Button
-            {
-                Text = text,
-                Tag = text,
-                Height = 40,
-                BorderRadius = 8,
-                FillColor = ColorTranslator.FromHtml("#D9C2A1"),
-                ForeColor = Color.White,
-                BorderThickness = 0,
-                AutoSize = false,
-                Padding = new Padding(20, 5, 20, 5)
-            };
-
-            Size textSize = TextRenderer.MeasureText(text, btn.Font);
-            btn.Width = textSize.Width + 60;
-
-            btn.HoverState.FillColor = btn.FillColor;
-
-            btn.Click += (s, e) =>
-            {
-                foreach (Control c in flp.Controls)
-                    if (c is Guna2Button b)
-                    {
-                        b.FillColor = ColorTranslator.FromHtml("#D9C2A1");
-                        b.ForeColor = Color.White;
-                        b.BorderThickness = 0;
-                    }
-
-                var clicked = s as Guna2Button;
-                clicked.FillColor = Color.White;
-                clicked.ForeColor = Color.Black;
-                clicked.BorderColor = Color.Black;
-                clicked.BorderThickness = 2;
-
-                onClick?.Invoke(clicked.Tag.ToString());
-            };
-
-            flp.Controls.Add(btn);
-        }
-
         #endregion
     }
 }
