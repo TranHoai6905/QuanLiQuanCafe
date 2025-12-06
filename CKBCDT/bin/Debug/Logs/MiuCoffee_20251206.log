@@ -1,0 +1,185 @@
+﻿[2025-12-06 00:26:54] [INFO] Initializing frmInBaoCao
+[2025-12-06 00:26:54] [INFO] frmInBaoCao initialized successfully
+[2025-12-06 00:26:54] [INFO] Loading report: From 2025-12-01 to 2026-01-01
+[2025-12-06 00:26:54] [INFO] Date range validated: 2025-12-01 to 2026-01-01
+[2025-12-06 00:26:54] [INFO] Starting data load
+[2025-12-06 00:26:54] [INFO] Database connection opened
+[2025-12-06 00:26:54] [INFO] Loading Morning shift data (6h-14h)
+[2025-12-06 00:26:54] [INFO] Morning shift: 0 orders, 0 VND
+[2025-12-06 00:26:54] [INFO] Loading Evening shift data (14h-22h)
+[2025-12-06 00:26:54] [INFO] Best selling item (14h-22h): Bánh mì - 14 portions
+[2025-12-06 00:26:54] [INFO] Evening shift: 11 orders, 1.715.000 VND
+[2025-12-06 00:26:54] [INFO] Summary displayed: 11 orders, 1.715.000 VND
+[2025-12-06 00:26:54] [INFO] Shift details displayed
+[2025-12-06 00:26:54] [INFO] Loading 8-shift chart
+[2025-12-06 00:26:54] [INFO] Chart loaded successfully
+[2025-12-06 00:26:54] [INFO] Data loaded successfully
+[2025-12-06 00:26:54] [INFO] Database connection closed
+[2025-12-06 00:26:54] [INFO] Report loaded successfully
+[2025-12-06 00:52:53] [INFO] Initializing frmInBaoCao
+[2025-12-06 00:52:53] [INFO] frmInBaoCao initialized successfully
+[2025-12-06 00:52:53] [INFO] Loading report: From 2025-12-01 to 2026-01-01
+[2025-12-06 00:52:53] [INFO] Date range validated: 2025-12-01 to 2026-01-01
+[2025-12-06 00:52:53] [INFO] Starting data load
+[2025-12-06 00:52:53] [INFO] Database connection opened
+[2025-12-06 00:52:53] [INFO] Loading Morning shift data (6h-14h)
+[2025-12-06 00:52:53] [INFO] Morning shift: 0 orders, 0 VND
+[2025-12-06 00:52:53] [INFO] Loading Evening shift data (14h-22h)
+[2025-12-06 00:52:53] [INFO] Best selling item (14h-22h): Bánh mì - 14 portions
+[2025-12-06 00:52:53] [INFO] Evening shift: 11 orders, 1.715.000 VND
+[2025-12-06 00:52:53] [INFO] Summary displayed: 11 orders, 1.715.000 VND
+[2025-12-06 00:52:53] [INFO] Shift details displayed
+[2025-12-06 00:52:53] [INFO] Loading 8-shift chart
+[2025-12-06 00:52:53] [INFO] Chart loaded successfully
+[2025-12-06 00:52:53] [INFO] Data loaded successfully
+[2025-12-06 00:52:53] [INFO] Database connection closed
+[2025-12-06 00:52:53] [INFO] Report loaded successfully
+[2025-12-06 00:52:54] [INFO] Starting PDF export
+[2025-12-06 00:52:57] [INFO] Exporting to: C:\Users\MY PC\Documents\MIUCOFFEE_BaoCao_01122025_den_31122025.pdf
+[2025-12-06 00:52:57] [INFO] PDF exported successfully
+[2025-12-06 00:52:59] [INFO] Opened PDF file: C:\Users\MY PC\Documents\MIUCOFFEE_BaoCao_01122025_den_31122025.pdf
+[2025-12-06 00:53:00] [INFO] PDF export resources cleaned up
+[2025-12-06 01:42:40] [INFO] Initializing frmInBaoCao
+[2025-12-06 01:42:40] [INFO] frmInBaoCao initialized successfully
+[2025-12-06 01:42:40] [INFO] Loading report: From 2025-12-01 to 2026-01-01
+[2025-12-06 01:42:40] [INFO] Date range validated: 2025-12-01 to 2026-01-01
+[2025-12-06 01:42:40] [INFO] Starting data load
+[2025-12-06 01:42:40] [INFO] Database connection opened
+[2025-12-06 01:42:40] [INFO] Loading Morning shift data (6h-14h)
+[2025-12-06 01:42:41] [INFO] Morning shift: 0 orders, 0 VND
+[2025-12-06 01:42:41] [INFO] Loading Evening shift data (14h-22h)
+[2025-12-06 01:42:41] [INFO] Best selling item (14h-22h): Bánh mì - 14 portions
+[2025-12-06 01:42:41] [INFO] Evening shift: 11 orders, 1.715.000 VND
+[2025-12-06 01:42:41] [INFO] Summary displayed: 11 orders, 1.715.000 VND
+[2025-12-06 01:42:41] [INFO] Shift details displayed
+[2025-12-06 01:42:41] [INFO] Loading 8-shift chart
+[2025-12-06 01:42:41] [INFO] Chart loaded successfully
+[2025-12-06 01:42:41] [INFO] Data loaded successfully
+[2025-12-06 01:42:41] [INFO] Database connection closed
+[2025-12-06 01:42:41] [INFO] Report loaded successfully
+[2025-12-06 02:13:40] [INFO] Initializing frmInBaoCao
+[2025-12-06 02:13:41] [INFO] frmInBaoCao initialized successfully
+[2025-12-06 02:13:41] [INFO] Loading report: From 2025-12-01 to 2026-01-01
+[2025-12-06 02:13:41] [INFO] Date range validated: 2025-12-01 to 2026-01-01
+[2025-12-06 02:13:41] [INFO] Starting data load
+[2025-12-06 02:13:41] [INFO] Database connection opened
+[2025-12-06 02:13:41] [INFO] Loading Morning shift data (6h-14h)
+[2025-12-06 02:13:41] [INFO] Morning shift: 0 orders, 0 VND
+[2025-12-06 02:13:41] [INFO] Loading Evening shift data (14h-22h)
+[2025-12-06 02:13:41] [INFO] Best selling item (14h-22h): Bánh mì - 14 portions
+[2025-12-06 02:13:41] [INFO] Evening shift: 11 orders, 1.715.000 VND
+[2025-12-06 02:13:41] [INFO] Summary displayed: 11 orders, 1.715.000 VND
+[2025-12-06 02:13:41] [INFO] Shift details displayed
+[2025-12-06 02:13:41] [INFO] Loading 8-shift chart
+[2025-12-06 02:13:41] [INFO] Chart loaded successfully
+[2025-12-06 02:13:41] [INFO] Data loaded successfully
+[2025-12-06 02:13:41] [INFO] Database connection closed
+[2025-12-06 02:13:41] [INFO] Report loaded successfully
+[2025-12-06 13:27:46] [INFO] Initializing frmInBaoCao
+[2025-12-06 13:27:46] [INFO] frmInBaoCao initialized successfully
+[2025-12-06 13:27:46] [INFO] Loading report: From 2025-12-01 to 2026-01-01
+[2025-12-06 13:27:46] [INFO] Date range validated: 2025-12-01 to 2026-01-01
+[2025-12-06 13:27:46] [INFO] Starting data load
+[2025-12-06 13:27:46] [INFO] Database connection opened
+[2025-12-06 13:27:46] [INFO] Loading Morning shift data (6h-14h)
+[2025-12-06 13:27:46] [INFO] Morning shift: 0 orders, 0 VND
+[2025-12-06 13:27:46] [INFO] Loading Evening shift data (14h-22h)
+[2025-12-06 13:27:46] [INFO] Best selling item (14h-22h): Bánh mì - 14 portions
+[2025-12-06 13:27:46] [INFO] Evening shift: 11 orders, 1.715.000 VND
+[2025-12-06 13:27:46] [INFO] Summary displayed: 11 orders, 1.715.000 VND
+[2025-12-06 13:27:46] [INFO] Shift details displayed
+[2025-12-06 13:27:46] [INFO] Loading 8-shift chart
+[2025-12-06 13:27:46] [INFO] Chart loaded successfully
+[2025-12-06 13:27:46] [INFO] Data loaded successfully
+[2025-12-06 13:27:46] [INFO] Database connection closed
+[2025-12-06 13:27:46] [INFO] Report loaded successfully
+[2025-12-06 13:28:44] [INFO] Initializing frmInBaoCao
+[2025-12-06 13:28:44] [INFO] frmInBaoCao initialized successfully
+[2025-12-06 13:28:44] [INFO] Loading report: From 2025-12-01 to 2026-01-01
+[2025-12-06 13:28:44] [INFO] Date range validated: 2025-12-01 to 2026-01-01
+[2025-12-06 13:28:44] [INFO] Starting data load
+[2025-12-06 13:28:44] [INFO] Database connection opened
+[2025-12-06 13:28:44] [INFO] Loading Morning shift data (6h-14h)
+[2025-12-06 13:28:44] [INFO] Morning shift: 0 orders, 0 VND
+[2025-12-06 13:28:44] [INFO] Loading Evening shift data (14h-22h)
+[2025-12-06 13:28:44] [INFO] Best selling item (14h-22h): Bánh mì - 14 portions
+[2025-12-06 13:28:44] [INFO] Evening shift: 11 orders, 1.715.000 VND
+[2025-12-06 13:28:44] [INFO] Summary displayed: 11 orders, 1.715.000 VND
+[2025-12-06 13:28:44] [INFO] Shift details displayed
+[2025-12-06 13:28:44] [INFO] Loading 8-shift chart
+[2025-12-06 13:28:44] [INFO] Chart loaded successfully
+[2025-12-06 13:28:44] [INFO] Data loaded successfully
+[2025-12-06 13:28:44] [INFO] Database connection closed
+[2025-12-06 13:28:44] [INFO] Report loaded successfully
+[2025-12-06 13:35:51] [INFO] Initializing frmInBaoCao
+[2025-12-06 13:35:51] [INFO] frmInBaoCao initialized successfully
+[2025-12-06 13:35:51] [INFO] Loading report: From 2025-12-01 to 2026-01-01
+[2025-12-06 13:35:51] [INFO] Date range validated: 2025-12-01 to 2026-01-01
+[2025-12-06 13:35:51] [INFO] Starting data load
+[2025-12-06 13:35:51] [INFO] Database connection opened
+[2025-12-06 13:35:51] [INFO] Loading Morning shift data (6h-14h)
+[2025-12-06 13:35:51] [INFO] Morning shift: 0 orders, 0 VND
+[2025-12-06 13:35:51] [INFO] Loading Evening shift data (14h-22h)
+[2025-12-06 13:35:51] [INFO] Best selling item (14h-22h): Bánh mì - 14 portions
+[2025-12-06 13:35:51] [INFO] Evening shift: 11 orders, 1.715.000 VND
+[2025-12-06 13:35:51] [INFO] Summary displayed: 11 orders, 1.715.000 VND
+[2025-12-06 13:35:51] [INFO] Shift details displayed
+[2025-12-06 13:35:51] [INFO] Loading 8-shift chart
+[2025-12-06 13:35:51] [INFO] Chart loaded successfully
+[2025-12-06 13:35:51] [INFO] Data loaded successfully
+[2025-12-06 13:35:51] [INFO] Database connection closed
+[2025-12-06 13:35:51] [INFO] Report loaded successfully
+[2025-12-06 13:39:59] [INFO] Initializing frmInBaoCao
+[2025-12-06 13:39:59] [INFO] frmInBaoCao initialized successfully
+[2025-12-06 13:39:59] [INFO] Loading report: From 2025-12-01 to 2026-01-01
+[2025-12-06 13:39:59] [INFO] Date range validated: 2025-12-01 to 2026-01-01
+[2025-12-06 13:39:59] [INFO] Starting data load
+[2025-12-06 13:39:59] [INFO] Database connection opened
+[2025-12-06 13:39:59] [INFO] Loading Morning shift data (6h-14h)
+[2025-12-06 13:39:59] [INFO] Morning shift: 0 orders, 0 VND
+[2025-12-06 13:39:59] [INFO] Loading Evening shift data (14h-22h)
+[2025-12-06 13:39:59] [INFO] Best selling item (14h-22h): Bánh mì - 14 portions
+[2025-12-06 13:39:59] [INFO] Evening shift: 11 orders, 1.715.000 VND
+[2025-12-06 13:39:59] [INFO] Summary displayed: 11 orders, 1.715.000 VND
+[2025-12-06 13:39:59] [INFO] Shift details displayed
+[2025-12-06 13:39:59] [INFO] Loading 8-shift chart
+[2025-12-06 13:39:59] [INFO] Chart loaded successfully
+[2025-12-06 13:39:59] [INFO] Data loaded successfully
+[2025-12-06 13:39:59] [INFO] Database connection closed
+[2025-12-06 13:39:59] [INFO] Report loaded successfully
+[2025-12-06 13:46:34] [INFO] Initializing frmInBaoCao
+[2025-12-06 13:46:34] [INFO] frmInBaoCao initialized successfully
+[2025-12-06 13:46:34] [INFO] Loading report: From 2025-12-01 to 2026-01-01
+[2025-12-06 13:46:34] [INFO] Date range validated: 2025-12-01 to 2026-01-01
+[2025-12-06 13:46:34] [INFO] Starting data load
+[2025-12-06 13:46:34] [INFO] Database connection opened
+[2025-12-06 13:46:34] [INFO] Loading Morning shift data (6h-14h)
+[2025-12-06 13:46:34] [INFO] Morning shift: 0 orders, 0 VND
+[2025-12-06 13:46:34] [INFO] Loading Evening shift data (14h-22h)
+[2025-12-06 13:46:34] [INFO] Best selling item (14h-22h): Bánh mì - 14 portions
+[2025-12-06 13:46:34] [INFO] Evening shift: 11 orders, 1.715.000 VND
+[2025-12-06 13:46:34] [INFO] Summary displayed: 11 orders, 1.715.000 VND
+[2025-12-06 13:46:34] [INFO] Shift details displayed
+[2025-12-06 13:46:34] [INFO] Loading 8-shift chart
+[2025-12-06 13:46:34] [INFO] Chart loaded successfully
+[2025-12-06 13:46:34] [INFO] Data loaded successfully
+[2025-12-06 13:46:34] [INFO] Database connection closed
+[2025-12-06 13:46:34] [INFO] Report loaded successfully
+[2025-12-06 14:44:22] [INFO] Initializing frmInBaoCao
+[2025-12-06 14:44:22] [INFO] frmInBaoCao initialized successfully
+[2025-12-06 14:44:22] [INFO] Loading report: From 2025-12-01 to 2026-01-01
+[2025-12-06 14:44:22] [INFO] Date range validated: 2025-12-01 to 2026-01-01
+[2025-12-06 14:44:22] [INFO] Starting data load
+[2025-12-06 14:44:22] [INFO] Database connection opened
+[2025-12-06 14:44:22] [INFO] Loading Morning shift data (6h-14h)
+[2025-12-06 14:44:22] [INFO] Morning shift: 0 orders, 0 VND
+[2025-12-06 14:44:22] [INFO] Loading Evening shift data (14h-22h)
+[2025-12-06 14:44:22] [INFO] Best selling item (14h-22h): Bánh mì - 14 portions
+[2025-12-06 14:44:22] [INFO] Evening shift: 11 orders, 1.715.000 VND
+[2025-12-06 14:44:22] [INFO] Summary displayed: 11 orders, 1.715.000 VND
+[2025-12-06 14:44:22] [INFO] Shift details displayed
+[2025-12-06 14:44:22] [INFO] Loading 8-shift chart
+[2025-12-06 14:44:22] [INFO] Chart loaded successfully
+[2025-12-06 14:44:22] [INFO] Data loaded successfully
+[2025-12-06 14:44:22] [INFO] Database connection closed
+[2025-12-06 14:44:22] [INFO] Report loaded successfully
