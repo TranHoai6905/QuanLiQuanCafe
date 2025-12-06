@@ -113,9 +113,9 @@ namespace QuanLiQuanCafe.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap refresh {
+        internal static System.Drawing.Bitmap refesh {
             get {
-                object obj = ResourceManager.GetObject("refresh", resourceCulture);
+                object obj = ResourceManager.GetObject("refesh", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -249,14 +249,19 @@
     <Content Include="Log4netconfig.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\bgLogin.png" />
+    <Content Include="Resources\bin.png" />
+    <Content Include="Resources\LogoCafe.png" />
+    <Content Include="Resources\pencil.png" />
+    <Content Include="Resources\plus.png" />
+    <Content Include="Resources\refesh.png" />
+    <Content Include="Resources\search.png" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\MSTest.Analyzers.4.0.1\analyzers\dotnet\cs\MSTest.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\MSTest.Analyzers.4.0.1\analyzers\dotnet\cs\MSTest.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

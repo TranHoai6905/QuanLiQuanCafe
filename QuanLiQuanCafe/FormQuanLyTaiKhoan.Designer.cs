@@ -160,7 +160,7 @@ namespace QuanLiQuanCafe
             this.btnRefresh.FillColor = System.Drawing.Color.RoyalBlue;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
-            this.btnRefresh.Image = global::QuanLiQuanCafe.Properties.Resources.refresh;
+            this.btnRefresh.Image = global::QuanLiQuanCafe.Properties.Resources.refesh;
             this.btnRefresh.Location = new System.Drawing.Point(958, 20);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(45, 45);
