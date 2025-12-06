@@ -49,5 +49,13 @@ namespace QuanLiQuanCafe.Test
             bool kq = _bus.KiemTraTenDangNhapTonTai("random_user");
             Assert.IsFalse(kq);
         }
+
+        [TestMethod]
+        public void DoiMatKhau_ThieuDuLieu_TraVeFalse()
+        {
+            Assert.IsFalse(_bus.DoiMatKhau("", "123", "456"));        // tên rỗng
+            Assert.IsFalse(_bus.DoiMatKhau("admin", "", "456"));      // mật khẩu cũ rỗng
+            Assert.IsFalse(_bus.DoiMatKhau("admin", "123", ""));      // mật khẩu mới rỗng
+        }
     }
 }
