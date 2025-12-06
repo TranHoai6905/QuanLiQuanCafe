@@ -13,17 +13,23 @@ using Guna.UI2.WinForms;
 
 namespace QuanLiQuanCafe
 {
+    /// <summary>
+    /// Form quản lý hóa đơn, hiển thị danh sách hóa đơn, chi tiết hóa đơn, và các chức năng thêm/xóa/thanh toán.
+    /// </summary>
     public partial class frmHoaDon : Form
     {
         private int nhanVienId;
         private int hoaDonId;
-
         private static readonly ILog log = LogManager.GetLogger(typeof(frmHoaDon));
 
-        // Biến trạng thái nút lọc
+        // Enum trạng thái lọc hóa đơn để dễ quản lý
         private enum LoaiTrangThai { TatCa, ChuaThanhToan, DaThanhToan }
         private LoaiTrangThai trangThaiHienTai = LoaiTrangThai.TatCa;
 
+        /// <summary>
+        /// Constructor khởi tạo form với ID nhân viên.
+        /// </summary>
+        /// <param name="nhanVienId">ID nhân viên đang đăng nhập.</param>
         public frmHoaDon(int nhanVienId)
         {
             InitializeComponent();
@@ -36,34 +42,32 @@ namespace QuanLiQuanCafe
             ButtonHelper.EnableShadow(this);
             DataGridViewHelper.SetHeaderColor(dgvHoaDon);
             DataGridViewHelper.SetHeaderColor(dgvChiTietHoaDon);
-
             dgvHoaDon.AutoGenerateColumns = true;
             dgvChiTietHoaDon.AutoGenerateColumns = true;
-
             LoadCboNhanVien();
-
             // Mặc định hiển thị tất cả hóa đơn
             ResetFilterButtons();
             SetButtonSelected(btnTatCa);
             trangThaiHienTai = LoaiTrangThai.TatCa;
             cboNhanVien.SelectedValue = 0;
-
             ApplyCurrentFilters();
             UpdateButtonStatus();
         }
 
         #region Load dữ liệu
+
+        /// <summary>
+        /// Load danh sách nhân viên vào ComboBox, thêm tùy chọn "Tất cả".
+        /// </summary>
         private void LoadCboNhanVien()
         {
             try
             {
                 DataTable dt = DataAccess.GetDataTable("SELECT Id, HoTen FROM TaiKhoan ORDER BY HoTen");
-
                 DataRow allRow = dt.NewRow();
                 allRow["Id"] = 0;
                 allRow["HoTen"] = "Tất cả";
                 dt.Rows.InsertAt(allRow, 0);
-
                 cboNhanVien.DisplayMember = "HoTen";
                 cboNhanVien.ValueMember = "Id";
                 cboNhanVien.DataSource = dt;
@@ -72,28 +76,34 @@ namespace QuanLiQuanCafe
             catch (Exception ex)
             {
                 log.Error("Lỗi LoadCboNhanVien", ex);
+                MessageBox.Show("Lỗi khi tải danh sách nhân viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        /// <summary>
+        /// Load danh sách hóa đơn dựa trên các bộ lọc (trạng thái, nhân viên, ngày/tháng/năm).
+        /// </summary>
+        /// <param name="trangThai">Trạng thái hóa đơn (có thể rỗng để lấy tất cả).</param>
+        /// <param name="nhanVienIdLoc">ID nhân viên lọc (0 để lấy tất cả).</param>
+        /// <param name="ngay">Ngày lọc (null để bỏ qua).</param>
+        /// <param name="thang">Tháng lọc (null để bỏ qua).</param>
+        /// <param name="nam">Năm lọc (null để bỏ qua).</param>
         private void LoadDanhSachHoaDon(string trangThai = "", int nhanVienIdLoc = 0, int? ngay = null, int? thang = null, int? nam = null)
         {
             try
             {
                 string sql = HoaDonQueries.SQL_LOC_HOA_DON_BASE;
                 List<SqlParameter> paramList = new List<SqlParameter>();
-
                 if (!string.IsNullOrEmpty(trangThai))
                 {
                     sql += " AND LTRIM(RTRIM(h.TrangThai)) = @tt";
                     paramList.Add(new SqlParameter("@tt", trangThai));
                 }
-
                 if (nhanVienIdLoc > 0)
                 {
                     sql += " AND h.NhanVienId = @nv";
                     paramList.Add(new SqlParameter("@nv", nhanVienIdLoc));
                 }
-
                 if (ngay.HasValue)
                 {
                     sql += " AND DAY(h.NgayTao) = @ngay";
@@ -109,14 +119,10 @@ namespace QuanLiQuanCafe
                     sql += " AND YEAR(h.NgayTao) = @nam";
                     paramList.Add(new SqlParameter("@nam", nam.Value));
                 }
-
                 sql += " ORDER BY h.NgayTao DESC";
-
                 DataTable dt = DataAccess.GetDataTable(sql, paramList.ToArray());
-
                 dgvHoaDon.SelectionChanged -= dgvHoaDon_SelectionChanged;
                 dgvHoaDon.DataSource = dt;
-
                 if (dgvHoaDon.Rows.Count > 0)
                 {
                     dgvHoaDon.ClearSelection();
@@ -129,15 +135,18 @@ namespace QuanLiQuanCafe
                     hoaDonId = 0;
                     dgvChiTietHoaDon.DataSource = null;
                 }
-
                 dgvHoaDon.SelectionChanged += dgvHoaDon_SelectionChanged;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi LoadDanhSachHoaDon: " + ex.Message);
+                log.Error("Lỗi LoadDanhSachHoaDon", ex);
+                MessageBox.Show("Lỗi khi tải danh sách hóa đơn: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        /// <summary>
+        /// Load chi tiết hóa đơn dựa trên hoaDonId hiện tại.
+        /// </summary>
         private void LoadChiTietHoaDon()
         {
             if (hoaDonId <= 0)
@@ -145,14 +154,11 @@ namespace QuanLiQuanCafe
                 dgvChiTietHoaDon.DataSource = null;
                 return;
             }
-
             try
             {
                 DataTable dt = DataAccess.GetDataTable(HoaDonQueries.SQL_LOAD_CHI_TIET,
                                                        new SqlParameter("@id", hoaDonId));
-
                 dgvChiTietHoaDon.DataSource = dt;
-
                 if (dgvChiTietHoaDon.Columns["Gia"] != null)
                     dgvChiTietHoaDon.Columns["Gia"].DefaultCellStyle.Format = "N0";
                 if (dgvChiTietHoaDon.Columns["ThanhTien"] != null)
@@ -161,11 +167,17 @@ namespace QuanLiQuanCafe
             catch (Exception ex)
             {
                 log.Error("Lỗi LoadChiTietHoaDon", ex);
+                MessageBox.Show("Lỗi khi tải chi tiết hóa đơn: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         #endregion
 
         #region Trạng thái nút
+
+        /// <summary>
+        /// Cập nhật trạng thái các nút dựa trên trạng thái hóa đơn hiện tại.
+        /// </summary>
         private void UpdateButtonStatus()
         {
             bool chuaThanhToan = GetTrangThaiHoaDon() == "Chưa thanh toán";
@@ -175,6 +187,10 @@ namespace QuanLiQuanCafe
             btnXoaHoaDon.Enabled = chuaThanhToan;
         }
 
+        /// <summary>
+        /// Lấy trạng thái hóa đơn từ cơ sở dữ liệu.
+        /// </summary>
+        /// <returns>Trạng thái hóa đơn (rỗng nếu không tồn tại).</returns>
         private string GetTrangThaiHoaDon()
         {
             if (hoaDonId <= 0) return "";
@@ -182,9 +198,11 @@ namespace QuanLiQuanCafe
                                                  new SqlParameter("@id", hoaDonId));
             return kq?.ToString().Trim() ?? "";
         }
+
         #endregion
 
         #region DataGridView
+
         private void dgvHoaDon_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvHoaDon.SelectedRows.Count > 0)
@@ -198,6 +216,7 @@ namespace QuanLiQuanCafe
                 catch (Exception ex)
                 {
                     log.Error("Lỗi lấy Id hóa đơn", ex);
+                    MessageBox.Show("Lỗi khi chọn hóa đơn: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -223,9 +242,11 @@ namespace QuanLiQuanCafe
                 row.DefaultCellStyle.ForeColor = Color.Black;
             }
         }
+
         #endregion
 
         #region Nút hành động
+
         private void btnThemMon_Click(object sender, EventArgs e)
         {
             if (hoaDonId <= 0) return;
@@ -264,7 +285,6 @@ namespace QuanLiQuanCafe
                 MessageBox.Show("Hóa đơn chưa có món nào!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             DataAccess.ExecuteNonQuery(HoaDonQueries.SQL_THANH_TOAN, new SqlParameter("@id", hoaDonId));
             LoadChiTietHoaDon();
             ApplyCurrentFilters();
@@ -280,7 +300,6 @@ namespace QuanLiQuanCafe
                 MessageBox.Show("Không thể xóa hóa đơn đã thanh toán!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             var confirm = MessageBox.Show($"Xóa hóa đơn #{hoaDonId}?", "Xác nhận",
                                           MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirm == DialogResult.Yes)
@@ -303,7 +322,6 @@ namespace QuanLiQuanCafe
                     {
                         SqlCommand cmd = new SqlCommand(HoaDonQueries.SQL_INSERT_HOA_DON, conn, trans);
                         cmd.Parameters.AddWithValue("@nv", nhanVienId);
-
                         object result = cmd.ExecuteScalar();
                         if (result == null || result == DBNull.Value)
                         {
@@ -312,23 +330,21 @@ namespace QuanLiQuanCafe
                             trans.Rollback();
                             return;
                         }
-
                         hoaDonId = Convert.ToInt32(result);
                         trans.Commit();
                     }
                 }
-
                 // Bỏ mọi filter để hóa đơn mới hiện lên ngay
                 ResetFilterButtons();
                 SetButtonSelected(btnTatCa);
                 trangThaiHienTai = LoaiTrangThai.TatCa;
                 cboNhanVien.SelectedValue = 0;
-
                 ApplyCurrentFilters();
                 ChonDongHoaDon(hoaDonId);
             }
             catch (Exception ex)
             {
+                log.Error("Lỗi khi tạo hóa đơn mới", ex);
                 MessageBox.Show("Lỗi khi tạo hóa đơn mới:\n" + ex.Message,
                                 "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -346,9 +362,11 @@ namespace QuanLiQuanCafe
                 }
             }
         }
+
         #endregion
 
         #region Nút lọc
+
         private void btnTatCa_Click(object sender, EventArgs e)
         {
             trangThaiHienTai = LoaiTrangThai.TatCa;
@@ -393,6 +411,9 @@ namespace QuanLiQuanCafe
             ApplyCurrentFilters();
         }
 
+        /// <summary>
+        /// Áp dụng các bộ lọc hiện tại và load danh sách hóa đơn.
+        /// </summary>
         private void ApplyCurrentFilters()
         {
             try
@@ -405,49 +426,46 @@ namespace QuanLiQuanCafe
                     case LoaiTrangThai.DaThanhToan: trangThai = "Đã thanh toán"; break;
                     case LoaiTrangThai.TatCa: trangThai = ""; break;
                 }
-
                 // 2. ID nhân viên
                 int nhanVienIdLoc = 0;
                 if (cboNhanVien.SelectedValue != null)
                     nhanVienIdLoc = Convert.ToInt32(cboNhanVien.SelectedValue);
-
                 // 3. Ngày/Tháng/Năm từ textbox
                 int? ngay = string.IsNullOrWhiteSpace(txtTimNgay.Text) ? null : (int?)Convert.ToInt32(txtTimNgay.Text);
                 int? thang = string.IsNullOrWhiteSpace(txtTimThang.Text) ? null : (int?)Convert.ToInt32(txtTimThang.Text);
                 int? nam = string.IsNullOrWhiteSpace(txtTimNam.Text) ? null : (int?)Convert.ToInt32(txtTimNam.Text);
-
                 // 4. Load danh sách
                 LoadDanhSachHoaDon(trangThai, nhanVienIdLoc, ngay, thang, nam);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi ApplyCurrentFilters:\n" + ex.Message);
+                log.Error("Lỗi ApplyCurrentFilters", ex);
+                MessageBox.Show("Lỗi khi áp dụng bộ lọc:\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         #endregion
 
         #region Định dạng nút lọc
+        /// <summary>
+        /// Đặt nút được chọn và reset các nút khác.
+        /// </summary>
+        /// <param name="btn">Nút được chọn.</param>
         private void SetButtonSelected(Guna2Button btn)
         {
-            ResetFilterButtons();
-            btn.FillColor = Color.White;
-            btn.ForeColor = Color.Black;
-            btn.BorderColor = Color.Black;
-            btn.BorderThickness = 2;
+            // Reset tất cả nút về normal trước
+            ButtonHelper.ResetFilterButtons(btnTatCa, btnChuaThanhToan, btnDaThanhToan);
+
+            // Set nút được chọn sang selected
+            ButtonHelper.SetFilterButtonSelected(btn);
         }
 
+        /// <summary>
+        /// Reset tất cả nút lọc về trạng thái mặc định.
+        /// </summary>
         private void ResetFilterButtons()
         {
-            btnTatCa.FillColor = Color.FromArgb(217, 194, 161);
-            btnDaThanhToan.FillColor = Color.FromArgb(217, 194, 161);
-            btnChuaThanhToan.FillColor = Color.FromArgb(217, 194, 161);
-        }
-
-        private void ResetButton(Guna2Button btn)
-        {
-            btn.FillColor = Color.FromArgb(150, 75, 0);
-            btn.ForeColor = Color.White;
-            btn.BorderThickness = 0;
+            ButtonHelper.ResetFilterButtons(btnTatCa, btnChuaThanhToan, btnDaThanhToan);
         }
         #endregion
     }

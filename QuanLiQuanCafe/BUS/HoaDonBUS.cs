@@ -10,6 +10,9 @@ using QuanLiQuanCafe.DAL;
 
 namespace QuanLiQuanCafe.BUS
 {
+    /// <summary>
+    /// Lớp xử lý business logic cho hóa đơn.
+    /// </summary>
     public class HoaDonBUS
     {
         /// <summary>
@@ -44,17 +47,20 @@ namespace QuanLiQuanCafe.BUS
             DataAccess.ExecuteNonQuery($"DELETE FROM ChiTietHoaDon WHERE HoaDonId={hoaDonId}");
             DataAccess.ExecuteNonQuery($"DELETE FROM HoaDon WHERE Id={hoaDonId}");
         }
+
+        /// <summary>
+        /// Lấy chi tiết hóa đơn theo ID.
+        /// </summary>
+        /// <param name="hoaDonId">ID hóa đơn.</param>
+        /// <returns>DataTable chi tiết hóa đơn.</returns>
         public DataTable GetChiTietHoaDon(int hoaDonId)
         {
             string sql = $@"
-        SELECT c.Id, m.TenMon, c.SoLuong, m.Gia, (m.Gia * c.SoLuong) AS ThanhTien
-        FROM ChiTietHoaDon c
-        INNER JOIN Mon m ON c.MonId = m.Id
-        WHERE c.HoaDonId = {hoaDonId}";
-
-            // Dùng GetDataTable thay vì ExecuteQuery
+                SELECT c.Id, m.TenMon, c.SoLuong, m.Gia, (m.Gia * c.SoLuong) AS ThanhTien
+                FROM ChiTietHoaDon c
+                INNER JOIN Mon m ON c.MonId = m.Id
+                WHERE c.HoaDonId = {hoaDonId}";
             return DataAccess.GetDataTable(sql);
         }
-
     }
 }

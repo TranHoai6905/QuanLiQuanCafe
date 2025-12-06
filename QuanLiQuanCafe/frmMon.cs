@@ -1,4 +1,5 @@
-﻿using Guna.UI2.WinForms;
+﻿// File: frmMon.cs
+using Guna.UI2.WinForms;
 using QuanLiQuanCafe.BUS;
 using QuanLiQuanCafe.DAL;
 using QuanLiQuanCafe.Helpers;
@@ -11,30 +12,28 @@ using System.Windows.Forms;
 
 namespace QuanLiQuanCafe
 {
+    /// <summary>
+    /// Form quản lý món, thêm món vào hóa đơn, thanh toán.
+    /// </summary>
     public partial class frmMon : Form
     {
         private readonly string connStr = @"Data Source=HOAI\MSSQLSERVER01;Initial Catalog=QuanLyQuanCafe1;Integrated Security=True";
         private MonBUS monBUS;
         private HoaDonBUS hoaDonBUS;
-
         private List<int> danhSachMonDaChon = new List<int>();
-        private int? hoaDonDangChonId = null; // hóa đơn đang chọn
-
+        private int? hoaDonDangChonId = null;
         public event Action<int> OnMonDaDuocThem;
 
         public frmMon()
         {
             InitializeComponent();
             this.Load += frmMon_Load;
-
             cboHoaDon.SelectedIndexChanged += cboHoaDon_SelectedIndexChanged;
             btnThemMonVaoDon.Click += btnThemMonVaoDon_Click;
             btnTimMon.Click += btnTimMon_Click;
             btnThanhToan.Click += btnThanhToan_Click;
             btnThemHoaDonMoi.Click += btnThemHoaDonMoi_Click;
             btnXoaHoaDon.Click += btnXoaHoaDon_Click;
-
-            // Style dgvMon
             DataGridViewHelper.SetBrownTheme(dgvMon);
         }
 
@@ -47,7 +46,6 @@ namespace QuanLiQuanCafe
         {
             monBUS = new MonBUS(connStr);
             hoaDonBUS = new HoaDonBUS();
-
             LoadCboHoaDon();
             LoadLoaiMon();
             LoadMon(); // load tất cả món mặc định
@@ -55,22 +53,21 @@ namespace QuanLiQuanCafe
 
         #region Hóa đơn
 
+        /// <summary>
+        /// Load ComboBox hóa đơn chưa thanh toán, thêm tùy chọn "Chọn hóa đơn".
+        /// </summary>
         private void LoadCboHoaDon()
         {
             DataTable dt = hoaDonBUS.GetHoaDonChuaThanhToan();
-
-            // Thêm row “Chọn hóa đơn”
             DataRow allRow = dt.NewRow();
             allRow["Id"] = 0;
             allRow["NgayTao"] = DBNull.Value;
             allRow["TongTien"] = 0;
             allRow["TrangThai"] = "";
             dt.Rows.InsertAt(allRow, 0);
-
             cboHoaDon.DisplayMember = "NgayTao";
             cboHoaDon.ValueMember = "Id";
             cboHoaDon.DataSource = dt;
-
             cboHoaDon.Format += (s, e) =>
             {
                 if (e.ListItem is DataRowView drv)
@@ -81,7 +78,6 @@ namespace QuanLiQuanCafe
                         e.Value = Convert.ToDateTime(drv["NgayTao"]).ToString("dd/MM/yyyy");
                 }
             };
-
             cboHoaDon.SelectedValue = 0;
         }
 
@@ -93,6 +89,9 @@ namespace QuanLiQuanCafe
             LoadChiTietHoaDon();
         }
 
+        /// <summary>
+        /// Load chi tiết hóa đơn vào DataGridView và cập nhật tổng tiền/số lượng.
+        /// </summary>
         private void LoadChiTietHoaDon()
         {
             if (!hoaDonDangChonId.HasValue)
@@ -102,29 +101,23 @@ namespace QuanLiQuanCafe
                 txtSoLuongMon.Text = "0";
                 return;
             }
-
             try
             {
                 DataTable dt = hoaDonBUS.GetChiTietHoaDon(hoaDonDangChonId.Value);
-
                 var dtShow = new DataTable();
                 dtShow.Columns.Add("Tên món");
                 dtShow.Columns.Add("Giá", typeof(decimal));
-
                 decimal tongTien = 0;
                 int soLuongMon = 0;
-
                 foreach (DataRow row in dt.Rows)
                 {
                     string tenMon = row["TenMon"].ToString();
                     decimal gia = Convert.ToDecimal(row["Gia"]);
                     int sl = Convert.ToInt32(row["SoLuong"]);
-
                     dtShow.Rows.Add(tenMon, gia);
                     tongTien += gia * sl;
                     soLuongMon += sl;
                 }
-
                 dgvMon.DataSource = dtShow;
                 txtTongTien.Text = tongTien.ToString("N0");
                 txtSoLuongMon.Text = soLuongMon.ToString();
@@ -139,22 +132,13 @@ namespace QuanLiQuanCafe
         {
             try
             {
-                int nhanVienId = 1;
+                int nhanVienId = 1; // Giả sử nhanVienId = 1, cần lấy từ session nếu có
                 int newId = hoaDonBUS.ThemHoaDonMoi(nhanVienId);
                 MessageBox.Show($"Đã tạo hóa đơn mới #{newId}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 LoadCboHoaDon();
-
-                foreach (var item in cboHoaDon.Items)
-                {
-                    if (item is DataRowView drv && Convert.ToInt32(drv["Id"]) == newId)
-                    {
-                        cboHoaDon.SelectedItem = drv;
-                        hoaDonDangChonId = newId;
-                        UpdateButtonStatus();
-                        break;
-                    }
-                }
+                cboHoaDon.SelectedValue = newId;
+                hoaDonDangChonId = newId;
+                UpdateButtonStatus();
             }
             catch (Exception ex)
             {
@@ -169,14 +153,12 @@ namespace QuanLiQuanCafe
                 MessageBox.Show("Vui lòng chọn 1 hóa đơn để xóa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             string trangThai = ((DataRowView)cboHoaDon.SelectedItem)["TrangThai"].ToString().Trim();
             if (trangThai == "Đã thanh toán")
             {
                 MessageBox.Show("Không thể xóa hóa đơn đã thanh toán!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
-
             var confirm = MessageBox.Show($"Bạn có chắc muốn xóa hóa đơn #{hoaDonDangChonId}?\nTất cả món sẽ bị xóa!",
                                           "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirm == DialogResult.Yes)
@@ -185,7 +167,6 @@ namespace QuanLiQuanCafe
                 {
                     hoaDonBUS.XoaHoaDon(hoaDonDangChonId.Value);
                     MessageBox.Show($"Đã xóa hóa đơn #{hoaDonDangChonId}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                     LoadCboHoaDon();
                     hoaDonDangChonId = null;
                     UpdateButtonStatus();
@@ -202,14 +183,10 @@ namespace QuanLiQuanCafe
 
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
-            if (!hoaDonDangChonId.HasValue)
-                return;
-
-            // ⭐ KIỂM TRA HÓA ĐƠN CÓ MÓN KHÔNG
+            if (!hoaDonDangChonId.HasValue) return;
             try
             {
                 DataTable dt = hoaDonBUS.GetChiTietHoaDon(hoaDonDangChonId.Value);
-
                 if (dt == null || dt.Rows.Count == 0)
                 {
                     MessageBox.Show("❌ Hóa đơn không có món. Không thể thanh toán!",
@@ -221,20 +198,17 @@ namespace QuanLiQuanCafe
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi kiểm tra món trong hóa đơn: " + ex.Message);
+                MessageBox.Show("Lỗi kiểm tra món trong hóa đơn: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
             try
             {
                 string sql = $"UPDATE HoaDon SET TrangThai=N'Đã thanh toán' WHERE Id={hoaDonDangChonId.Value}";
                 DataAccess.ExecuteNonQuery(sql);
-
                 MessageBox.Show($"Hóa đơn #{hoaDonDangChonId.Value} đã thanh toán!",
                                 "Thành công",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
-
                 LoadCboHoaDon();
                 dgvMon.DataSource = null;
                 txtTongTien.Text = "0";
@@ -253,40 +227,36 @@ namespace QuanLiQuanCafe
 
         #region Món
 
+        /// <summary>
+        /// Load danh sách món vào FlowLayoutPanel dưới dạng MonCard.
+        /// </summary>
+        /// <param name="loai">Loại món (Tất cả để lấy hết).</param>
         private void LoadMon(string loai = "Tất cả")
         {
             flpMon.Controls.Clear();
             DataTable dtMon = monBUS.GetMon("", loai);
-
             foreach (DataRow row in dtMon.Rows)
             {
-                // Lấy ảnh nếu có
                 Image img = null;
-                if (dtMon.Columns.Contains("Anh"))
+                string duongDanAnh = row["Anh"]?.ToString();
+                if (!string.IsNullOrEmpty(duongDanAnh))
                 {
-                    string duongDanAnh = row["Anh"]?.ToString();
-                    if (!string.IsNullOrEmpty(duongDanAnh))
-                    {
-                        string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, duongDanAnh);
-                        if (File.Exists(fullPath))
-                            img = Image.FromFile(fullPath);
-                    }
+                    string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, duongDanAnh);
+                    if (File.Exists(fullPath))
+                        img = Image.FromFile(fullPath);
                 }
-
                 var card = new MonCard(
                     Convert.ToInt32(row["Id"]),
                     row["TenMon"].ToString(),
                     Convert.ToDecimal(row["Gia"]),
                     row["Loai"]?.ToString() ?? "",
-                    img  // truyền ảnh vào MonCard
+                    img
                 );
-
                 card.SetSelected(danhSachMonDaChon.Contains(card.Id));
                 card.OnSelect += (c) => ToggleMonCard(c);
                 flpMon.Controls.Add(card);
             }
         }
-
 
         private void ToggleMonCard(MonCard card)
         {
@@ -300,14 +270,12 @@ namespace QuanLiQuanCafe
                 danhSachMonDaChon.Add(card.Id);
                 card.SetSelected(true);
             }
-
             UpdateButtonStatus();
         }
 
         private void btnThemMonVaoDon_Click(object sender, EventArgs e)
         {
             if (!hoaDonDangChonId.HasValue || danhSachMonDaChon.Count == 0) return;
-
             try
             {
                 monBUS.ThemMonVaoHoaDon(hoaDonDangChonId.Value, danhSachMonDaChon);
@@ -330,6 +298,9 @@ namespace QuanLiQuanCafe
 
         #endregion
 
+        /// <summary>
+        /// Cập nhật trạng thái nút dựa trên lựa chọn.
+        /// </summary>
         private void UpdateButtonStatus()
         {
             btnThemMonVaoDon.Enabled = danhSachMonDaChon.Count > 0 && hoaDonDangChonId.HasValue;
@@ -338,15 +309,18 @@ namespace QuanLiQuanCafe
 
         #region Loại món
 
+        /// <summary>
+        /// Load loại món vào FlowLayoutPanel.
+        /// </summary>
         private void LoadLoaiMon()
         {
             DataTable dtLoai = monBUS.GetLoaiMon();
-
             LoaiMonHelper.LoadLoaiMon(flpLoaiMon, dtLoai, (loai) =>
             {
                 LoadMon(loai);
             });
         }
+
         #endregion
     }
 }

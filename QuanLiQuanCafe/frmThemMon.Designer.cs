@@ -59,30 +59,30 @@ namespace QuanLiQuanCafe
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Consolas", 14.25F);
+            this.label3.Font = new System.Drawing.Font("Constantia", 14.25F);
             this.label3.Location = new System.Drawing.Point(36, 90);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 22);
+            this.label3.Size = new System.Drawing.Size(45, 23);
             this.label3.TabIndex = 18;
             this.label3.Text = "Loại";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Consolas", 14.25F);
+            this.label1.Font = new System.Drawing.Font("Constantia", 14.25F);
             this.label1.Location = new System.Drawing.Point(36, 155);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 22);
+            this.label1.Size = new System.Drawing.Size(83, 23);
             this.label1.TabIndex = 16;
             this.label1.Text = "Tên món";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Consolas", 14.25F);
+            this.label2.Font = new System.Drawing.Font("Constantia", 14.25F);
             this.label2.Location = new System.Drawing.Point(36, 220);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 22);
+            this.label2.Size = new System.Drawing.Size(37, 23);
             this.label2.TabIndex = 17;
             this.label2.Text = "Giá";
             // 
@@ -110,10 +110,10 @@ namespace QuanLiQuanCafe
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Consolas", 14.25F);
-            this.label6.Location = new System.Drawing.Point(36, 276);
+            this.label6.Font = new System.Drawing.Font("Constantia", 14.25F);
+            this.label6.Location = new System.Drawing.Point(36, 301);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 22);
+            this.label6.Size = new System.Drawing.Size(45, 23);
             this.label6.TabIndex = 29;
             this.label6.Text = "Ảnh";
             // 
@@ -129,7 +129,7 @@ namespace QuanLiQuanCafe
             this.btnChonAnh.ForeColor = System.Drawing.Color.White;
             this.btnChonAnh.Image = global::QuanLiQuanCafe.Resource1.photo_gallery;
             this.btnChonAnh.ImageSize = new System.Drawing.Size(30, 30);
-            this.btnChonAnh.Location = new System.Drawing.Point(320, 264);
+            this.btnChonAnh.Location = new System.Drawing.Point(138, 289);
             this.btnChonAnh.Name = "btnChonAnh";
             this.btnChonAnh.Size = new System.Drawing.Size(196, 45);
             this.btnChonAnh.TabIndex = 28;
@@ -139,9 +139,9 @@ namespace QuanLiQuanCafe
             // pbAnhMon
             // 
             this.pbAnhMon.BackColor = System.Drawing.Color.White;
-            this.pbAnhMon.Location = new System.Drawing.Point(138, 264);
+            this.pbAnhMon.Location = new System.Drawing.Point(138, 344);
             this.pbAnhMon.Name = "pbAnhMon";
-            this.pbAnhMon.Size = new System.Drawing.Size(176, 167);
+            this.pbAnhMon.Size = new System.Drawing.Size(196, 167);
             this.pbAnhMon.TabIndex = 27;
             this.pbAnhMon.TabStop = false;
             // 
@@ -166,14 +166,17 @@ namespace QuanLiQuanCafe
             // 
             // cmbLoai
             // 
+            this.cmbLoai.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbLoai.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.cmbLoai.FormattingEnabled = true;
             this.cmbLoai.Location = new System.Drawing.Point(138, 91);
             this.cmbLoai.Name = "cmbLoai";
-            this.cmbLoai.Size = new System.Drawing.Size(211, 21);
+            this.cmbLoai.Size = new System.Drawing.Size(211, 25);
             this.cmbLoai.TabIndex = 25;
             // 
             // txtGia
             // 
+            this.txtGia.BorderRadius = 10;
             this.txtGia.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtGia.DefaultText = "";
             this.txtGia.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -184,6 +187,7 @@ namespace QuanLiQuanCafe
             this.txtGia.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtGia.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtGia.Location = new System.Drawing.Point(138, 206);
+            this.txtGia.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtGia.Name = "txtGia";
             this.txtGia.PlaceholderText = "Nhập giá ";
             this.txtGia.SelectedText = "";
@@ -192,6 +196,7 @@ namespace QuanLiQuanCafe
             // 
             // txtTenMon
             // 
+            this.txtTenMon.BorderRadius = 10;
             this.txtTenMon.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtTenMon.DefaultText = "";
             this.txtTenMon.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -202,6 +207,7 @@ namespace QuanLiQuanCafe
             this.txtTenMon.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtTenMon.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtTenMon.Location = new System.Drawing.Point(138, 141);
+            this.txtTenMon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTenMon.Name = "txtTenMon";
             this.txtTenMon.PlaceholderText = "Nhập tên món ";
             this.txtTenMon.SelectedText = "";
@@ -220,7 +226,7 @@ namespace QuanLiQuanCafe
             this.btnSuaMon.ForeColor = System.Drawing.Color.White;
             this.btnSuaMon.Image = global::QuanLiQuanCafe.Resource1.office_material;
             this.btnSuaMon.ImageSize = new System.Drawing.Size(30, 30);
-            this.btnSuaMon.Location = new System.Drawing.Point(220, 466);
+            this.btnSuaMon.Location = new System.Drawing.Point(402, 398);
             this.btnSuaMon.Name = "btnSuaMon";
             this.btnSuaMon.Size = new System.Drawing.Size(129, 45);
             this.btnSuaMon.TabIndex = 22;
@@ -239,7 +245,7 @@ namespace QuanLiQuanCafe
             this.btnXoaMon.ForeColor = System.Drawing.Color.White;
             this.btnXoaMon.Image = global::QuanLiQuanCafe.Resource1.cross;
             this.btnXoaMon.ImageSize = new System.Drawing.Size(30, 30);
-            this.btnXoaMon.Location = new System.Drawing.Point(387, 466);
+            this.btnXoaMon.Location = new System.Drawing.Point(402, 462);
             this.btnXoaMon.Name = "btnXoaMon";
             this.btnXoaMon.Size = new System.Drawing.Size(129, 45);
             this.btnXoaMon.TabIndex = 21;
@@ -258,7 +264,7 @@ namespace QuanLiQuanCafe
             this.btnThemMonMoi.ForeColor = System.Drawing.Color.White;
             this.btnThemMonMoi.Image = global::QuanLiQuanCafe.Resource1.plus;
             this.btnThemMonMoi.ImageSize = new System.Drawing.Size(30, 30);
-            this.btnThemMonMoi.Location = new System.Drawing.Point(40, 466);
+            this.btnThemMonMoi.Location = new System.Drawing.Point(402, 332);
             this.btnThemMonMoi.Name = "btnThemMonMoi";
             this.btnThemMonMoi.Size = new System.Drawing.Size(129, 45);
             this.btnThemMonMoi.TabIndex = 20;
@@ -311,6 +317,7 @@ namespace QuanLiQuanCafe
             this.txtTimKiem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtTimKiem.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtTimKiem.Location = new System.Drawing.Point(230, 27);
+            this.txtTimKiem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.PlaceholderText = "";
             this.txtTimKiem.SelectedText = "";
@@ -335,7 +342,7 @@ namespace QuanLiQuanCafe
             this.guna2Panel3.Controls.Add(this.guna2PictureBox2);
             this.guna2Panel3.Controls.Add(this.guna2HtmlLabel2);
             this.guna2Panel3.ForeColor = System.Drawing.SystemColors.Control;
-            this.guna2Panel3.Location = new System.Drawing.Point(588, 130);
+            this.guna2Panel3.Location = new System.Drawing.Point(601, 130);
             this.guna2Panel3.Name = "guna2Panel3";
             this.guna2Panel3.Size = new System.Drawing.Size(282, 56);
             this.guna2Panel3.TabIndex = 29;
@@ -379,7 +386,7 @@ namespace QuanLiQuanCafe
             // 
             // flpMon
             // 
-            this.flpMon.Location = new System.Drawing.Point(588, 184);
+            this.flpMon.Location = new System.Drawing.Point(601, 184);
             this.flpMon.Name = "flpMon";
             this.flpMon.Size = new System.Drawing.Size(282, 483);
             this.flpMon.TabIndex = 32;
@@ -415,7 +422,7 @@ namespace QuanLiQuanCafe
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(238)))), ((int)(((byte)(225)))));
-            this.ClientSize = new System.Drawing.Size(910, 679);
+            this.ClientSize = new System.Drawing.Size(910, 609);
             this.Controls.Add(this.flpMon);
             this.Controls.Add(this.guna2PictureBox1);
             this.Controls.Add(this.flpLoaiMon);

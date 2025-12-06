@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Guna.UI2.WinForms;
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -52,5 +53,47 @@ namespace QuanLiQuanCafe.Helpers
                 }
             }
         }
+
+        /// <summary>
+        /// Sets the button to its normal state: orange-brown background, white text, with border.
+        /// </summary>
+        /// <param name="button">The button to update.</param>
+        public static void SetFilterButtonNormal(Guna2Button button)
+        {
+            if (button == null) return;
+
+            // Normal state: orange-brown background (using SaddleBrown as example, adjust RGB if needed)
+            button.FillColor = Color.SaddleBrown; // Or Color.FromArgb(139, 69, 19) for custom orange-brown
+            button.ForeColor = Color.White;
+            button.BorderThickness = 1; // Default border
+            button.BorderColor = Color.Black; // Optional border color
+        }
+
+        /// <summary>
+        /// Sets the button to its selected state: beige background, dark brown text, no border.
+        /// </summary>
+        /// <param name="button">The button to update.</param>
+        public static void SetFilterButtonSelected(Guna2Button button)
+        {
+            if (button == null) return;
+
+            // Selected state: beige background
+            button.FillColor = Color.Beige;
+            button.ForeColor = Color.Chocolate; // Dark brown text (or Color.FromArgb(139, 69, 19) for darker)
+            button.BorderThickness = 0; // No border
+        }
+
+        /// <summary>
+        /// Resets all provided filter buttons to their normal state.
+        /// </summary>
+        /// <param name="buttons">The buttons to reset.</param>
+        public static void ResetFilterButtons(params Guna2Button[] buttons)
+        {
+            foreach (var button in buttons)
+            {
+                SetFilterButtonNormal(button);
+            }
+        }
     }
+        
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿// File: frmThemMon.cs
+using System;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -8,16 +9,17 @@ using QuanLiQuanCafe.Helpers;
 
 namespace QuanLiQuanCafe
 {
+    /// <summary>
+    /// Form thêm/sửa/xóa món.
+    /// </summary>
     public partial class frmThemMon : Form
     {
         private LoaiMonBUS loaiBUS;
         private MonBUS monBUS;
-
         private string loaiMonDangChon = "Tất cả";
         private string connStr = @"Data Source=HOAI\MSSQLSERVER01;Initial Catalog=QuanLyQuanCafe1;Integrated Security=True";
         private string duongDanAnh = "";
-        private MonCard monDangChon = null;
-        private string anhHienTai = "";
+        private MonCard selectedCard = null;
 
         public frmThemMon()
         {
@@ -30,21 +32,67 @@ namespace QuanLiQuanCafe
         {
             LoadLoaiMon();
             LoadMon();
+            LoadDefaultImageToPictureBox();
+        }
+
+        /// <summary>
+        /// Luôn load ảnh mặc định vào PictureBox lúc mở form.
+        /// </summary>
+        private void LoadDefaultImageToPictureBox()
+        {
+            try
+            {
+                MessageBox.Show("👉 Vào LoadDefaultImageToPictureBox()", "DEBUG");
+
+                string folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
+                MessageBox.Show("Thư mục Images: " + folder, "DEBUG");
+
+                if (!Directory.Exists(folder))
+                {
+                    MessageBox.Show("Thư mục Images CHƯA tồn tại -> tạo mới", "DEBUG");
+                    Directory.CreateDirectory(folder);
+                }
+
+                string defaultPath = Path.Combine(folder, "Default.png");
+                MessageBox.Show("Đường dẫn ảnh mặc định: " + defaultPath, "DEBUG");
+
+                if (!File.Exists(defaultPath))
+                {
+                    MessageBox.Show("Chưa có file Default.png -> tạo từ Resource1.DefaultImage", "DEBUG");
+                    Resource1.DefaultImage.Save(defaultPath, System.Drawing.Imaging.ImageFormat.Png);
+                }
+
+                pbAnhMon.Image = Image.FromFile(defaultPath);
+                pbAnhMon.SizeMode = PictureBoxSizeMode.Zoom;
+
+                duongDanAnh = "Images\\Default.png";
+
+                MessageBox.Show("✅ LoadDefaultImageToPictureBox() hoàn tất", "DEBUG");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "🔥 LỖI trong LoadDefaultImageToPictureBox:\n\n" +
+                    ex.Message + "\n\n" +
+                    ex.StackTrace,
+                    "EXCEPTION",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
 
         #region --- Loại món ---
+
         public void LoadLoaiMon()
         {
             DataTable dt = loaiBUS.GetLoai();
-
-            // Load vào FlowLayoutPanel bằng Helper
             LoaiMonHelper.LoadLoaiMon(flpLoaiMon, dt, (loai) =>
             {
                 loaiMonDangChon = loai;
                 LoadMon();
             });
 
-            // Load vào ComboBox
             cmbLoai.Items.Clear();
             foreach (DataRow row in dt.Rows)
                 cmbLoai.Items.Add(row["Loai"].ToString());
@@ -52,47 +100,36 @@ namespace QuanLiQuanCafe
             if (cmbLoai.Items.Count > 0)
                 cmbLoai.SelectedIndex = 0;
         }
+
         #endregion
 
         #region --- Món ---
+
         private void LoadMon(string keyword = "")
         {
             flpMon.Controls.Clear();
+
             DataTable dt = monBUS.GetMon(keyword, loaiMonDangChon);
-            if (!dt.Columns.Contains("Anh"))
-            {
-                MessageBox.Show("❌ Lỗi: DataTable không có cột 'Anh'.\n" +
-                                "Vui lòng kiểm tra lại câu lệnh SELECT trong MonBUS.GetMon()!",
-                                "Lỗi cơ sở dữ liệu",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
-                return;
-            }
 
             foreach (DataRow row in dt.Rows)
             {
-                // Lấy đường dẫn ảnh từ DB hoặc null
-                string duongDanAnh = row["Anh"].ToString();
-                string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, duongDanAnh);
-
-                Image img = null;
-
-                if (File.Exists(fullPath))
-                    img = Image.FromFile(fullPath);
-
+                string anh = row["Anh"].ToString();
+                string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, anh);
+                Image img = File.Exists(fullPath) ? Image.FromFile(fullPath) : Resource1.DefaultImage;
 
                 var card = new MonCard(
                     Convert.ToInt32(row["Id"]),
                     row["TenMon"].ToString(),
                     Convert.ToDecimal(row["Gia"]),
                     row["Loai"].ToString(),
-                    img
+                    img,
+                    anh
                 );
+
                 card.OnSelect += Card_OnSelect;
                 flpMon.Controls.Add(card);
             }
         }
-        private MonCard selectedCard = null;
 
         private void Card_OnSelect(MonCard card)
         {
@@ -106,68 +143,126 @@ namespace QuanLiQuanCafe
             txtGia.Text = card.Gia.ToString();
             cmbLoai.Text = card.Loai;
 
+            pbAnhMon.Image = card.MonImage;
+            pbAnhMon.SizeMode = PictureBoxSizeMode.Zoom;
+
             btnSuaMon.Enabled = true;
             btnXoaMon.Enabled = true;
         }
 
-
-        private void MonCard_OnSelect(MonCard card)
-        {
-            // Bỏ chọn card cũ
-            if (monDangChon != null)
-                monDangChon.SetSelected(false);
-
-            // Chọn card mới
-            monDangChon = card;
-            card.SetSelected(true);
-
-            // Điền thông tin vào form
-            txtTenMon.Text = card.TenMon;
-            txtGia.Text = card.Gia.ToString();
-            cmbLoai.Text = card.Loai;
-            btnSuaMon.Enabled = true;
-            btnXoaMon.Enabled = true;
-        }
         #endregion
 
         #region --- Thêm / Sửa / Xóa ---
+
         private void btnThemMonMoi_Click(object sender, EventArgs e)
         {
-            if (!ValidateInputs(out decimal gia)) return;
-
-            string loai = cmbLoai.Text.Trim();
-
-            // Kiểm tra ảnh
-            if (string.IsNullOrEmpty(duongDanAnh) || !File.Exists(duongDanAnh))
+            try
             {
-                MessageBox.Show("❌ Vui lòng chọn ảnh món!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                MessageBox.Show("👉 Bắt đầu xử lý nút Thêm món", "DEBUG");
+
+                // In ra các giá trị nhập
+                MessageBox.Show(
+                    $"Tên món: {txtTenMon.Text}\nGiá (text): {txtGia.Text}\nLoại: {cmbLoai.Text}",
+                    "DEBUG - Giá trị input"
+                );
+
+                // Kiểm tra ValidateInputs
+                if (!ValidateInputs(out decimal gia))
+                {
+                    MessageBox.Show("❗ ValidateInputs trả về FALSE. Dừng thêm món.", "DEBUG");
+                    return;
+                }
+
+                MessageBox.Show($"✅ ValidateInputs OK. Giá parse được: {gia}", "DEBUG");
+
+                string loai = cmbLoai.Text.Trim();
+
+                // Kiểm tra biến đường dẫn ảnh hiện tại
+                MessageBox.Show($"duongDanAnh hiện tại: '{duongDanAnh}'", "DEBUG - Ảnh");
+
+                // Nếu không chọn ảnh, dùng ảnh mặc định
+                string anhLuu;
+                if (string.IsNullOrEmpty(duongDanAnh))
+                {
+                    anhLuu = "Images\\Default.png";
+                    MessageBox.Show("Không có ảnh được chọn -> dùng ảnh mặc định: " + anhLuu, "DEBUG - Ảnh");
+                }
+                else
+                {
+                    anhLuu = duongDanAnh;
+                    MessageBox.Show("Ảnh người dùng chọn: " + anhLuu, "DEBUG - Ảnh");
+                }
+
+                // Kiểm tra file ảnh có tồn tại không
+                string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, anhLuu);
+                bool fileTonTai = File.Exists(fullPath);
+                MessageBox.Show(
+                    $"FullPath ảnh: {fullPath}\nTồn tại file? {fileTonTai}",
+                    "DEBUG - File ảnh"
+                );
+
+                // Nếu file không tồn tại, báo luôn
+                if (!fileTonTai)
+                {
+                    MessageBox.Show("⚠ Ảnh không tồn tại trên ổ đĩa. Vẫn tiếp tục lưu DB nhưng bạn cần kiểm tra lại phần tạo ảnh mặc định.", "DEBUG");
+                }
+
+                // Gọi BUS thêm món
+                MessageBox.Show("👉 Chuẩn bị gọi monBUS.ThemMon(...)", "DEBUG");
+
+                int result = monBUS.ThemMon(
+                    txtTenMon.Text.Trim(),
+                    gia,
+                    loai,
+                    anhLuu
+                );
+
+                MessageBox.Show("Kết quả monBUS.ThemMon trả về: " + result, "DEBUG");
+
+                if (result > 0)
+                {
+                    LoadLoaiMon();
+                    loaiMonDangChon = loai;
+                    LoadMon();
+                    ClearInputs();
+                    // Sau khi thêm xong, có thể load lại ảnh mặc định
+                    duongDanAnh = "";
+                    MessageBox.Show("✅ Thêm món thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("❌ monBUS.ThemMon trả về <= 0. Không thêm được món!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-
-            int result = monBUS.ThemMon(txtTenMon.Text.Trim(), gia, loai, duongDanAnh);
-
-            if (result > 0)
+            catch (Exception ex)
             {
-                LoadLoaiMon();
-                loaiMonDangChon = loai;
-                LoadMon();
-                ClearInputs();
-                duongDanAnh = "";
-                MessageBox.Show("✅ Thêm món thành công!");
+                // Bắt mọi lỗi nghiêm trọng và show ra để xem chi tiết
+                MessageBox.Show(
+                    "🔥 LỖI NGHIÊM TRỌNG trong btnThemMonMoi_Click:\n\n" +
+                    ex.Message + "\n\n" +
+                    ex.StackTrace,
+                    "EXCEPTION",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
-            else MessageBox.Show("❌ Lỗi khi thêm món!");
         }
 
         private void btnSuaMon_Click(object sender, EventArgs e)
         {
-            if (monDangChon == null || !ValidateInputs(out decimal gia)) return;
+            if (selectedCard == null || !ValidateInputs(out decimal gia)) return;
+
+            // Nếu không chọn ảnh mới → giữ ảnh cũ
+            string anhSua = string.IsNullOrEmpty(duongDanAnh)
+                ? selectedCard.AnhPath
+                : duongDanAnh;
 
             int result = monBUS.SuaMon(
-                monDangChon.Id,
+                selectedCard.Id,
                 txtTenMon.Text.Trim(),
                 gia,
                 cmbLoai.Text.Trim(),
-                duongDanAnh   // ảnh mới (nếu có)
+                anhSua
             );
 
             if (result > 0)
@@ -175,28 +270,41 @@ namespace QuanLiQuanCafe
                 LoadLoaiMon();
                 LoadMon();
                 ClearInputs();
-                MessageBox.Show("✅ Sửa món thành công!");
+                LoadDefaultImageToPictureBox();
+                duongDanAnh = "";
+
+                MessageBox.Show("✅ Sửa món thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else MessageBox.Show("❌ Lỗi khi sửa món!");
+            else
+            {
+                MessageBox.Show("❌ Lỗi khi sửa món!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnXoaMon_Click(object sender, EventArgs e)
         {
-            if (monDangChon == null) return;
+            if (selectedCard == null) return;
 
-            int result = monBUS.XoaMon(monDangChon.Id);
+            int result = monBUS.XoaMon(selectedCard.Id);
             if (result > 0)
             {
                 LoadLoaiMon();
                 LoadMon();
                 ClearInputs();
-                MessageBox.Show("✅ Xóa món thành công!");
+                LoadDefaultImageToPictureBox();
+
+                MessageBox.Show("✅ Xóa món thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else MessageBox.Show("❌ Không xóa được món!");
+            else
+            {
+                MessageBox.Show("❌ Không xóa được món!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
         #endregion
 
-        #region --- Xử lý ảnh ---
+        #region --- Chọn ảnh ---
+
         private void btnChonAnh_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
@@ -207,8 +315,8 @@ namespace QuanLiQuanCafe
                 {
                     string source = ofd.FileName;
                     string fileName = Path.GetFileName(source);
-
                     string folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
+
                     if (!Directory.Exists(folder))
                         Directory.CreateDirectory(folder);
 
@@ -216,19 +324,20 @@ namespace QuanLiQuanCafe
 
                     File.Copy(source, dest, true);
 
-                    // Lưu đường dẫn tương đối vào DB
-                    duongDanAnh = Path.Combine("Images", fileName);
+                    duongDanAnh = "Images\\" + fileName;
 
                     pbAnhMon.Image = Image.FromFile(dest);
                     pbAnhMon.SizeMode = PictureBoxSizeMode.Zoom;
                 }
             }
         }
+
         #endregion
 
+        #region --- Tiện ích ---
 
-        #region --- Các hàm tiện ích ---
         private void txtTimKiem_TextChanged(object sender, EventArgs e) => LoadMon(txtTimKiem.Text.Trim());
+
         private void btnTimMon_Click(object sender, EventArgs e) => LoadMon(txtTimKiem.Text.Trim());
 
         private void ClearInputs()
@@ -238,27 +347,33 @@ namespace QuanLiQuanCafe
             cmbLoai.SelectedIndex = 0;
             btnSuaMon.Enabled = false;
             btnXoaMon.Enabled = false;
+            selectedCard = null;
+            duongDanAnh = "";
         }
 
         private bool ValidateInputs(out decimal gia)
         {
             gia = 0;
+
             if (string.IsNullOrWhiteSpace(txtTenMon.Text))
             {
-                MessageBox.Show("Vui lòng nhập tên món!");
+                MessageBox.Show("Vui lòng nhập tên món!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
+
             if (!decimal.TryParse(txtGia.Text, out gia) || gia <= 0)
             {
-                MessageBox.Show("Giá phải là số dương!");
+                MessageBox.Show("Giá phải là số dương!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
+
             return true;
         }
+
         #endregion
 
+        #region --- Loại ---
 
-        #region --- Thêm / Xóa loại ---
         private void btnThemLoai_Click(object sender, EventArgs e)
         {
             frmThemLoai frm = new frmThemLoai(this);
@@ -266,38 +381,6 @@ namespace QuanLiQuanCafe
             this.Hide();
         }
 
-        private void btnXoaLoai_Click(object sender, EventArgs e)
-        {
-            string loaiCanXoa = cmbLoai.Text.Trim();
-            if (string.IsNullOrEmpty(loaiCanXoa) || loaiCanXoa == "Tất cả")
-            {
-                MessageBox.Show("❌ Không thể xóa loại 'Tất cả' hoặc loại trống!");
-                return;
-            }
-
-            int soMon = monBUS.DemMonTheoLoai(loaiCanXoa);
-            if (soMon > 0)
-            {
-                MessageBox.Show($"❌ Loại '{loaiCanXoa}' đang có {soMon} món.\nBạn phải xóa từng món trước khi xóa loại!",
-                    "Không thể xóa", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (MessageBox.Show($"Bạn có chắc muốn xóa loại '{loaiCanXoa}' không?", "Xác nhận",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
-
-            int xoaResult = loaiBUS.XoaLoai(loaiCanXoa);
-            if (xoaResult > 0)
-            {
-                MessageBox.Show("✅ Đã xóa loại thành công!");
-                LoadLoaiMon();
-                loaiMonDangChon = "Tất cả";
-                LoadMon();
-            }
-            else MessageBox.Show("❌ Xóa loại thất bại!");
-        }
         #endregion
-
-
     }
 }
