@@ -1,0 +1,376 @@
+2025-12-06 20:17:46,628 [1] INFO  CKBCDT.Program - === UNG DUNG KHOI DONG THANH CONG ===
+2025-12-06 20:17:46,692 [1] INFO  CKBCDT.Logger - Kh?i t?o form Báo cáo Doanh thu
+2025-12-06 20:17:46,949 [1] INFO  CKBCDT.Logger - Kh?i t?o ReportService
+2025-12-06 20:17:46,954 [1] DEBUG CKBCDT.Logger - Ðãng k? event handlers thành công
+2025-12-06 20:17:46,959 [1] DEBUG CKBCDT.Logger - C?u h?nh DataGridView
+2025-12-06 20:17:46,990 [1] DEBUG CKBCDT.Logger - C?u h?nh DataGridView thành công
+2025-12-06 20:17:46,993 [1] INFO  CKBCDT.Logger - T?i báo cáo m?c ð?nh
+2025-12-06 20:17:46,999 [1] INFO  CKBCDT.Logger - B?t ð?u t?i báo cáo: Ngày 06/12/2025
+2025-12-06 20:17:47,031 [1] DEBUG CKBCDT.Logger - L?y t?ng h?p doanh thu: 06/12/2025 - 07/12/2025
+2025-12-06 20:17:47,363 [1] INFO  CKBCDT.Logger - L?y t?ng h?p thành công: Ðõn: 0, Doanh thu: 0ð
+2025-12-06 20:17:47,373 [1] DEBUG CKBCDT.Logger - T?i t?ng h?p: 0 ðõn, 0ð
+2025-12-06 20:17:47,376 [1] DEBUG CKBCDT.Logger - L?y doanh thu theo ca: 06/12/2025 - 07/12/2025
+2025-12-06 20:17:47,385 [1] INFO  CKBCDT.Logger - L?y doanh thu theo ca thành công: 8 ca
+2025-12-06 20:17:47,388 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca
+2025-12-06 20:17:47,396 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca thành công
+2025-12-06 20:17:47,397 [1] DEBUG CKBCDT.Logger - T?i doanh thu theo ca: 8 ca
+2025-12-06 20:17:47,399 [1] DEBUG CKBCDT.Logger - L?y top 5 món bán ch?y: 06/12/2025 - 07/12/2025
+2025-12-06 20:17:47,409 [1] INFO  CKBCDT.Logger - L?y món bán ch?y thành công: 5 món
+2025-12-06 20:17:47,411 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y
+2025-12-06 20:17:47,417 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y thành công
+2025-12-06 20:17:47,418 [1] DEBUG CKBCDT.Logger - T?i món bán ch?y: 5 món
+2025-12-06 20:17:47,420 [1] DEBUG CKBCDT.Logger - L?y t? l? món: 06/12/2025 - 07/12/2025
+2025-12-06 20:17:47,426 [1] INFO  CKBCDT.Logger - L?y t? l? món thành công: 0 lo?i
+2025-12-06 20:17:47,429 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món
+2025-12-06 20:17:47,431 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món thành công
+2025-12-06 20:17:47,432 [1] DEBUG CKBCDT.Logger - T?i t? l? món: 0 lo?i
+2025-12-06 20:17:47,434 [1] DEBUG CKBCDT.Logger - L?y danh sách hóa ðõn: 06/12/2025 - 07/12/2025
+2025-12-06 20:17:47,464 [1] INFO  CKBCDT.Logger - L?y danh sách hóa ðõn thành công: 0 hóa ðõn
+2025-12-06 20:17:47,491 [1] DEBUG CKBCDT.Logger - T?i danh sách hóa ðõn: 0 hóa ðõn
+2025-12-06 20:17:47,492 [1] INFO  CKBCDT.Logger - T?i báo cáo thành công: Ngày 06/12/2025
+2025-12-06 20:17:47,493 [1] INFO  CKBCDT.Logger - Kh?i t?o form Báo cáo Doanh thu thành công
+2025-12-06 20:17:48,511 [1] INFO  CKBCDT.Logger - Ngý?i dùng ch?n báo cáo theo nãm
+2025-12-06 20:17:48,513 [1] INFO  CKBCDT.Logger - B?t ð?u t?i báo cáo: Nãm 2025
+2025-12-06 20:17:48,514 [1] DEBUG CKBCDT.Logger - L?y t?ng h?p doanh thu: 01/01/2025 - 01/01/2026
+2025-12-06 20:17:48,518 [1] INFO  CKBCDT.Logger - L?y t?ng h?p thành công: Ðõn: 22, Doanh thu: 6.285.000ð
+2025-12-06 20:17:48,519 [1] DEBUG CKBCDT.Logger - T?i t?ng h?p: 22 ðõn, 6.285.000ð
+2025-12-06 20:17:48,520 [1] DEBUG CKBCDT.Logger - L?y doanh thu theo ca: 01/01/2025 - 01/01/2026
+2025-12-06 20:17:48,523 [1] INFO  CKBCDT.Logger - L?y doanh thu theo ca thành công: 8 ca
+2025-12-06 20:17:48,524 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca
+2025-12-06 20:17:48,525 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca thành công
+2025-12-06 20:17:48,526 [1] DEBUG CKBCDT.Logger - T?i doanh thu theo ca: 8 ca
+2025-12-06 20:17:48,527 [1] DEBUG CKBCDT.Logger - L?y top 5 món bán ch?y: 01/01/2025 - 01/01/2026
+2025-12-06 20:17:48,533 [1] INFO  CKBCDT.Logger - L?y món bán ch?y thành công: 5 món
+2025-12-06 20:17:48,534 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y
+2025-12-06 20:17:48,535 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y thành công
+2025-12-06 20:17:48,536 [1] DEBUG CKBCDT.Logger - T?i món bán ch?y: 5 món
+2025-12-06 20:17:48,537 [1] DEBUG CKBCDT.Logger - L?y t? l? món: 01/01/2025 - 01/01/2026
+2025-12-06 20:17:48,544 [1] INFO  CKBCDT.Logger - L?y t? l? món thành công: 2 lo?i
+2025-12-06 20:17:48,544 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món
+2025-12-06 20:17:48,545 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món thành công
+2025-12-06 20:17:48,546 [1] DEBUG CKBCDT.Logger - T?i t? l? món: 2 lo?i
+2025-12-06 20:17:48,547 [1] DEBUG CKBCDT.Logger - L?y danh sách hóa ðõn: 01/01/2025 - 01/01/2026
+2025-12-06 20:17:48,573 [1] INFO  CKBCDT.Logger - L?y danh sách hóa ðõn thành công: 22 hóa ðõn
+2025-12-06 20:17:48,600 [1] DEBUG CKBCDT.Logger - T?i danh sách hóa ðõn: 22 hóa ðõn
+2025-12-06 20:17:48,601 [1] INFO  CKBCDT.Logger - T?i báo cáo thành công: Nãm 2025
+2025-12-06 20:17:49,537 [1] INFO  CKBCDT.Logger - Ngý?i dùng ch?n báo cáo theo tháng
+2025-12-06 20:17:49,538 [1] INFO  CKBCDT.Logger - B?t ð?u t?i báo cáo: Tháng 12/2025
+2025-12-06 20:17:49,539 [1] DEBUG CKBCDT.Logger - L?y t?ng h?p doanh thu: 01/12/2025 - 01/01/2026
+2025-12-06 20:17:49,544 [1] INFO  CKBCDT.Logger - L?y t?ng h?p thành công: Ðõn: 11, Doanh thu: 1.715.000ð
+2025-12-06 20:17:49,545 [1] DEBUG CKBCDT.Logger - T?i t?ng h?p: 11 ðõn, 1.715.000ð
+2025-12-06 20:17:49,545 [1] DEBUG CKBCDT.Logger - L?y doanh thu theo ca: 01/12/2025 - 01/01/2026
+2025-12-06 20:17:49,549 [1] INFO  CKBCDT.Logger - L?y doanh thu theo ca thành công: 8 ca
+2025-12-06 20:17:49,549 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca
+2025-12-06 20:17:49,550 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca thành công
+2025-12-06 20:17:49,551 [1] DEBUG CKBCDT.Logger - T?i doanh thu theo ca: 8 ca
+2025-12-06 20:17:49,552 [1] DEBUG CKBCDT.Logger - L?y top 5 món bán ch?y: 01/12/2025 - 01/01/2026
+2025-12-06 20:17:49,558 [1] INFO  CKBCDT.Logger - L?y món bán ch?y thành công: 5 món
+2025-12-06 20:17:49,559 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y
+2025-12-06 20:17:49,560 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y thành công
+2025-12-06 20:17:49,560 [1] DEBUG CKBCDT.Logger - T?i món bán ch?y: 5 món
+2025-12-06 20:17:49,561 [1] DEBUG CKBCDT.Logger - L?y t? l? món: 01/12/2025 - 01/01/2026
+2025-12-06 20:17:49,566 [1] INFO  CKBCDT.Logger - L?y t? l? món thành công: 2 lo?i
+2025-12-06 20:17:49,567 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món
+2025-12-06 20:17:49,568 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món thành công
+2025-12-06 20:17:49,569 [1] DEBUG CKBCDT.Logger - T?i t? l? món: 2 lo?i
+2025-12-06 20:17:49,570 [1] DEBUG CKBCDT.Logger - L?y danh sách hóa ðõn: 01/12/2025 - 01/01/2026
+2025-12-06 20:17:49,574 [1] INFO  CKBCDT.Logger - L?y danh sách hóa ðõn thành công: 11 hóa ðõn
+2025-12-06 20:17:49,585 [1] DEBUG CKBCDT.Logger - T?i danh sách hóa ðõn: 11 hóa ðõn
+2025-12-06 20:17:49,586 [1] INFO  CKBCDT.Logger - T?i báo cáo thành công: Tháng 12/2025
+2025-12-06 20:17:50,534 [1] INFO  CKBCDT.Logger - Ngý?i dùng m? form in báo cáo
+2025-12-06 20:17:50,535 [1] INFO  CKBCDT.Logger - Kh?i t?o form In Báo cáo
+2025-12-06 20:17:50,577 [1] DEBUG CKBCDT.Logger - Ðãng k? event handlers thành công
+2025-12-06 20:17:50,578 [1] INFO  CKBCDT.Logger - Kh?i t?o form In Báo cáo thành công
+2025-12-06 20:17:50,594 [1] INFO  CKBCDT.Logger - T?i báo cáo: 01/12/2025 - 01/01/2026
+2025-12-06 20:17:50,595 [1] DEBUG CKBCDT.Logger - Validation thành công: 01/12/2025 - 01/01/2026
+2025-12-06 20:17:50,597 [1] INFO  CKBCDT.Logger - B?t ð?u t?i d? li?u báo cáo
+2025-12-06 20:17:50,601 [1] DEBUG CKBCDT.Logger - K?t n?i database thành công
+2025-12-06 20:17:50,602 [1] DEBUG CKBCDT.Logger - T?i d? li?u ca Sáng (6h-14h)
+2025-12-06 20:17:50,608 [1] DEBUG CKBCDT.Logger - Doanh thu ca 6h-14h: 0 ðõn, 0ð
+2025-12-06 20:17:50,615 [1] DEBUG CKBCDT.Logger - Không có món bán ch?y trong ca 6h-14h
+2025-12-06 20:17:50,616 [1] INFO  CKBCDT.Logger - Ca Sáng: Orders: 0, Revenue: 0ð, Best: Chýa có bán
+2025-12-06 20:17:50,617 [1] DEBUG CKBCDT.Logger - T?i d? li?u ca T?i (14h-22h)
+2025-12-06 20:17:50,620 [1] DEBUG CKBCDT.Logger - Doanh thu ca 14h-22h: 11 ðõn, 1.715.000ð
+2025-12-06 20:17:50,626 [1] DEBUG CKBCDT.Logger - Không có món bán ch?y trong ca 14h-22h
+2025-12-06 20:17:50,627 [1] INFO  CKBCDT.Logger - Ca T?i: Orders: 11, Revenue: 1.715.000ð, Best: Chýa có bán
+2025-12-06 20:17:50,630 [1] DEBUG CKBCDT.Logger - Hi?n th? t?ng h?p: 11 ðõn, 1.715.000ð
+2025-12-06 20:17:50,632 [1] DEBUG CKBCDT.Logger - Hi?n th? chi ti?t ca làm vi?c thành công
+2025-12-06 20:17:50,633 [1] INFO  CKBCDT.Logger - T?i bi?u ð? 8 ca
+2025-12-06 20:17:50,634 [1] DEBUG CKBCDT.Logger - Kh?i t?o bi?u ð? thành công
+2025-12-06 20:17:50,642 [1] DEBUG CKBCDT.Logger - Ð? thêm 8 ði?m d? li?u vào bi?u ð?
+2025-12-06 20:17:50,643 [1] INFO  CKBCDT.Logger - T?i bi?u ð? thành công
+2025-12-06 20:17:50,644 [1] INFO  CKBCDT.Logger - T?i d? li?u báo cáo thành công
+2025-12-06 20:17:50,645 [1] INFO  CKBCDT.Logger - T?i báo cáo thành công
+2025-12-06 20:17:52,929 [1] INFO  CKBCDT.Program - === UNG DUNG KET THUC BINH THUONG ===
+2025-12-06 20:20:40,967 [1] INFO  CKBCDT.Program - === UNG DUNG KHOI DONG THANH CONG ===
+2025-12-06 20:20:41,060 [1] INFO  CKBCDT.Logger - Kh?i t?o form Báo cáo Doanh thu
+2025-12-06 20:20:41,305 [1] INFO  CKBCDT.Logger - Kh?i t?o ReportService
+2025-12-06 20:20:41,307 [1] DEBUG CKBCDT.Logger - Ðãng k? event handlers thành công
+2025-12-06 20:20:41,309 [1] DEBUG CKBCDT.Logger - C?u h?nh DataGridView
+2025-12-06 20:20:41,321 [1] DEBUG CKBCDT.Logger - C?u h?nh DataGridView thành công
+2025-12-06 20:20:41,322 [1] INFO  CKBCDT.Logger - T?i báo cáo m?c ð?nh
+2025-12-06 20:20:41,326 [1] INFO  CKBCDT.Logger - B?t ð?u t?i báo cáo: Ngày 06/12/2025
+2025-12-06 20:20:41,352 [1] DEBUG CKBCDT.Logger - L?y t?ng h?p doanh thu: 06/12/2025 - 07/12/2025
+2025-12-06 20:20:41,688 [1] INFO  CKBCDT.Logger - L?y t?ng h?p thành công: Ðõn: 0, Doanh thu: 0ð
+2025-12-06 20:20:41,698 [1] DEBUG CKBCDT.Logger - T?i t?ng h?p: 0 ðõn, 0ð
+2025-12-06 20:20:41,700 [1] DEBUG CKBCDT.Logger - L?y doanh thu theo ca: 06/12/2025 - 07/12/2025
+2025-12-06 20:20:41,708 [1] INFO  CKBCDT.Logger - L?y doanh thu theo ca thành công: 8 ca
+2025-12-06 20:20:41,710 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca
+2025-12-06 20:20:41,721 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca thành công
+2025-12-06 20:20:41,722 [1] DEBUG CKBCDT.Logger - T?i doanh thu theo ca: 8 ca
+2025-12-06 20:20:41,724 [1] DEBUG CKBCDT.Logger - L?y top 5 món bán ch?y: 06/12/2025 - 07/12/2025
+2025-12-06 20:20:41,735 [1] INFO  CKBCDT.Logger - L?y món bán ch?y thành công: 5 món
+2025-12-06 20:20:41,737 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y
+2025-12-06 20:20:41,743 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y thành công
+2025-12-06 20:20:41,744 [1] DEBUG CKBCDT.Logger - T?i món bán ch?y: 5 món
+2025-12-06 20:20:41,745 [1] DEBUG CKBCDT.Logger - L?y t? l? món: 06/12/2025 - 07/12/2025
+2025-12-06 20:20:41,750 [1] INFO  CKBCDT.Logger - L?y t? l? món thành công: 0 lo?i
+2025-12-06 20:20:41,752 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món
+2025-12-06 20:20:41,754 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món thành công
+2025-12-06 20:20:41,754 [1] DEBUG CKBCDT.Logger - T?i t? l? món: 0 lo?i
+2025-12-06 20:20:41,756 [1] DEBUG CKBCDT.Logger - L?y danh sách hóa ðõn: 06/12/2025 - 07/12/2025
+2025-12-06 20:20:41,802 [1] INFO  CKBCDT.Logger - L?y danh sách hóa ðõn thành công: 0 hóa ðõn
+2025-12-06 20:20:41,828 [1] DEBUG CKBCDT.Logger - T?i danh sách hóa ðõn: 0 hóa ðõn
+2025-12-06 20:20:41,829 [1] INFO  CKBCDT.Logger - T?i báo cáo thành công: Ngày 06/12/2025
+2025-12-06 20:20:41,830 [1] INFO  CKBCDT.Logger - Kh?i t?o form Báo cáo Doanh thu thành công
+2025-12-06 20:20:44,047 [1] INFO  CKBCDT.Logger - Ngý?i dùng ch?n báo cáo theo nãm
+2025-12-06 20:20:44,049 [1] INFO  CKBCDT.Logger - B?t ð?u t?i báo cáo: Nãm 2025
+2025-12-06 20:20:44,050 [1] DEBUG CKBCDT.Logger - L?y t?ng h?p doanh thu: 01/01/2025 - 01/01/2026
+2025-12-06 20:20:44,056 [1] INFO  CKBCDT.Logger - L?y t?ng h?p thành công: Ðõn: 22, Doanh thu: 6.285.000ð
+2025-12-06 20:20:44,058 [1] DEBUG CKBCDT.Logger - T?i t?ng h?p: 22 ðõn, 6.285.000ð
+2025-12-06 20:20:44,059 [1] DEBUG CKBCDT.Logger - L?y doanh thu theo ca: 01/01/2025 - 01/01/2026
+2025-12-06 20:20:44,065 [1] INFO  CKBCDT.Logger - L?y doanh thu theo ca thành công: 8 ca
+2025-12-06 20:20:44,066 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca
+2025-12-06 20:20:44,067 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca thành công
+2025-12-06 20:20:44,068 [1] DEBUG CKBCDT.Logger - T?i doanh thu theo ca: 8 ca
+2025-12-06 20:20:44,069 [1] DEBUG CKBCDT.Logger - L?y top 5 món bán ch?y: 01/01/2025 - 01/01/2026
+2025-12-06 20:20:44,077 [1] INFO  CKBCDT.Logger - L?y món bán ch?y thành công: 5 món
+2025-12-06 20:20:44,078 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y
+2025-12-06 20:20:44,079 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y thành công
+2025-12-06 20:20:44,080 [1] DEBUG CKBCDT.Logger - T?i món bán ch?y: 5 món
+2025-12-06 20:20:44,080 [1] DEBUG CKBCDT.Logger - L?y t? l? món: 01/01/2025 - 01/01/2026
+2025-12-06 20:20:44,088 [1] INFO  CKBCDT.Logger - L?y t? l? món thành công: 2 lo?i
+2025-12-06 20:20:44,089 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món
+2025-12-06 20:20:44,091 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món thành công
+2025-12-06 20:20:44,092 [1] DEBUG CKBCDT.Logger - T?i t? l? món: 2 lo?i
+2025-12-06 20:20:44,092 [1] DEBUG CKBCDT.Logger - L?y danh sách hóa ðõn: 01/01/2025 - 01/01/2026
+2025-12-06 20:20:44,120 [1] INFO  CKBCDT.Logger - L?y danh sách hóa ðõn thành công: 22 hóa ðõn
+2025-12-06 20:20:44,145 [1] DEBUG CKBCDT.Logger - T?i danh sách hóa ðõn: 22 hóa ðõn
+2025-12-06 20:20:44,147 [1] INFO  CKBCDT.Logger - T?i báo cáo thành công: Nãm 2025
+2025-12-06 20:20:45,681 [1] INFO  CKBCDT.Program - === UNG DUNG KET THUC BINH THUONG ===
+2025-12-06 20:42:38,341 [1] INFO  CKBCDT.Program - === UNG DUNG KHOI DONG THANH CONG ===
+2025-12-06 20:42:38,413 [1] INFO  CKBCDT.Logger - Kh?i t?o form Báo cáo Doanh thu
+2025-12-06 20:42:38,611 [1] INFO  CKBCDT.Logger - Kh?i t?o ReportService
+2025-12-06 20:42:38,613 [1] DEBUG CKBCDT.Logger - Ðãng k? event handlers thành công
+2025-12-06 20:42:38,616 [1] DEBUG CKBCDT.Logger - C?u h?nh DataGridView
+2025-12-06 20:42:38,628 [1] DEBUG CKBCDT.Logger - C?u h?nh DataGridView thành công
+2025-12-06 20:42:38,630 [1] INFO  CKBCDT.Logger - T?i báo cáo m?c ð?nh
+2025-12-06 20:42:38,633 [1] INFO  CKBCDT.Logger - B?t ð?u t?i báo cáo: Ngày 06/12/2025
+2025-12-06 20:42:38,651 [1] DEBUG CKBCDT.Logger - L?y t?ng h?p doanh thu: 06/12/2025 - 07/12/2025
+2025-12-06 20:42:39,207 [1] INFO  CKBCDT.Logger - L?y t?ng h?p thành công: Ðõn: 0, Doanh thu: 0ð
+2025-12-06 20:42:39,215 [1] DEBUG CKBCDT.Logger - T?i t?ng h?p: 0 ðõn, 0ð
+2025-12-06 20:42:39,218 [1] DEBUG CKBCDT.Logger - L?y doanh thu theo ca: 06/12/2025 - 07/12/2025
+2025-12-06 20:42:39,237 [1] INFO  CKBCDT.Logger - L?y doanh thu theo ca thành công: 8 ca
+2025-12-06 20:42:39,240 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca
+2025-12-06 20:42:39,248 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca thành công
+2025-12-06 20:42:39,250 [1] DEBUG CKBCDT.Logger - T?i doanh thu theo ca: 8 ca
+2025-12-06 20:42:39,252 [1] DEBUG CKBCDT.Logger - L?y top 5 món bán ch?y: 06/12/2025 - 07/12/2025
+2025-12-06 20:42:39,283 [1] INFO  CKBCDT.Logger - L?y món bán ch?y thành công: 5 món
+2025-12-06 20:42:39,285 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y
+2025-12-06 20:42:39,290 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y thành công
+2025-12-06 20:42:39,291 [1] DEBUG CKBCDT.Logger - T?i món bán ch?y: 5 món
+2025-12-06 20:42:39,293 [1] DEBUG CKBCDT.Logger - L?y t? l? món: 06/12/2025 - 07/12/2025
+2025-12-06 20:42:39,302 [1] INFO  CKBCDT.Logger - L?y t? l? món thành công: 0 lo?i
+2025-12-06 20:42:39,304 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món
+2025-12-06 20:42:39,306 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món thành công
+2025-12-06 20:42:39,307 [1] DEBUG CKBCDT.Logger - T?i t? l? món: 0 lo?i
+2025-12-06 20:42:39,310 [1] DEBUG CKBCDT.Logger - L?y danh sách hóa ðõn: 06/12/2025 - 07/12/2025
+2025-12-06 20:42:39,349 [1] INFO  CKBCDT.Logger - L?y danh sách hóa ðõn thành công: 0 hóa ðõn
+2025-12-06 20:42:39,383 [1] DEBUG CKBCDT.Logger - T?i danh sách hóa ðõn: 0 hóa ðõn
+2025-12-06 20:42:39,385 [1] INFO  CKBCDT.Logger - T?i báo cáo thành công: Ngày 06/12/2025
+2025-12-06 20:42:39,387 [1] INFO  CKBCDT.Logger - Kh?i t?o form Báo cáo Doanh thu thành công
+2025-12-06 20:42:40,476 [1] INFO  CKBCDT.Logger - Ngý?i dùng ch?n báo cáo theo nãm
+2025-12-06 20:42:40,478 [1] INFO  CKBCDT.Logger - B?t ð?u t?i báo cáo: Nãm 2025
+2025-12-06 20:42:40,480 [1] DEBUG CKBCDT.Logger - L?y t?ng h?p doanh thu: 01/01/2025 - 01/01/2026
+2025-12-06 20:42:40,485 [1] INFO  CKBCDT.Logger - L?y t?ng h?p thành công: Ðõn: 22, Doanh thu: 6.285.000ð
+2025-12-06 20:42:40,487 [1] DEBUG CKBCDT.Logger - T?i t?ng h?p: 22 ðõn, 6.285.000ð
+2025-12-06 20:42:40,487 [1] DEBUG CKBCDT.Logger - L?y doanh thu theo ca: 01/01/2025 - 01/01/2026
+2025-12-06 20:42:40,490 [1] INFO  CKBCDT.Logger - L?y doanh thu theo ca thành công: 8 ca
+2025-12-06 20:42:40,490 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca
+2025-12-06 20:42:40,491 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca thành công
+2025-12-06 20:42:40,492 [1] DEBUG CKBCDT.Logger - T?i doanh thu theo ca: 8 ca
+2025-12-06 20:42:40,492 [1] DEBUG CKBCDT.Logger - L?y top 5 món bán ch?y: 01/01/2025 - 01/01/2026
+2025-12-06 20:42:40,498 [1] INFO  CKBCDT.Logger - L?y món bán ch?y thành công: 5 món
+2025-12-06 20:42:40,499 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y
+2025-12-06 20:42:40,499 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y thành công
+2025-12-06 20:42:40,500 [1] DEBUG CKBCDT.Logger - T?i món bán ch?y: 5 món
+2025-12-06 20:42:40,501 [1] DEBUG CKBCDT.Logger - L?y t? l? món: 01/01/2025 - 01/01/2026
+2025-12-06 20:42:40,507 [1] INFO  CKBCDT.Logger - L?y t? l? món thành công: 2 lo?i
+2025-12-06 20:42:40,508 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món
+2025-12-06 20:42:40,509 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món thành công
+2025-12-06 20:42:40,510 [1] DEBUG CKBCDT.Logger - T?i t? l? món: 2 lo?i
+2025-12-06 20:42:40,510 [1] DEBUG CKBCDT.Logger - L?y danh sách hóa ðõn: 01/01/2025 - 01/01/2026
+2025-12-06 20:42:40,538 [1] INFO  CKBCDT.Logger - L?y danh sách hóa ðõn thành công: 22 hóa ðõn
+2025-12-06 20:42:40,562 [1] DEBUG CKBCDT.Logger - T?i danh sách hóa ðõn: 22 hóa ðõn
+2025-12-06 20:42:40,563 [1] INFO  CKBCDT.Logger - T?i báo cáo thành công: Nãm 2025
+2025-12-06 20:42:41,254 [1] INFO  CKBCDT.Logger - Ngý?i dùng ch?n báo cáo theo tháng
+2025-12-06 20:42:41,257 [1] INFO  CKBCDT.Logger - B?t ð?u t?i báo cáo: Tháng 12/2025
+2025-12-06 20:42:41,257 [1] DEBUG CKBCDT.Logger - L?y t?ng h?p doanh thu: 01/12/2025 - 01/01/2026
+2025-12-06 20:42:41,262 [1] INFO  CKBCDT.Logger - L?y t?ng h?p thành công: Ðõn: 11, Doanh thu: 1.715.000ð
+2025-12-06 20:42:41,263 [1] DEBUG CKBCDT.Logger - T?i t?ng h?p: 11 ðõn, 1.715.000ð
+2025-12-06 20:42:41,264 [1] DEBUG CKBCDT.Logger - L?y doanh thu theo ca: 01/12/2025 - 01/01/2026
+2025-12-06 20:42:41,268 [1] INFO  CKBCDT.Logger - L?y doanh thu theo ca thành công: 8 ca
+2025-12-06 20:42:41,268 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca
+2025-12-06 20:42:41,269 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca thành công
+2025-12-06 20:42:41,270 [1] DEBUG CKBCDT.Logger - T?i doanh thu theo ca: 8 ca
+2025-12-06 20:42:41,271 [1] DEBUG CKBCDT.Logger - L?y top 5 món bán ch?y: 01/12/2025 - 01/01/2026
+2025-12-06 20:42:41,277 [1] INFO  CKBCDT.Logger - L?y món bán ch?y thành công: 5 món
+2025-12-06 20:42:41,278 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y
+2025-12-06 20:42:41,281 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y thành công
+2025-12-06 20:42:41,281 [1] DEBUG CKBCDT.Logger - T?i món bán ch?y: 5 món
+2025-12-06 20:42:41,282 [1] DEBUG CKBCDT.Logger - L?y t? l? món: 01/12/2025 - 01/01/2026
+2025-12-06 20:42:41,288 [1] INFO  CKBCDT.Logger - L?y t? l? món thành công: 2 lo?i
+2025-12-06 20:42:41,289 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món
+2025-12-06 20:42:41,290 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món thành công
+2025-12-06 20:42:41,290 [1] DEBUG CKBCDT.Logger - T?i t? l? món: 2 lo?i
+2025-12-06 20:42:41,291 [1] DEBUG CKBCDT.Logger - L?y danh sách hóa ðõn: 01/12/2025 - 01/01/2026
+2025-12-06 20:42:41,295 [1] INFO  CKBCDT.Logger - L?y danh sách hóa ðõn thành công: 11 hóa ðõn
+2025-12-06 20:42:41,307 [1] DEBUG CKBCDT.Logger - T?i danh sách hóa ðõn: 11 hóa ðõn
+2025-12-06 20:42:41,308 [1] INFO  CKBCDT.Logger - T?i báo cáo thành công: Tháng 12/2025
+2025-12-06 20:42:42,674 [1] INFO  CKBCDT.Logger - Ngý?i dùng m? form in báo cáo
+2025-12-06 20:42:42,676 [1] INFO  CKBCDT.Logger - Kh?i t?o form In Báo cáo
+2025-12-06 20:42:42,725 [1] DEBUG CKBCDT.Logger - Ðãng k? event handlers thành công
+2025-12-06 20:42:42,726 [1] INFO  CKBCDT.Logger - Kh?i t?o form In Báo cáo thành công
+2025-12-06 20:42:42,744 [1] INFO  CKBCDT.Logger - T?i báo cáo: 01/12/2025 - 01/01/2026
+2025-12-06 20:42:42,746 [1] DEBUG CKBCDT.Logger - Validation thành công: 01/12/2025 - 01/01/2026
+2025-12-06 20:42:42,749 [1] INFO  CKBCDT.Logger - B?t ð?u t?i d? li?u báo cáo
+2025-12-06 20:42:42,753 [1] DEBUG CKBCDT.Logger - K?t n?i database thành công
+2025-12-06 20:42:42,756 [1] DEBUG CKBCDT.Logger - T?i d? li?u ca Sáng (6h-14h)
+2025-12-06 20:42:42,761 [1] DEBUG CKBCDT.Logger - Doanh thu ca 6h-14h: 0 ðõn, 0ð
+2025-12-06 20:42:42,771 [1] DEBUG CKBCDT.Logger - Không có món bán ch?y trong ca 6h-14h
+2025-12-06 20:42:42,773 [1] INFO  CKBCDT.Logger - Ca Sáng: Orders: 0, Revenue: 0ð, Best: Chýa có bán
+2025-12-06 20:42:42,774 [1] DEBUG CKBCDT.Logger - T?i d? li?u ca T?i (14h-22h)
+2025-12-06 20:42:42,775 [1] DEBUG CKBCDT.Logger - Doanh thu ca 14h-22h: 11 ðõn, 1.715.000ð
+2025-12-06 20:42:42,776 [1] DEBUG CKBCDT.Logger - Không có món bán ch?y trong ca 14h-22h
+2025-12-06 20:42:42,777 [1] INFO  CKBCDT.Logger - Ca T?i: Orders: 11, Revenue: 1.715.000ð, Best: Chýa có bán
+2025-12-06 20:42:42,780 [1] DEBUG CKBCDT.Logger - Hi?n th? t?ng h?p: 11 ðõn, 1.715.000ð
+2025-12-06 20:42:42,782 [1] DEBUG CKBCDT.Logger - Hi?n th? chi ti?t ca làm vi?c thành công
+2025-12-06 20:42:42,783 [1] INFO  CKBCDT.Logger - T?i bi?u ð? 8 ca
+2025-12-06 20:42:42,785 [1] DEBUG CKBCDT.Logger - Kh?i t?o bi?u ð? thành công
+2025-12-06 20:42:42,790 [1] DEBUG CKBCDT.Logger - Ð? thêm 8 ði?m d? li?u vào bi?u ð?
+2025-12-06 20:42:42,791 [1] INFO  CKBCDT.Logger - T?i bi?u ð? thành công
+2025-12-06 20:42:42,792 [1] INFO  CKBCDT.Logger - T?i d? li?u báo cáo thành công
+2025-12-06 20:42:42,793 [1] INFO  CKBCDT.Logger - T?i báo cáo thành công
+2025-12-06 20:42:44,171 [1] INFO  CKBCDT.Program - === UNG DUNG KET THUC BINH THUONG ===
+2025-12-06 23:26:52,150 [1] INFO  CKBCDT.Program - === UNG DUNG KHOI DONG THANH CONG ===
+2025-12-06 23:26:52,165 [1] INFO  CKBCDT.Logger - Kh?i t?o form Báo cáo Doanh thu
+2025-12-06 23:26:52,311 [1] INFO  CKBCDT.Logger - Kh?i t?o ReportService
+2025-12-06 23:26:52,313 [1] DEBUG CKBCDT.Logger - Ðãng k? event handlers thành công
+2025-12-06 23:26:52,315 [1] DEBUG CKBCDT.Logger - C?u h?nh DataGridView
+2025-12-06 23:26:52,317 [1] DEBUG CKBCDT.Logger - C?u h?nh DataGridView thành công
+2025-12-06 23:26:52,318 [1] INFO  CKBCDT.Logger - T?i báo cáo m?c ð?nh
+2025-12-06 23:26:52,320 [1] INFO  CKBCDT.Logger - B?t ð?u t?i báo cáo: Ngày 06/12/2025
+2025-12-06 23:26:52,350 [1] DEBUG CKBCDT.Logger - L?y t?ng h?p doanh thu: 06/12/2025 - 07/12/2025
+2025-12-06 23:26:52,634 [1] INFO  CKBCDT.Logger - L?y t?ng h?p thành công: Ðõn: 0, Doanh thu: 0ð
+2025-12-06 23:26:52,635 [1] DEBUG CKBCDT.Logger - T?i t?ng h?p: 0 ðõn, 0ð
+2025-12-06 23:26:52,637 [1] DEBUG CKBCDT.Logger - L?y doanh thu theo ca: 06/12/2025 - 07/12/2025
+2025-12-06 23:26:52,647 [1] INFO  CKBCDT.Logger - L?y doanh thu theo ca thành công: 8 ca
+2025-12-06 23:26:52,650 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca
+2025-12-06 23:26:52,657 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca thành công
+2025-12-06 23:26:52,658 [1] DEBUG CKBCDT.Logger - T?i doanh thu theo ca: 8 ca
+2025-12-06 23:26:52,660 [1] DEBUG CKBCDT.Logger - L?y top 5 món bán ch?y: 06/12/2025 - 07/12/2025
+2025-12-06 23:26:52,671 [1] INFO  CKBCDT.Logger - L?y món bán ch?y thành công: 5 món
+2025-12-06 23:26:52,673 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y
+2025-12-06 23:26:52,678 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y thành công
+2025-12-06 23:26:52,679 [1] DEBUG CKBCDT.Logger - T?i món bán ch?y: 5 món
+2025-12-06 23:26:52,680 [1] DEBUG CKBCDT.Logger - L?y t? l? món: 06/12/2025 - 07/12/2025
+2025-12-06 23:26:52,689 [1] INFO  CKBCDT.Logger - L?y t? l? món thành công: 0 lo?i
+2025-12-06 23:26:52,691 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món
+2025-12-06 23:26:52,693 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món thành công
+2025-12-06 23:26:52,694 [1] DEBUG CKBCDT.Logger - T?i t? l? món: 0 lo?i
+2025-12-06 23:26:52,695 [1] DEBUG CKBCDT.Logger - L?y danh sách hóa ðõn: 06/12/2025 - 07/12/2025
+2025-12-06 23:26:52,708 [1] INFO  CKBCDT.Logger - L?y danh sách hóa ðõn thành công: 0 hóa ðõn
+2025-12-06 23:26:52,714 [1] DEBUG CKBCDT.Logger - T?i danh sách hóa ðõn: 0 hóa ðõn
+2025-12-06 23:26:52,715 [1] INFO  CKBCDT.Logger - T?i báo cáo thành công: Ngày 06/12/2025
+2025-12-06 23:26:52,716 [1] INFO  CKBCDT.Logger - Kh?i t?o form Báo cáo Doanh thu thành công
+2025-12-06 23:26:53,664 [1] INFO  CKBCDT.Logger - Ngý?i dùng ch?n báo cáo theo nãm
+2025-12-06 23:26:53,667 [1] INFO  CKBCDT.Logger - B?t ð?u t?i báo cáo: Nãm 2025
+2025-12-06 23:26:53,668 [1] DEBUG CKBCDT.Logger - L?y t?ng h?p doanh thu: 01/01/2025 - 01/01/2026
+2025-12-06 23:26:53,670 [1] INFO  CKBCDT.Logger - L?y t?ng h?p thành công: Ðõn: 22, Doanh thu: 6.285.000ð
+2025-12-06 23:26:53,672 [1] DEBUG CKBCDT.Logger - T?i t?ng h?p: 22 ðõn, 6.285.000ð
+2025-12-06 23:26:53,673 [1] DEBUG CKBCDT.Logger - L?y doanh thu theo ca: 01/01/2025 - 01/01/2026
+2025-12-06 23:26:53,675 [1] INFO  CKBCDT.Logger - L?y doanh thu theo ca thành công: 8 ca
+2025-12-06 23:26:53,676 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca
+2025-12-06 23:26:53,677 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca thành công
+2025-12-06 23:26:53,678 [1] DEBUG CKBCDT.Logger - T?i doanh thu theo ca: 8 ca
+2025-12-06 23:26:53,679 [1] DEBUG CKBCDT.Logger - L?y top 5 món bán ch?y: 01/01/2025 - 01/01/2026
+2025-12-06 23:26:53,682 [1] INFO  CKBCDT.Logger - L?y món bán ch?y thành công: 5 món
+2025-12-06 23:26:53,683 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y
+2025-12-06 23:26:53,684 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y thành công
+2025-12-06 23:26:53,684 [1] DEBUG CKBCDT.Logger - T?i món bán ch?y: 5 món
+2025-12-06 23:26:53,685 [1] DEBUG CKBCDT.Logger - L?y t? l? món: 01/01/2025 - 01/01/2026
+2025-12-06 23:26:53,688 [1] INFO  CKBCDT.Logger - L?y t? l? món thành công: 2 lo?i
+2025-12-06 23:26:53,689 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món
+2025-12-06 23:26:53,690 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món thành công
+2025-12-06 23:26:53,691 [1] DEBUG CKBCDT.Logger - T?i t? l? món: 2 lo?i
+2025-12-06 23:26:53,692 [1] DEBUG CKBCDT.Logger - L?y danh sách hóa ðõn: 01/01/2025 - 01/01/2026
+2025-12-06 23:26:53,695 [1] INFO  CKBCDT.Logger - L?y danh sách hóa ðõn thành công: 22 hóa ðõn
+2025-12-06 23:26:53,698 [1] DEBUG CKBCDT.Logger - T?i danh sách hóa ðõn: 22 hóa ðõn
+2025-12-06 23:26:53,699 [1] INFO  CKBCDT.Logger - T?i báo cáo thành công: Nãm 2025
+2025-12-06 23:26:57,021 [1] INFO  CKBCDT.Program - === UNG DUNG KET THUC BINH THUONG ===
+2025-12-06 23:45:52,956 [1] INFO  CKBCDT.Program - === UNG DUNG KHOI DONG THANH CONG ===
+2025-12-06 23:45:52,971 [1] INFO  CKBCDT.Logger - Kh?i t?o form Báo cáo Doanh thu
+2025-12-06 23:45:53,132 [1] INFO  CKBCDT.Logger - Kh?i t?o ReportService
+2025-12-06 23:45:53,134 [1] DEBUG CKBCDT.Logger - Ðãng k? event handlers thành công
+2025-12-06 23:45:53,136 [1] DEBUG CKBCDT.Logger - C?u h?nh DataGridView
+2025-12-06 23:45:53,139 [1] DEBUG CKBCDT.Logger - C?u h?nh DataGridView thành công
+2025-12-06 23:45:53,139 [1] INFO  CKBCDT.Logger - T?i báo cáo m?c ð?nh
+2025-12-06 23:45:53,142 [1] INFO  CKBCDT.Logger - B?t ð?u t?i báo cáo: Ngày 06/12/2025
+2025-12-06 23:45:53,180 [1] DEBUG CKBCDT.Logger - L?y t?ng h?p doanh thu: 06/12/2025 - 07/12/2025
+2025-12-06 23:45:53,487 [1] INFO  CKBCDT.Logger - L?y t?ng h?p thành công: Ðõn: 0, Doanh thu: 0ð
+2025-12-06 23:45:53,489 [1] DEBUG CKBCDT.Logger - T?i t?ng h?p: 0 ðõn, 0ð
+2025-12-06 23:45:53,491 [1] DEBUG CKBCDT.Logger - L?y doanh thu theo ca: 06/12/2025 - 07/12/2025
+2025-12-06 23:45:53,503 [1] INFO  CKBCDT.Logger - L?y doanh thu theo ca thành công: 8 ca
+2025-12-06 23:45:53,507 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca
+2025-12-06 23:45:53,514 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca thành công
+2025-12-06 23:45:53,515 [1] DEBUG CKBCDT.Logger - T?i doanh thu theo ca: 8 ca
+2025-12-06 23:45:53,516 [1] DEBUG CKBCDT.Logger - L?y top 5 món bán ch?y: 06/12/2025 - 07/12/2025
+2025-12-06 23:45:53,541 [1] INFO  CKBCDT.Logger - L?y món bán ch?y thành công: 5 món
+2025-12-06 23:45:53,543 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y
+2025-12-06 23:45:53,549 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y thành công
+2025-12-06 23:45:53,550 [1] DEBUG CKBCDT.Logger - T?i món bán ch?y: 5 món
+2025-12-06 23:45:53,551 [1] DEBUG CKBCDT.Logger - L?y t? l? món: 06/12/2025 - 07/12/2025
+2025-12-06 23:45:53,561 [1] INFO  CKBCDT.Logger - L?y t? l? món thành công: 0 lo?i
+2025-12-06 23:45:53,563 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món
+2025-12-06 23:45:53,566 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món thành công
+2025-12-06 23:45:53,567 [1] DEBUG CKBCDT.Logger - T?i t? l? món: 0 lo?i
+2025-12-06 23:45:53,568 [1] DEBUG CKBCDT.Logger - L?y danh sách hóa ðõn: 06/12/2025 - 07/12/2025
+2025-12-06 23:45:53,586 [1] INFO  CKBCDT.Logger - L?y danh sách hóa ðõn thành công: 0 hóa ðõn
+2025-12-06 23:45:53,593 [1] DEBUG CKBCDT.Logger - T?i danh sách hóa ðõn: 0 hóa ðõn
+2025-12-06 23:45:53,595 [1] INFO  CKBCDT.Logger - T?i báo cáo thành công: Ngày 06/12/2025
+2025-12-06 23:45:53,596 [1] INFO  CKBCDT.Logger - Kh?i t?o form Báo cáo Doanh thu thành công
+2025-12-06 23:45:56,325 [1] INFO  CKBCDT.Logger - Ngý?i dùng ch?n báo cáo theo nãm
+2025-12-06 23:45:56,327 [1] INFO  CKBCDT.Logger - B?t ð?u t?i báo cáo: Nãm 2025
+2025-12-06 23:45:56,329 [1] DEBUG CKBCDT.Logger - L?y t?ng h?p doanh thu: 01/01/2025 - 01/01/2026
+2025-12-06 23:45:56,333 [1] INFO  CKBCDT.Logger - L?y t?ng h?p thành công: Ðõn: 22, Doanh thu: 6.285.000ð
+2025-12-06 23:45:56,335 [1] DEBUG CKBCDT.Logger - T?i t?ng h?p: 22 ðõn, 6.285.000ð
+2025-12-06 23:45:56,336 [1] DEBUG CKBCDT.Logger - L?y doanh thu theo ca: 01/01/2025 - 01/01/2026
+2025-12-06 23:45:56,340 [1] INFO  CKBCDT.Logger - L?y doanh thu theo ca thành công: 8 ca
+2025-12-06 23:45:56,342 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca
+2025-12-06 23:45:56,343 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? doanh thu theo ca thành công
+2025-12-06 23:45:56,344 [1] DEBUG CKBCDT.Logger - T?i doanh thu theo ca: 8 ca
+2025-12-06 23:45:56,345 [1] DEBUG CKBCDT.Logger - L?y top 5 món bán ch?y: 01/01/2025 - 01/01/2026
+2025-12-06 23:45:56,353 [1] INFO  CKBCDT.Logger - L?y món bán ch?y thành công: 5 món
+2025-12-06 23:45:56,355 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y
+2025-12-06 23:45:56,356 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? món bán ch?y thành công
+2025-12-06 23:45:56,357 [1] DEBUG CKBCDT.Logger - T?i món bán ch?y: 5 món
+2025-12-06 23:45:56,358 [1] DEBUG CKBCDT.Logger - L?y t? l? món: 01/01/2025 - 01/01/2026
+2025-12-06 23:45:56,365 [1] INFO  CKBCDT.Logger - L?y t? l? món thành công: 2 lo?i
+2025-12-06 23:45:56,366 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món
+2025-12-06 23:45:56,367 [1] DEBUG CKBCDT.Logger - C?u h?nh bi?u ð? t? l? món thành công
+2025-12-06 23:45:56,367 [1] DEBUG CKBCDT.Logger - T?i t? l? món: 2 lo?i
+2025-12-06 23:45:56,368 [1] DEBUG CKBCDT.Logger - L?y danh sách hóa ðõn: 01/01/2025 - 01/01/2026
+2025-12-06 23:45:56,376 [1] INFO  CKBCDT.Logger - L?y danh sách hóa ðõn thành công: 22 hóa ðõn
+2025-12-06 23:45:56,379 [1] DEBUG CKBCDT.Logger - T?i danh sách hóa ðõn: 22 hóa ðõn
+2025-12-06 23:45:56,380 [1] INFO  CKBCDT.Logger - T?i báo cáo thành công: Nãm 2025
+2025-12-06 23:45:57,759 [1] INFO  CKBCDT.Program - === UNG DUNG KET THUC BINH THUONG ===

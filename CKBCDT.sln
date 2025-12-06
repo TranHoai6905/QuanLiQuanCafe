@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CKBCDT", "CKBCDT\CKBCDT.csproj", "{925F419F-F900-4EE8-A267-B9E8552A3993}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KTCK", "KTCK\KTCK.csproj", "{CC26E706-C2C4-4789-BAC7-03C4F2BA4B0D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{925F419F-F900-4EE8-A267-B9E8552A3993}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{925F419F-F900-4EE8-A267-B9E8552A3993}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{925F419F-F900-4EE8-A267-B9E8552A3993}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{925F419F-F900-4EE8-A267-B9E8552A3993}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC26E706-C2C4-4789-BAC7-03C4F2BA4B0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC26E706-C2C4-4789-BAC7-03C4F2BA4B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC26E706-C2C4-4789-BAC7-03C4F2BA4B0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC26E706-C2C4-4789-BAC7-03C4F2BA4B0D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2DD5554A-BAD6-4B72-874A-6833819BA2A8}
+	EndGlobalSection
+EndGlobal
