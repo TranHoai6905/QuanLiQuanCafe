@@ -1,4 +1,5 @@
 ﻿// File: LoaiMonBUS.cs
+using QuanLiQuanCafe.DAL;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -16,9 +17,9 @@ namespace QuanLiQuanCafe.BUS
         /// Constructor với chuỗi kết nối.
         /// </summary>
         /// <param name="connectionString">Chuỗi kết nối SQL.</param>
-        public LoaiMonBUS(string connectionString)
+        public LoaiMonBUS()
         {
-            connStr = connectionString;
+            connStr = DBConnect.ConnectionString;
         }
 
         /// <summary>

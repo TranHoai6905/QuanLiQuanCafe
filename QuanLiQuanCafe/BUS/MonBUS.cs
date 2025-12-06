@@ -1,4 +1,5 @@
 ﻿// File: MonBUS.cs
+using QuanLiQuanCafe.DAL;
 using QuanLiQuanCafe.DAL.Queries;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace QuanLiQuanCafe.BUS
         /// <param name="connectionString">Chuỗi kết nối SQL.</param>
         public MonBUS(string connectionString)
         {
-            connStr = connectionString;
+            connStr = DBConnect.ConnectionString;
         }
 
         // ================= LOẠI MÓN =================
