@@ -33,8 +33,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
+      <HintPath>..\packages\Guna.UI2.WinForms.2.0.4.7\lib\net472\Guna.UI2.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=3.2.0.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.3.2.0\lib\net462\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,23 +57,99 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="BUS\HoaDonBUS.cs" />
+    <Compile Include="BUS\LoaiMonBUS.cs" />
+    <Compile Include="BUS\MonBUS.cs" />
+    <Compile Include="DAL\DataAccess.cs" />
+    <Compile Include="frmThemLoai.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmThemLoai.Designer.cs">
+      <DependentUpon>frmThemLoai.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTrangChu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTrangChu.Designer.cs">
+      <DependentUpon>frmTrangChu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHoaDon.Designer.cs">
+      <DependentUpon>frmHoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMon.Designer.cs">
+      <DependentUpon>frmMon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmThemMon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmThemMon.Designer.cs">
+      <DependentUpon>frmThemMon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ButtonHelper.cs" />
+    <Compile Include="Helpers\DataGridViewHelper.cs" />
+    <Compile Include="Helpers\LoaiMonHelper.cs" />
+    <Compile Include="Helpers\MonCard.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Models\ChiTietHoaDon.cs" />
+    <Compile Include="Models\HoaDon.cs" />
+    <Compile Include="DAL\HoaDonQueries.cs" />
+    <Compile Include="Models\Mon.cs" />
+    <Compile Include="DAL\MonQueries.cs" />
+    <Compile Include="MonDAO.cs" />
+    <Compile Include="MonInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Include="Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="TaiKhoan.cs" />
+    <EmbeddedResource Include="frmThemLoai.resx">
+      <DependentUpon>frmThemLoai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTrangChu.resx">
+      <DependentUpon>frmTrangChu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHoaDon.resx">
+      <DependentUpon>frmHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMon.resx">
+      <DependentUpon>frmMon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmThemMon.resx">
+      <DependentUpon>frmThemMon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -72,9 +159,44 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="log4net.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\photo-gallery.png" />
+    <None Include="Resources\default.png" />
+    <None Include="Resources\stars.png" />
+    <None Include="Resources\need-assessment.png" />
+    <None Include="Resources\menu %283%29.png" />
+    <None Include="Resources\direction.png" />
+    <None Include="Resources\open.png" />
+    <None Include="Resources\cafe %281%29.png" />
+    <None Include="Resources\sign.png" />
+    <None Include="Resources\back.png" />
+    <None Include="Resources\undo.png" />
+    <None Include="Resources\menu %282%29.png" />
+    <None Include="Resources\add.png" />
+    <None Include="Resources\payment.png" />
+    <None Include="Resources\menu %281%29.png" />
+    <None Include="Resources\pay.png" />
+    <None Include="Resources\menu.png" />
+    <None Include="Resources\cafe.png" />
+    <None Include="Resources\notepad.png" />
+    <None Include="Resources\highlighter.png" />
+    <None Include="Resources\office-material.png" />
+    <None Include="Resources\cross.png" />
+    <None Include="Resources\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
