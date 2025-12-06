@@ -48,7 +48,7 @@ namespace QuanLiQuanCafe
         /// <summary>
         /// Đổi màu nút menu khi click – dùng riêng cho FormMain
         /// </summary>
-      
+
 
         /// <summary>
         /// Phương pháp: Extract Method - Cấu hình nút tài khoản
@@ -278,7 +278,8 @@ namespace QuanLiQuanCafe
         }
 
         /// <summary>
-        /// Event handler: Nút Danh sách món (placeholder)
+        /// Event handler: Nút Quản lý món (đồ uống)
+        /// Mở form danh sách món theo đúng quy trình MDI child
         /// </summary>
         private void btnQuanLyMon_Click(object sender, EventArgs e)
         {
