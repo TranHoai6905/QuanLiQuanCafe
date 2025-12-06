@@ -1,9 +1,9 @@
-﻿using System;
+using System;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 using log4net;
 using log4net.Config;
-using System.IO;
-using System.Reflection;
 
 namespace QuanLiQuanCafe
 {
@@ -18,9 +18,7 @@ namespace QuanLiQuanCafe
         [STAThread]
         static void Main()
         {
-            // ==============================
             // 1) Load file log4net.xml nếu có
-            // ==============================
             var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
             string logFile = "log4net.xml";
 
@@ -33,9 +31,7 @@ namespace QuanLiQuanCafe
                 MessageBox.Show($"Không tìm thấy file log4net.xml!\nỨng dụng vẫn chạy nhưng không ghi log.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            // ==============================
             // 2) Ghi log test để kiểm tra
-            // ==============================
             log.Debug("Ứng dụng bắt đầu chạy (DEBUG)");
             log.Info("Ứng dụng bắt đầu chạy (INFO)");
             fatalLog.Fatal("TEST FATAL: Ghi log FATAL ngay khi khởi chạy");
@@ -45,14 +41,11 @@ namespace QuanLiQuanCafe
 
             try
             {
-                // ==============================
-                // 3) Chạy form đầu tiên: Trang chủ
-                // ==============================
-                Application.Run(new frmTrangChu());
+                // 3) Chạy form đăng nhập đầu tiên
+                Application.Run(new FormDangNhap());
             }
             catch (Exception ex)
             {
-                // Ghi log lỗi nghiêm trọng
                 fatalLog.Fatal("FATAL: Lỗi không xử lý trong Main()", ex);
 
                 MessageBox.Show(
@@ -63,9 +56,6 @@ namespace QuanLiQuanCafe
             }
             finally
             {
-                // ==============================
-                // 4) Log khi ứng dụng thoát
-                // ==============================
                 log.Info("Ứng dụng đã thoát");
             }
         }
