@@ -83,7 +83,7 @@ namespace CKBCDT
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(958, 937);
             this.panelMain.TabIndex = 0;
-           
+            
             // 
             // lblTenQuan
             // 

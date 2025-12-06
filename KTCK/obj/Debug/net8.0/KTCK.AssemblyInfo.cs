@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KTCK")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6aaf058413145c2e3d918764633c5740c7bc2283")]
 [assembly: System.Reflection.AssemblyProductAttribute("KTCK")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KTCK")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

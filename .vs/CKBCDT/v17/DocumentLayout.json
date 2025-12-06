@@ -3,60 +3,60 @@
   "WorkspaceRootPath": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CC26E706-C2C4-4789-BAC7-03C4F2BA4B0D}|KTCK\\KTCK.csproj|c:\\users\\my pc\\downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\ckbcdt\\ktck\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC26E706-C2C4-4789-BAC7-03C4F2BA4B0D}|KTCK\\KTCK.csproj|solutionrelative:ktck\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|c:\\users\\my pc\\downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\ckbcdt\\ckbcdt\\frmbaocaodoanhthu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:ckbcdt\\frmbaocaodoanhthu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\ckbcdt\\frmbaocaodoanhthu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:ckbcdt\\frmbaocaodoanhthu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\ckbcdt\\frminbaocao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:ckbcdt\\frminbaocao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmBaoCaoDoanhThu.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:CKBCDT\\frmBaoCaoDoanhThu.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\ckbcdt\\frmbaocaodoanhthu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:ckbcdt\\frmbaocaodoanhthu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmBaoCaoDoanhThu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:CKBCDT\\frmBaoCaoDoanhThu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\ckbcdt\\baocaodoanhthubus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:ckbcdt\\baocaodoanhthubus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\ckbcdt\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:ckbcdt\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\ckbcdt\\baocaodoanhthudal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:ckbcdt\\baocaodoanhthudal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\log4net.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:CKBCDT\\log4net.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\ckbcdt\\frminbaocao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:ckbcdt\\frminbaocao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:CKBCDT\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\bin\\Debug\\log4net.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CKBCDT\\bin\\Debug\\log4net.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\Logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:CKBCDT\\Logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\ckbcdt\\log4net.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:ckbcdt\\log4net.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\log4net.config||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:CKBCDT\\log4net.config||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\ckbcdt\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:ckbcdt\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\BaoCaoDoanhThuDAL.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:CKBCDT\\BaoCaoDoanhThuDAL.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC26E706-C2C4-4789-BAC7-03C4F2BA4B0D}|KTCK\\KTCK.csproj|c:\\users\\my pc\\downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\ckbcdt\\ktck\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC26E706-C2C4-4789-BAC7-03C4F2BA4B0D}|KTCK\\KTCK.csproj|solutionrelative:ktck\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\BaoCaoDoanhThuBUS.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:CKBCDT\\BaoCaoDoanhThuBUS.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\ckbcdt\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:ckbcdt\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmInBaoCao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:CKBCDT\\frmInBaoCao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC26E706-C2C4-4789-BAC7-03C4F2BA4B0D}|KTCK\\KTCK.csproj|c:\\users\\my pc\\downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\ckbcdt\\ktck\\ktck.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{CC26E706-C2C4-4789-BAC7-03C4F2BA4B0D}|KTCK\\KTCK.csproj|solutionrelative:ktck\\ktck.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmInBaoCao.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:CKBCDT\\frmInBaoCao.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\ckbcdt\\frminbaocao.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:ckbcdt\\frminbaocao.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\ckbcdt\\frmbaocaodoanhthu.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{925F419F-F900-4EE8-A267-B9E8552A3993}|CKBCDT\\CKBCDT.csproj|solutionrelative:ckbcdt\\frmbaocaodoanhthu.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -87,8 +87,8 @@
           ]
         },
         {
-          "DockedHeight": 183,
-          "SelectedChildIndex": 1,
+          "DockedHeight": 69,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -96,176 +96,189 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
+              "Title": "log4net.config",
+              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\bin\\Debug\\log4net.config",
+              "RelativeDocumentMoniker": "CKBCDT\\bin\\Debug\\log4net.config",
+              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\bin\\Debug\\log4net.config",
+              "RelativeToolTip": "CKBCDT\\bin\\Debug\\log4net.config",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-12-06T13:18:17.942Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "log4net.config",
+              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\log4net.config",
+              "RelativeDocumentMoniker": "CKBCDT\\log4net.config",
+              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\log4net.config",
+              "RelativeToolTip": "CKBCDT\\log4net.config",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAUwBgAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-12-06T13:16:30.594Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "UnitTest1.cs",
               "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\KTCK\\UnitTest1.cs",
               "RelativeDocumentMoniker": "KTCK\\UnitTest1.cs",
               "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\KTCK\\UnitTest1.cs",
               "RelativeToolTip": "KTCK\\UnitTest1.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAA3AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-06T06:33:44.762Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-06T12:27:27.555Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Logger.cs",
-              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\Logger.cs",
-              "RelativeDocumentMoniker": "CKBCDT\\Logger.cs",
-              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\Logger.cs",
-              "RelativeToolTip": "CKBCDT\\Logger.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAowCMAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T17:31:35.444Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "log4net.config",
-              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\log4net.config",
-              "RelativeDocumentMoniker": "CKBCDT\\log4net.config",
-              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\log4net.config",
-              "RelativeToolTip": "CKBCDT\\log4net.config",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwB4AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-12-05T17:30:27.396Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "frmBaoCaoDoanhThu.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmBaoCaoDoanhThu.Designer.cs",
-              "RelativeDocumentMoniker": "CKBCDT\\frmBaoCaoDoanhThu.Designer.cs",
-              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmBaoCaoDoanhThu.Designer.cs",
-              "RelativeToolTip": "CKBCDT\\frmBaoCaoDoanhThu.Designer.cs",
-              "ViewState": "AQIAAFsBAAAAAAAAAAAqwHABAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T17:20:23.696Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frmBaoCaoDoanhThu.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmBaoCaoDoanhThu.cs",
-              "RelativeDocumentMoniker": "CKBCDT\\frmBaoCaoDoanhThu.cs",
-              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmBaoCaoDoanhThu.cs [Design]",
-              "RelativeToolTip": "CKBCDT\\frmBaoCaoDoanhThu.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T17:20:17.363Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\Program.cs",
-              "RelativeDocumentMoniker": "CKBCDT\\Program.cs",
-              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\Program.cs",
-              "RelativeToolTip": "CKBCDT\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T17:33:59.043Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "log4net.config",
-              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\log4net.config",
-              "RelativeDocumentMoniker": "CKBCDT\\log4net.config",
-              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\log4net.config",
-              "RelativeToolTip": "CKBCDT\\log4net.config",
-              "ViewState": "AQIAABIAAAAAAAAAAAAuwB4AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-12-05T17:38:18.171Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "App.config",
-              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\App.config",
-              "RelativeDocumentMoniker": "CKBCDT\\App.config",
-              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\App.config",
-              "RelativeToolTip": "CKBCDT\\App.config",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-12-05T18:42:07.123Z",
+              "DocumentIndex": 11,
+              "Title": "KTCK.csproj",
+              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\KTCK\\KTCK.csproj",
+              "RelativeDocumentMoniker": "KTCK\\KTCK.csproj",
+              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\KTCK\\KTCK.csproj",
+              "RelativeToolTip": "KTCK\\KTCK.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-06T12:27:23.53Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "BaoCaoDoanhThuDAL.cs",
-              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\BaoCaoDoanhThuDAL.cs",
-              "RelativeDocumentMoniker": "CKBCDT\\BaoCaoDoanhThuDAL.cs",
-              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\BaoCaoDoanhThuDAL.cs",
-              "RelativeToolTip": "CKBCDT\\BaoCaoDoanhThuDAL.cs",
-              "ViewState": "AQIAAF8AAAAAAAAAAAAiwGgAAAABAAAA",
+              "Title": "Logger.cs",
+              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\Logger.cs",
+              "RelativeDocumentMoniker": "CKBCDT\\Logger.cs",
+              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\Logger.cs",
+              "RelativeToolTip": "CKBCDT\\Logger.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAkwAsAAABXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T17:28:26.506Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "BaoCaoDoanhThuBUS.cs",
-              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\BaoCaoDoanhThuBUS.cs",
-              "RelativeDocumentMoniker": "CKBCDT\\BaoCaoDoanhThuBUS.cs",
-              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\BaoCaoDoanhThuBUS.cs",
-              "RelativeToolTip": "CKBCDT\\BaoCaoDoanhThuBUS.cs",
-              "ViewState": "AQIAAJEAAAAAAAAAAAAgwJ4AAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T17:27:48.116Z"
+              "WhenOpened": "2025-12-06T12:27:05.228Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
-              "Title": "frmInBaoCao.cs",
-              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmInBaoCao.cs",
-              "RelativeDocumentMoniker": "CKBCDT\\frmInBaoCao.cs",
-              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmInBaoCao.cs",
-              "RelativeToolTip": "CKBCDT\\frmInBaoCao.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAAACMAAABfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T17:24:53.039Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
               "Title": "frmInBaoCao.Designer.cs",
               "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmInBaoCao.Designer.cs",
               "RelativeDocumentMoniker": "CKBCDT\\frmInBaoCao.Designer.cs",
               "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmInBaoCao.Designer.cs",
               "RelativeToolTip": "CKBCDT\\frmInBaoCao.Designer.cs",
-              "ViewState": "AQIAAE4AAAAAAAAAAAAUwFYAAAAPAAAA",
+              "ViewState": "AQIAAEkAAAAAAAAAAAAcwFUAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T17:24:07.521Z",
+              "WhenOpened": "2025-12-06T12:26:34.755Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
+              "Title": "frmInBaoCao.cs",
+              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmInBaoCao.cs",
+              "RelativeDocumentMoniker": "CKBCDT\\frmInBaoCao.cs",
+              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmInBaoCao.cs",
+              "RelativeToolTip": "CKBCDT\\frmInBaoCao.cs",
+              "ViewState": "AQIAANkDAAAAAAAAAAAowN8DAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T12:26:25.314Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "frmBaoCaoDoanhThu.cs",
               "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmBaoCaoDoanhThu.cs",
               "RelativeDocumentMoniker": "CKBCDT\\frmBaoCaoDoanhThu.cs",
               "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmBaoCaoDoanhThu.cs",
               "RelativeToolTip": "CKBCDT\\frmBaoCaoDoanhThu.cs",
-              "ViewState": "AQIAAAkCAAAAAAAAAAAAABcCAAABAAAA",
+              "ViewState": "AQIAAI4EAAAAAAAAAAAqwJoEAABKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T17:21:11.626Z"
+              "WhenOpened": "2025-12-06T12:25:57.134Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "frmInBaoCao.cs [Design]",
               "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmInBaoCao.cs",
               "RelativeDocumentMoniker": "CKBCDT\\frmInBaoCao.cs",
               "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmInBaoCao.cs [Design]",
               "RelativeToolTip": "CKBCDT\\frmInBaoCao.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T17:23:52.081Z",
+              "WhenOpened": "2025-12-06T12:24:52.224Z",
               "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BaoCaoDoanhThuDAL.cs",
+              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\BaoCaoDoanhThuDAL.cs",
+              "RelativeDocumentMoniker": "CKBCDT\\BaoCaoDoanhThuDAL.cs",
+              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\BaoCaoDoanhThuDAL.cs",
+              "RelativeToolTip": "CKBCDT\\BaoCaoDoanhThuDAL.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T12:24:14.432Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BaoCaoDoanhThuBUS.cs",
+              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\BaoCaoDoanhThuBUS.cs",
+              "RelativeDocumentMoniker": "CKBCDT\\BaoCaoDoanhThuBUS.cs",
+              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\BaoCaoDoanhThuBUS.cs",
+              "RelativeToolTip": "CKBCDT\\BaoCaoDoanhThuBUS.cs",
+              "ViewState": "AQIAAKoAAAAAAAAAAAAqwLsAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T12:24:03.411Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "frmBaoCaoDoanhThu.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmBaoCaoDoanhThu.cs",
+              "RelativeDocumentMoniker": "CKBCDT\\frmBaoCaoDoanhThu.cs",
+              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmBaoCaoDoanhThu.cs [Design]",
+              "RelativeToolTip": "CKBCDT\\frmBaoCaoDoanhThu.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T12:16:02.547Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "frmBaoCaoDoanhThu.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmBaoCaoDoanhThu.Designer.cs",
+              "RelativeDocumentMoniker": "CKBCDT\\frmBaoCaoDoanhThu.Designer.cs",
+              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\frmBaoCaoDoanhThu.Designer.cs",
+              "RelativeToolTip": "CKBCDT\\frmBaoCaoDoanhThu.Designer.cs",
+              "ViewState": "AQIAAGcAAAAAAAAAAAAcwHMAAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T12:15:45.325Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\Program.cs",
+              "RelativeDocumentMoniker": "CKBCDT\\Program.cs",
+              "ToolTip": "C:\\Users\\MY PC\\Downloads\\b\u00E0i th\u1EF1c h\u00E0nh\\CKBCDT\\CKBCDT\\Program.cs",
+              "RelativeToolTip": "CKBCDT\\Program.cs",
+              "ViewState": "AQIAADwAAAAAAAAAAAAQwE4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T12:15:39.337Z"
+            }
+          ]
+        },
+        {
+          "DockedHeight": 46,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         },
@@ -276,10 +289,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         }

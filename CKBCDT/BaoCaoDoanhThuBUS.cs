@@ -10,7 +10,12 @@ namespace CKBCDT
     public class BaoCaoDoanhThuBUS
     {
         private static readonly ILog Logger = LogManager.GetLogger(typeof(BaoCaoDoanhThuBUS));
-        private readonly BaoCaoDoanhThuDAL _dal = new BaoCaoDoanhThuDAL();
+        private readonly BaoCaoDoanhThuDAL _dal;
+
+        public BaoCaoDoanhThuBUS()
+        {
+            _dal = new BaoCaoDoanhThuDAL();
+        }
 
         public class KetQuaBaoCao
         {
@@ -25,132 +30,156 @@ namespace CKBCDT
             int? nhanVienId = null,
             string loaiMon = null)
         {
+            KetQuaBaoCao ketQua = new KetQuaBaoCao();
+
+            // 1. Try-catch-finally đầu tiên: Log bắt đầu + kiểm tra tham số
             try
             {
-                Logger.Info($"=== BẮT ĐẦU LẤY BÁO CÁO DOANH THU ===");
-                Logger.Info($"Tham số: Từ {tuNgay:dd/MM/yyyy} → Đến {denNgay:dd/MM/yyyy} | NV: {nhanVienId} | Loại món: {loaiMon}");
+                Logger.Info("=== BẮT ĐẦU TẠO BÁO CÁO DOANH THU ===");
+                Logger.Debug($"Tham số: Từ ngày: {tuNgay:dd/MM/yyyy} | Đến ngày: {denNgay:dd/MM/yyyy} | NV: {nhanVienId} | Loại món: {loaiMon ?? "Tất cả"}");
+            }
+            catch (Exception ex)
+            {
+                Logger.Fatal("LỖI NGHIÊM TRỌNG: Không thể ghi log khởi động báo cáo!", ex);
+                throw;
+            }
+            finally
+            {
+                Logger.Debug("Khối khởi động báo cáo đã hoàn thành (finally #1).");
+            }
 
-                var dt = _dal.LayDoanhThu(tuNgay, denNgay, nhanVienId, loaiMon);
+            // 2. Try-catch-finally thứ hai: Lấy dữ liệu từ DAL
+            DataTable dt = null;
+            try
+            {
+                dt = _dal.LayDoanhThu(tuNgay, denNgay, nhanVienId, loaiMon);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("LỖI khi gọi DAL để lấy dữ liệu doanh thu!", ex);
+                throw new ReportDataException("Không thể lấy dữ liệu từ cơ sở dữ liệu.", ex);
+            }
+            finally
+            {
+                Logger.Debug("Hoàn tất gọi DAL (finally #2).");
+            }
 
+            // 3. Try-catch-finally thứ ba: Kiểm tra dữ liệu rỗng
+            try
+            {
                 if (dt == null || dt.Rows.Count == 0)
                 {
-                    Logger.Warn("Không có dữ liệu doanh thu với tiêu chí đã chọn.");
-                    return new KetQuaBaoCao(); // Trả về rỗng, không lỗi
+                    Logger.Warn("Không tìm thấy dữ liệu doanh thu nào với điều kiện hiện tại.");
+                    return ketQua; // Trả rỗng hợp lệ
                 }
-
-                decimal tongDoanhThu = dt.AsEnumerable()
-                    .Sum(row => row.Field<decimal>("ThanhTien"));
-
-                var series = TaoBieuDoTuDong(dt, loaiMon, nhanVienId);
-                series.IsValueShownAsLabel = true;
-                series.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-                series.LabelForeColor = System.Drawing.Color.Black;
-
-                Logger.Info($"TẢI BÁO CÁO THÀNH CÔNG | {dt.Rows.Count} dòng | Tổng DT: {tongDoanhThu:N0}đ");
-
-                return new KetQuaBaoCao
-                {
-                    DuLieu = dt,
-                    TongDoanhThu = tongDoanhThu,
-                    BieuDo = series
-                };
             }
             catch (Exception ex)
             {
-                Logger.Error("LỖI NGHIÊM TRỌNG KHI LẤY BÁO CÁO DOANH THU: " + ex.ToString());
-                throw new ReportDataException("Không thể tải dữ liệu báo cáo doanh thu. Vui lòng kiểm tra lại kết nối hoặc tiêu chí lọc.", ex);
+                Logger.Error("Lỗi không mong muốn khi kiểm tra DataTable rỗng!", ex);
+                throw;
             }
-        }
-
-        /// <summary>
-        /// Tự động tạo biểu đồ theo thứ tự ưu tiên: Loại món → Nhân viên → Ngày
-        /// </summary>
-        private Series TaoBieuDoTuDong(DataTable dt, string loaiMon, int? nhanVienId)
-        {
-            var series = new Series("Doanh thu")
+            finally
             {
-                ChartType = SeriesChartType.Column,
-                IsValueShownAsLabel = true
-            };
+                Logger.Debug("Kiểm tra dữ liệu rỗng hoàn tất (finally #3).");
+            }
 
+            // 4. Try-catch-finally thứ tư: Tính tổng doanh thu
             try
             {
-                // 1. Ưu tiên: Loại món
-                if (!string.IsNullOrEmpty(loaiMon))
-                {
-                    var data = dt.AsEnumerable()
-                        .GroupBy(r => r.Field<string>("TenLoai") ?? "Khác")
-                        .Select(g => new
-                        {
-                            Nhom = g.Key,
-                            Tong = g.Sum(r => r.Field<decimal>("ThanhTien"))
-                        })
-                        .OrderBy(x => x.Nhom);
+                ketQua.TongDoanhThu = dt.AsEnumerable()
+                    .Sum(row => row.Field<decimal>("ThanhTien"));
 
-                    foreach (var item in data)
-                    {
-                        series.Points.AddXY(item.Nhom, (double)item.Tong);
-                    }
-                    series.Name = "Doanh thu theo loại món";
-                    Logger.Info("Tạo biểu đồ: Doanh thu theo loại món");
-                    return series;
-                }
-
-                // 2. Nhân viên
-                if (nhanVienId.HasValue)
-                {
-                    var data = dt.AsEnumerable()
-                        .GroupBy(r => new
-                        {
-                            MaNV = r.Field<int>("NhanVienId"),
-                            TenNV = r.Field<string>("TenNhanVien") ?? "Không xác định"
-                        })
-                        .Select(g => new
-                        {
-                            Nhom = $"{g.Key.MaNV:D3} - {g.Key.TenNV}",
-                            Tong = g.Sum(r => r.Field<decimal>("ThanhTien"))
-                        })
-                        .OrderBy(x => x.Nhom);
-
-                    foreach (var item in data)
-                    {
-                        series.Points.AddXY(item.Nhom, (double)item.Tong);
-                    }
-                    series.Name = "Doanh thu theo nhân viên";
-                    Logger.Info("Tạo biểu đồ: Doanh thu theo nhân viên");
-                    return series;
-                }
-
-                // 3. Mặc định: Theo ngày
-                var groupedByDate = dt.AsEnumerable()
-                    .GroupBy(r => r.Field<DateTime>("Ngay").Date)
-                    .Select(g => new
-                    {
-                        Ngay = g.Key,
-                        Tong = g.Sum(r => r.Field<decimal>("ThanhTien"))
-                    })
-                    .OrderBy(x => x.Ngay);
-
-                foreach (var item in groupedByDate)
-                {
-                    string label = item.Ngay.ToString("dd/MM");
-                    series.Points.AddXY(label, (double)item.Tong);
-                }
-                series.Name = "Doanh thu theo ngày";
-                Logger.Info("Tạo biểu đồ: Doanh thu theo ngày");
-                return series;
+                Logger.Info($"Tính tổng doanh thu thành công: {ketQua.TongDoanhThu:N0} VNĐ");
+            }
+            catch (InvalidCastException icex)
+            {
+                Logger.Error("Lỗi ép kiểu cột ThanhTien trong DataTable!", icex);
+                throw new ReportDataException("Dữ liệu cột ThanhTien không hợp lệ.", icex);
             }
             catch (Exception ex)
             {
-                Logger.Error("Lỗi khi tạo biểu đồ tự động: " + ex.Message);
-                // Trả về biểu đồ rỗng thay vì crash
-                series.Points.AddXY("Lỗi dữ liệu", 0);
-                return series;
+                Logger.Fatal("LỖI NGHIÊM TRỌNG khi tính tổng doanh thu!", ex);
+                throw new ReportDataException("Không thể tính tổng doanh thu.", ex);
             }
+            finally
+            {
+                Logger.Debug("Khối tính tổng doanh thu đã chạy xong (finally #4).");
+            }
+
+            // 5. Try-catch-finally thứ năm: Tạo biểu đồ (ưu tiên loại món → nhân viên → ngày)
+            try
+            {
+                ketQua.BieuDo = TaoBieuDoTuDong(dt, loaiMon, nhanVienId);
+                ketQua.BieuDo.IsValueShownAsLabel = true;
+                ketQua.BieuDo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+                ketQua.BieuDo.LabelForeColor = System.Drawing.Color.Black;
+
+                Logger.Info($"Tạo biểu đồ thành công: {ketQua.BieuDo.Name} | Số điểm: {ketQua.BieuDo.Points.Count}");
+                Logger.Info($"=== HOÀN TẤT BÁO CÁO DOANH THU | Tổng: {ketQua.TongDoanhThu:N0} VNĐ | Dòng dữ liệu: {dt.Rows.Count:N0} ===");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Lỗi nghiêm trọng khi tạo biểu đồ doanh thu!", ex);
+                ketQua.BieuDo.Points.Clear();
+                ketQua.BieuDo.Points.AddXY("LỖI DỮ LIỆU", 0);
+                ketQua.BieuDo.Name = "Biểu đồ lỗi";
+            }
+            finally
+            {
+                Logger.Debug("Khối tạo biểu đồ đã kết thúc (finally #5).");
+            }
+
+            return ketQua;
+        }
+
+        private Series TaoBieuDoTuDong(DataTable dt, string loaiMon, int? nhanVienId)
+        {
+            var series = new Series("Doanh thu") { ChartType = SeriesChartType.Column };
+
+            if (!string.IsNullOrEmpty(loaiMon))
+            {
+                var data = dt.AsEnumerable()
+                    .GroupBy(r => r.Field<string>("TenLoai") ?? "Khác")
+                    .Select(g => new { Nhom = g.Key, Tong = g.Sum(r => r.Field<decimal>("ThanhTien")) })
+                    .OrderBy(x => x.Nhom);
+
+                foreach (var item in data)
+                    series.Points.AddXY(item.Nhom, (double)item.Tong);
+                series.Name = "Doanh thu theo loại món";
+            }
+            else if (nhanVienId.HasValue)
+            {
+                var data = dt.AsEnumerable()
+                    .GroupBy(r => new {
+                        MaNV = r.Field<int>("NhanVienId"),
+                        TenNV = r.Field<string>("TenNhanVien") ?? "Không xác định"
+                    })
+                    .Select(g => new {
+                        Nhom = $"{g.Key.MaNV:D3} - {g.Key.TenNV}",
+                        Tong = g.Sum(r => r.Field<decimal>("ThanhTien"))
+                    })
+                    .OrderBy(x => x.Nhom);
+
+                foreach (var item in data)
+                    series.Points.AddXY(item.Nhom, (double)item.Tong);
+                series.Name = "Doanh thu theo nhân viên";
+            }
+            else
+            {
+                var data = dt.AsEnumerable()
+                    .GroupBy(r => r.Field<DateTime>("Ngay").Date)
+                    .Select(g => new { Ngay = g.Key, Tong = g.Sum(r => r.Field<decimal>("ThanhTien")) })
+                    .OrderBy(x => x.Ngay);
+
+                foreach (var item in data)
+                    series.Points.AddXY(item.Ngay.ToString("dd/MM"), (double)item.Tong);
+                series.Name = "Doanh thu theo ngày";
+            }
+
+            return series;
         }
     }
 
-    // Dùng chung với form báo cáo khác
     public class ReportDataException : Exception
     {
         public ReportDataException(string message) : base(message) { }

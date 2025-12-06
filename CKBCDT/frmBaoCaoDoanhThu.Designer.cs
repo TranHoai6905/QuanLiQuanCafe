@@ -113,7 +113,8 @@ namespace CKBCDT
             this.btnInBaoCao.TabIndex = 4;
             this.btnInBaoCao.Text = "In báo cáo";
             this.btnInBaoCao.UseVisualStyleBackColor = false;
-
+           
+            // 
             // btnRefresh
             // 
             this.btnRefresh.BackColor = System.Drawing.Color.Transparent;

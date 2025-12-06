@@ -8,10 +8,8 @@ using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
 using System.Diagnostics;
-using System.Text;
 using DrawingFont = System.Drawing.Font;
 using DrawingRectangle = System.Drawing.Rectangle;
-using System.Drawing.Printing;
 
 namespace CKBCDT
 {
@@ -26,14 +24,14 @@ namespace CKBCDT
         private const int SHIFT_INTERVAL = 2;
         private const int TOTAL_SHIFTS = 8;
         private const string NO_SALES_MESSAGE = "Chưa có bán";
+        private const int PANEL_CAPTURE_DELAY = 200;
         #endregion
 
         #region Properties
         public DateTime TuNgay { get; set; }
         public DateTime DenNgay { get; set; }
 
-        private readonly string _connectionString =
-            @"Server=NGUYENNHI2407\SQLEXPRESS;Database=QuanLyQuanCafe2;Integrated Security=True;";
+        private readonly string _connectionString;
         #endregion
 
         #region Data Models
@@ -43,26 +41,13 @@ namespace CKBCDT
             public decimal Revenue { get; set; }
             public string BestSellingItem { get; set; } = NO_SALES_MESSAGE;
             public int BestSellingQuantity { get; set; }
+
+            public override string ToString()
+            {
+                return $"Orders: {OrderCount}, Revenue: {Revenue:N0}đ, Best: {BestSellingItem}";
+            }
         }
         #endregion
-
-        #region Constructor & Initialization
-        public frmInBaoCao()
-        {
-            try
-            {
-                Logger.LogInfo("Initializing frmInBaoCao");
-                InitializeComponent();
-                this.Load += FrmInBaoCao_Load;
-                this.btnXuatPDF.Click += BtnXuatPDF_Click;
-                Logger.LogInfo("frmInBaoCao initialized successfully");
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError("Failed to initialize frmInBaoCao", ex);
-                throw;
-            }
-        }
 
         #region Custom Exceptions
         public class DatabaseConnectionException : Exception
@@ -84,85 +69,77 @@ namespace CKBCDT
         }
         #endregion
 
-        #region Logger Service
-        public static class Logger
+        #region Constructor & Initialization
+        public frmInBaoCao()
         {
-            private static readonly string LogFilePath = Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "Logs",
-                $"MiuCoffee_{DateTime.Now:yyyyMMdd}.log"
-            );
-
-            static Logger()
+            try
             {
-                try
+                Logger.Info("Khởi tạo form In Báo cáo");
+                InitializeComponent();
+
+                _connectionString = @"Server=NGUYENNHI2407\SQLEXPRESS;Database=QuanLyQuanCafe2;Integrated Security=True;";
+
+                if (string.IsNullOrWhiteSpace(_connectionString))
                 {
-                    var logDir = Path.GetDirectoryName(LogFilePath);
-                    if (!Directory.Exists(logDir))
-                    {
-                        Directory.CreateDirectory(logDir);
-                    }
+                    throw new ArgumentException("Connection string không được để trống");
                 }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"Cannot create log directory: {ex.Message}");
-                }
+
+                InitializeEventHandlers();
+                Logger.Info("Khởi tạo form In Báo cáo thành công");
             }
-
-            public static void LogInfo(string message)
+            catch (Exception ex)
             {
-                Log("INFO", message);
-            }
-
-            public static void LogWarning(string message)
-            {
-                Log("WARNING", message);
-            }
-
-            public static void LogError(string message, Exception ex = null)
-            {
-                var logMessage = message;
-                if (ex != null)
-                {
-                    logMessage += $"\nException: {ex.GetType().Name}\nMessage: {ex.Message}\nStackTrace: {ex.StackTrace}";
-                }
-                Log("ERROR", logMessage);
-            }
-
-            private static void Log(string level, string message)
-            {
-                try
-                {
-                    var logEntry = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] [{level}] {message}{Environment.NewLine}";
-                    File.AppendAllText(LogFilePath, logEntry, Encoding.UTF8);
-                    Debug.WriteLine(logEntry);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"Logging failed: {ex.Message}");
-                }
+                Logger.Error("Lỗi khởi tạo form In Báo cáo", ex);
+                MessageBox.Show(
+                    "Không thể khởi tạo form in báo cáo. Vui lòng kiểm tra cấu hình.",
+                    "Lỗi khởi tạo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                throw;
             }
         }
-        #endregion
 
-
+        private void InitializeEventHandlers()
+        {
+            try
+            {
+                this.Load += FrmInBaoCao_Load;
+                this.btnXuatPDF.Click += BtnXuatPDF_Click;
+                Logger.Debug("Đăng ký event handlers thành công");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Lỗi khi đăng ký event handlers", ex);
+                throw new InvalidOperationException("Không thể đăng ký event handlers", ex);
+            }
+        }
 
         private void FrmInBaoCao_Load(object sender, EventArgs e)
         {
             try
             {
-                Logger.LogInfo($"Loading report: From {TuNgay:yyyy-MM-dd} to {DenNgay:yyyy-MM-dd}");
+                Logger.Info($"Tải báo cáo: {TuNgay:dd/MM/yyyy} - {DenNgay:dd/MM/yyyy}");
 
                 ValidateDateRange();
                 this.Text = TITLE;
                 LoadReportData();
 
-                Logger.LogInfo("Report loaded successfully");
+                Logger.Info("Tải báo cáo thành công");
+            }
+            catch (ArgumentException argEx)
+            {
+                Logger.Warn($"Dữ liệu đầu vào không hợp lệ: {argEx.Message}");
+                ShowErrorMessage("Dữ liệu không hợp lệ", argEx.Message);
+            }
+            catch (DatabaseConnectionException dbEx)
+            {
+                Logger.Error("Lỗi kết nối database", dbEx);
+                ShowErrorMessage("Lỗi kết nối", "Không thể kết nối đến cơ sở dữ liệu. Vui lòng kiểm tra kết nối.");
             }
             catch (Exception ex)
             {
-                Logger.LogError("Failed to load report", ex);
-                ShowErrorMessage("Không thể tải báo cáo", ex.Message);
+                Logger.Error("Lỗi tải báo cáo", ex);
+                ShowErrorMessage("Lỗi", "Không thể tải báo cáo. Vui lòng thử lại.");
             }
         }
         #endregion
@@ -173,18 +150,25 @@ namespace CKBCDT
             if (TuNgay == DateTime.MinValue || DenNgay == DateTime.MinValue)
             {
                 var ex = new ArgumentException("Ngày bắt đầu và ngày kết thúc không được để trống");
-                Logger.LogError("Invalid date range", ex);
+                Logger.Error("Ngày không hợp lệ", ex);
                 throw ex;
             }
 
             if (DenNgay <= TuNgay)
             {
                 var ex = new ArgumentException("Ngày kết thúc phải lớn hơn ngày bắt đầu");
-                Logger.LogError("Invalid date range", ex);
+                Logger.Error("Khoảng thời gian không hợp lệ", ex);
                 throw ex;
             }
 
-            Logger.LogInfo($"Date range validated: {TuNgay:yyyy-MM-dd} to {DenNgay:yyyy-MM-dd}");
+            if (TuNgay > DateTime.Now)
+            {
+                var ex = new ArgumentException("Ngày bắt đầu không thể trong tương lai");
+                Logger.Error("Ngày trong tương lai", ex);
+                throw ex;
+            }
+
+            Logger.Debug($"Validation thành công: {TuNgay:dd/MM/yyyy} - {DenNgay:dd/MM/yyyy}");
         }
         #endregion
 
@@ -193,68 +177,85 @@ namespace CKBCDT
         {
             ShiftData morningData = null;
             ShiftData eveningData = null;
-            SqlConnection connection = null;
 
             try
             {
-                Logger.LogInfo("Starting data load");
+                Logger.Info("Bắt đầu tải dữ liệu báo cáo");
 
-                connection = new SqlConnection(_connectionString);
-                connection.Open();
-                Logger.LogInfo("Database connection opened");
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    Logger.Debug("Kết nối database thành công");
 
-                morningData = LoadShiftData(connection, MORNING_SHIFT_START, MORNING_SHIFT_END, "Morning");
-                eveningData = LoadShiftData(connection, EVENING_SHIFT_START, EVENING_SHIFT_END, "Evening");
+                    morningData = LoadShiftData(connection, MORNING_SHIFT_START, MORNING_SHIFT_END, "Sáng");
+                    eveningData = LoadShiftData(connection, EVENING_SHIFT_START, EVENING_SHIFT_END, "Tối");
+                }
+
+                if (morningData == null || eveningData == null)
+                {
+                    throw new DataLoadException("Không thể tải dữ liệu ca làm việc", null);
+                }
 
                 DisplayReportSummary(morningData, eveningData);
                 DisplayShiftDetails(morningData, eveningData);
                 LoadBieuDo8Ca();
 
-                Logger.LogInfo("Data loaded successfully");
+                Logger.Info("Tải dữ liệu báo cáo thành công");
             }
             catch (SqlException sqlEx)
             {
-                Logger.LogError("Database error while loading report data", sqlEx);
-                throw new DatabaseConnectionException("Lỗi kết nối cơ sở dữ liệu", sqlEx);
+                Logger.Error("Lỗi SQL khi tải báo cáo", sqlEx);
+                throw new DatabaseConnectionException("Lỗi truy vấn cơ sở dữ liệu", sqlEx);
+            }
+            catch (DataLoadException)
+            {
+                throw;
             }
             catch (Exception ex)
             {
-                Logger.LogError("Error loading report data", ex);
+                Logger.Error("Lỗi không xác định khi tải báo cáo", ex);
                 throw new DataLoadException("Lỗi tải dữ liệu báo cáo", ex);
-            }
-            finally
-            {
-                if (connection != null && connection.State == ConnectionState.Open)
-                {
-                    connection.Close();
-                    Logger.LogInfo("Database connection closed");
-                }
             }
         }
 
         private ShiftData LoadShiftData(SqlConnection connection, int startHour, int endHour, string shiftName)
         {
+            if (connection == null)
+            {
+                throw new ArgumentNullException(nameof(connection));
+            }
+
+            if (connection.State != ConnectionState.Open)
+            {
+                throw new InvalidOperationException("Kết nối database chưa được mở");
+            }
+
             var data = new ShiftData();
 
             try
             {
-                Logger.LogInfo($"Loading {shiftName} shift data ({startHour}h-{endHour}h)");
+                Logger.Debug($"Tải dữ liệu ca {shiftName} ({startHour}h-{endHour}h)");
 
                 LoadShiftRevenue(connection, startHour, endHour, data);
                 LoadBestSellingItem(connection, startHour, endHour, data);
 
-                Logger.LogInfo($"{shiftName} shift: {data.OrderCount} orders, {data.Revenue:N0} VND");
+                Logger.Info($"Ca {shiftName}: {data}");
                 return data;
             }
             catch (Exception ex)
             {
-                Logger.LogError($"Error loading {shiftName} shift data", ex);
+                Logger.Error($"Lỗi khi tải dữ liệu ca {shiftName}", ex);
                 throw;
             }
         }
 
         private void LoadShiftRevenue(SqlConnection connection, int startHour, int endHour, ShiftData data)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
             const string sql = @"
                 SELECT 
                     COUNT(*) AS SoDon,
@@ -266,38 +267,42 @@ namespace CKBCDT
                   AND DATEPART(HOUR, NgayTao) >= @startHour 
                   AND DATEPART(HOUR, NgayTao) < @endHour";
 
-            SqlCommand command = null;
-            SqlDataReader reader = null;
-
             try
             {
-                command = new SqlCommand(sql, connection);
-                command.Parameters.AddWithValue("@tu", TuNgay.Date);
-                command.Parameters.AddWithValue("@den", DenNgay.Date);
-                command.Parameters.AddWithValue("@startHour", startHour);
-                command.Parameters.AddWithValue("@endHour", endHour);
-
-                reader = command.ExecuteReader();
-                if (reader.Read())
+                using (var command = new SqlCommand(sql, connection))
                 {
-                    data.OrderCount = reader.GetInt32(0);
-                    data.Revenue = reader.GetDecimal(1);
+                    command.CommandTimeout = 30;
+                    command.Parameters.AddWithValue("@tu", TuNgay.Date);
+                    command.Parameters.AddWithValue("@den", DenNgay.Date);
+                    command.Parameters.AddWithValue("@startHour", startHour);
+                    command.Parameters.AddWithValue("@endHour", endHour);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            data.OrderCount = SafeGetInt32(reader, 0);
+                            data.Revenue = SafeGetDecimal(reader, 1);
+                        }
+                    }
                 }
+
+                Logger.Debug($"Doanh thu ca {startHour}h-{endHour}h: {data.OrderCount} đơn, {data.Revenue:N0}đ");
             }
             catch (SqlException sqlEx)
             {
-                Logger.LogError($"SQL error loading shift revenue ({startHour}h-{endHour}h)", sqlEx);
+                Logger.Error($"Lỗi SQL khi lấy doanh thu ca {startHour}h-{endHour}h", sqlEx);
                 throw;
-            }
-            finally
-            {
-                reader?.Close();
-                command?.Dispose();
             }
         }
 
         private void LoadBestSellingItem(SqlConnection connection, int startHour, int endHour, ShiftData data)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
             const string sql = @"
                 SELECT TOP 1 
                     m.TenMon, 
@@ -305,7 +310,7 @@ namespace CKBCDT
                 FROM ChiTietHoaDon ct
                 JOIN HoaDon hd ON ct.HoaDonId = hd.Id
                 JOIN Mon m ON ct.MonId = m.Id
-                WHERE hd.TrangThai = N'Đã thanh toán'
+                WHERE hd.TrangThai = N'Đá thanh toán'
                   AND hd.NgayTao >= @tu 
                   AND hd.NgayTao < @den
                   AND DATEPART(HOUR, hd.NgayTao) >= @startHour 
@@ -313,34 +318,35 @@ namespace CKBCDT
                 GROUP BY m.TenMon
                 ORDER BY SUM(ct.SoLuong) DESC";
 
-            SqlCommand command = null;
-            SqlDataReader reader = null;
-
             try
             {
-                command = new SqlCommand(sql, connection);
-                command.Parameters.AddWithValue("@tu", TuNgay.Date);
-                command.Parameters.AddWithValue("@den", DenNgay.Date);
-                command.Parameters.AddWithValue("@startHour", startHour);
-                command.Parameters.AddWithValue("@endHour", endHour);
-
-                reader = command.ExecuteReader();
-                if (reader.Read())
+                using (var command = new SqlCommand(sql, connection))
                 {
-                    data.BestSellingItem = reader.GetString(0);
-                    data.BestSellingQuantity = reader.GetInt32(1);
-                    Logger.LogInfo($"Best selling item ({startHour}h-{endHour}h): {data.BestSellingItem} - {data.BestSellingQuantity} portions");
+                    command.CommandTimeout = 30;
+                    command.Parameters.AddWithValue("@tu", TuNgay.Date);
+                    command.Parameters.AddWithValue("@den", DenNgay.Date);
+                    command.Parameters.AddWithValue("@startHour", startHour);
+                    command.Parameters.AddWithValue("@endHour", endHour);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            data.BestSellingItem = SafeGetString(reader, 0);
+                            data.BestSellingQuantity = SafeGetInt32(reader, 1);
+                            Logger.Debug($"Món bán chạy {startHour}h-{endHour}h: {data.BestSellingItem} ({data.BestSellingQuantity})");
+                        }
+                        else
+                        {
+                            Logger.Debug($"Không có món bán chạy trong ca {startHour}h-{endHour}h");
+                        }
+                    }
                 }
             }
             catch (SqlException sqlEx)
             {
-                Logger.LogError($"SQL error loading best selling item ({startHour}h-{endHour}h)", sqlEx);
+                Logger.Error($"Lỗi SQL khi lấy món bán chạy {startHour}h-{endHour}h", sqlEx);
                 throw;
-            }
-            finally
-            {
-                reader?.Close();
-                command?.Dispose();
             }
         }
         #endregion
@@ -348,6 +354,16 @@ namespace CKBCDT
         #region Display Methods
         private void DisplayReportSummary(ShiftData morning, ShiftData evening)
         {
+            if (morning == null)
+            {
+                throw new ArgumentNullException(nameof(morning));
+            }
+
+            if (evening == null)
+            {
+                throw new ArgumentNullException(nameof(evening));
+            }
+
             try
             {
                 var totalRevenue = morning.Revenue + evening.Revenue;
@@ -356,20 +372,30 @@ namespace CKBCDT
                 lblThoiGian.Text = $"Từ ngày {TuNgay:dd/MM/yyyy} đến {DenNgay.AddDays(-1):dd/MM/yyyy}";
                 lblTongDT.Text = $"Tổng doanh thu toàn kỳ: {totalRevenue:N0} VND";
                 lblTongHD.Text = $"Tổng số hóa đơn: {totalOrders} hóa đơn";
-                lblTongCa.Text = $"Tổng số ca làm: {totalOrders} ca";
+                lblTongCa.Text = $"Tổng số ca làm: 2 ca";
                 lblNhanXet.Text = GenerateAnalysis(morning.Revenue, evening.Revenue, totalRevenue);
 
-                Logger.LogInfo($"Summary displayed: {totalOrders} orders, {totalRevenue:N0} VND");
+                Logger.Debug($"Hiển thị tổng hợp: {totalOrders} đơn, {totalRevenue:N0}đ");
             }
             catch (Exception ex)
             {
-                Logger.LogError("Error displaying report summary", ex);
+                Logger.Error("Lỗi khi hiển thị tổng hợp báo cáo", ex);
                 throw;
             }
         }
 
         private void DisplayShiftDetails(ShiftData morning, ShiftData evening)
         {
+            if (morning == null)
+            {
+                throw new ArgumentNullException(nameof(morning));
+            }
+
+            if (evening == null)
+            {
+                throw new ArgumentNullException(nameof(evening));
+            }
+
             try
             {
                 // Grid
@@ -387,81 +413,97 @@ namespace CKBCDT
                 lblHDToi.Text = $"Số hóa đơn: {evening.OrderCount}";
                 lblMonToi.Text = FormatBestSellingItem(evening);
 
-                Logger.LogInfo("Shift details displayed");
+                Logger.Debug("Hiển thị chi tiết ca làm việc thành công");
             }
             catch (Exception ex)
             {
-                Logger.LogError("Error displaying shift details", ex);
+                Logger.Error("Lỗi khi hiển thị chi tiết ca", ex);
                 throw;
             }
         }
 
         private string FormatBestSellingItem(ShiftData data)
         {
-            return data.BestSellingQuantity > 0
-                ? $"Món bán chạy: {data.BestSellingItem} ({data.BestSellingQuantity} phần)"
-                : NO_SALES_MESSAGE;
+            try
+            {
+                if (data == null)
+                {
+                    return NO_SALES_MESSAGE;
+                }
+
+                return data.BestSellingQuantity > 0
+                    ? $"Món bán chạy: {data.BestSellingItem} ({data.BestSellingQuantity} phần)"
+                    : NO_SALES_MESSAGE;
+            }
+            catch
+            {
+                Logger.Warn("Lỗi khi format món bán chạy");
+                return NO_SALES_MESSAGE;
+            }
         }
 
         private string GenerateAnalysis(decimal morningRevenue, decimal eveningRevenue, decimal totalRevenue)
         {
-            if (totalRevenue == 0)
-                return "Nhận xét:\nChưa có doanh thu trong kỳ.";
-
-            var analysis = "Nhận xét:\n";
-
-            if (eveningRevenue >= morningRevenue)
+            try
             {
-                var percentage = (eveningRevenue / totalRevenue * 100);
-                analysis += $"Ca tối có doanh thu cao hơn, chiếm {percentage:N1}% tổng doanh thu.\n";
-            }
-            else
-            {
-                var percentage = (morningRevenue / totalRevenue * 100);
-                analysis += $"Ca sáng có doanh thu cao hơn, chiếm {percentage:N1}% tổng doanh thu.\n";
-            }
+                if (totalRevenue == 0)
+                {
+                    Logger.Warn("Tổng doanh thu bằng 0");
+                    return "Nhận xét:\nChưa có doanh thu trong kỳ.";
+                }
 
-            analysis += "Khuyến khích đẩy mạnh món bán chạy vào khung giờ cao điểm.";
-            return analysis;
+                var analysis = "Nhận xét:\n";
+
+                if (eveningRevenue >= morningRevenue)
+                {
+                    var percentage = (eveningRevenue / totalRevenue * 100);
+                    analysis += $"Ca tối có doanh thu cao hơn, chiếm {percentage:N1}% tổng doanh thu.\n";
+                }
+                else
+                {
+                    var percentage = (morningRevenue / totalRevenue * 100);
+                    analysis += $"Ca sáng có doanh thu cao hơn, chiếm {percentage:N1}% tổng doanh thu.\n";
+                }
+
+                analysis += "Khuyến khích đẩy mạnh món bán chạy vào khung giờ cao điểm.";
+                return analysis;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Lỗi khi tạo phân tích", ex);
+                return "Nhận xét:\nKhông thể tạo phân tích.";
+            }
         }
         #endregion
 
         #region Chart Methods
         private void LoadBieuDo8Ca()
         {
-            SqlConnection connection = null;
-
             try
             {
-                Logger.LogInfo("Loading 8-shift chart");
+                Logger.Info("Tải biểu đồ 8 ca");
 
                 InitializeChart();
                 var series = CreateChartSeries();
 
-                connection = new SqlConnection(_connectionString);
-                connection.Open();
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    PopulateChartData(series, connection);
+                }
 
-                PopulateChartData(series, connection);
                 chartIn.Series.Add(series);
-
-                Logger.LogInfo("Chart loaded successfully");
+                Logger.Info("Tải biểu đồ thành công");
             }
             catch (SqlException sqlEx)
             {
-                Logger.LogError("Database error loading chart", sqlEx);
+                Logger.Error("Lỗi SQL khi tải biểu đồ", sqlEx);
                 throw new DatabaseConnectionException("Lỗi tải dữ liệu biểu đồ", sqlEx);
             }
             catch (Exception ex)
             {
-                Logger.LogError("Error loading chart", ex);
+                Logger.Error("Lỗi khi tải biểu đồ", ex);
                 throw;
-            }
-            finally
-            {
-                if (connection != null && connection.State == ConnectionState.Open)
-                {
-                    connection.Close();
-                }
             }
         }
 
@@ -469,6 +511,11 @@ namespace CKBCDT
         {
             try
             {
+                if (chartIn == null)
+                {
+                    throw new InvalidOperationException("Chart control không tồn tại");
+                }
+
                 chartIn.Series.Clear();
                 chartIn.ChartAreas.Clear();
                 chartIn.Titles.Clear();
@@ -482,32 +529,54 @@ namespace CKBCDT
 
                 var title = chartIn.Titles.Add("Biểu đồ số hóa đơn theo ca 2h");
                 title.Font = new DrawingFont("Segoe UI", 14F, FontStyle.Bold);
+
+                Logger.Debug("Khởi tạo biểu đồ thành công");
             }
             catch (Exception ex)
             {
-                Logger.LogError("Error initializing chart", ex);
+                Logger.Error("Lỗi khi khởi tạo biểu đồ", ex);
                 throw;
             }
         }
 
         private Series CreateChartSeries()
         {
-            return new Series("Số đơn")
+            try
             {
-                ChartType = SeriesChartType.Column,
-                IsValueShownAsLabel = true,
-                Font = new DrawingFont("Segoe UI", 11F, FontStyle.Bold),
-                LabelForeColor = Color.Black
-            };
+                return new Series("Số đơn")
+                {
+                    ChartType = SeriesChartType.Column,
+                    IsValueShownAsLabel = true,
+                    Font = new DrawingFont("Segoe UI", 11F, FontStyle.Bold),
+                    LabelForeColor = Color.Black
+                };
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Lỗi khi tạo series biểu đồ", ex);
+                throw;
+            }
         }
 
         private void PopulateChartData(Series series, SqlConnection connection)
         {
+            if (series == null)
+            {
+                throw new ArgumentNullException(nameof(series));
+            }
+
+            if (connection == null || connection.State != ConnectionState.Open)
+            {
+                throw new InvalidOperationException("Kết nối database không hợp lệ");
+            }
+
             var shiftLabels = new[] { "6h-8h", "8h-10h", "10h-12h", "12h-14h",
                                       "14h-16h", "16h-18h", "18h-20h", "20h-22h" };
-            var colors = new[] { Color.CornflowerBlue, Color.Orange, Color.MediumPurple,
-                                Color.LimeGreen, Color.Tomato, Color.HotPink,
-                                Color.SaddleBrown, Color.Goldenrod };
+            var colors = new[] {
+                Color.CornflowerBlue, Color.Orange, Color.MediumPurple,
+                Color.LimeGreen, Color.Tomato, Color.HotPink,
+                Color.SaddleBrown, Color.Goldenrod
+            };
 
             try
             {
@@ -516,10 +585,12 @@ namespace CKBCDT
                     var orderCount = GetOrderCountForTimeSlot(connection, MORNING_SHIFT_START + i * SHIFT_INTERVAL);
                     AddChartPoint(series, shiftLabels[i], orderCount, colors[i]);
                 }
+
+                Logger.Debug($"Đã thêm {TOTAL_SHIFTS} điểm dữ liệu vào biểu đồ");
             }
             catch (Exception ex)
             {
-                Logger.LogError("Error populating chart data", ex);
+                Logger.Error("Lỗi khi điền dữ liệu biểu đồ", ex);
                 throw;
             }
         }
@@ -535,35 +606,45 @@ namespace CKBCDT
                   AND DATEPART(HOUR, NgayTao) >= @gio 
                   AND DATEPART(HOUR, NgayTao) < @gio + @interval";
 
-            SqlCommand command = null;
-
             try
             {
-                command = new SqlCommand(sql, connection);
-                command.Parameters.AddWithValue("@tu", TuNgay.Date);
-                command.Parameters.AddWithValue("@den", DenNgay.Date);
-                command.Parameters.AddWithValue("@gio", startHour);
-                command.Parameters.AddWithValue("@interval", SHIFT_INTERVAL);
+                using (var command = new SqlCommand(sql, connection))
+                {
+                    command.CommandTimeout = 30;
+                    command.Parameters.AddWithValue("@tu", TuNgay.Date);
+                    command.Parameters.AddWithValue("@den", DenNgay.Date);
+                    command.Parameters.AddWithValue("@gio", startHour);
+                    command.Parameters.AddWithValue("@interval", SHIFT_INTERVAL);
 
-                return Convert.ToInt32(command.ExecuteScalar());
+                    object result = command.ExecuteScalar();
+                    return SafeConvertToInt32(result);
+                }
             }
             catch (SqlException sqlEx)
             {
-                Logger.LogError($"SQL error getting order count for {startHour}h", sqlEx);
+                Logger.Error($"Lỗi SQL khi lấy số đơn cho ca {startHour}h", sqlEx);
                 throw;
-            }
-            finally
-            {
-                command?.Dispose();
             }
         }
 
         private void AddChartPoint(Series series, string label, int value, Color color)
         {
-            var point = series.Points.Add(value);
-            point.AxisLabel = label;
-            point.Color = color;
-            point.Label = value > 0 ? value.ToString() : "";
+            try
+            {
+                if (series == null)
+                {
+                    throw new ArgumentNullException(nameof(series));
+                }
+
+                var point = series.Points.Add(value);
+                point.AxisLabel = label;
+                point.Color = color;
+                point.Label = value > 0 ? value.ToString() : "";
+            }
+            catch
+            {
+                Logger.Warn($"Lỗi khi thêm điểm biểu đồ {label}");
+            }
         }
         #endregion
 
@@ -577,97 +658,135 @@ namespace CKBCDT
 
             try
             {
-                Logger.LogInfo("Starting PDF export");
+                Logger.Info("Bắt đầu xuất PDF");
 
                 HideExportButton();
 
                 var fileName = GetSaveFileName();
                 if (string.IsNullOrEmpty(fileName))
                 {
-                    Logger.LogInfo("PDF export cancelled by user");
+                    Logger.Info("Người dùng hủy xuất PDF");
                     return;
                 }
 
-                Logger.LogInfo($"Exporting to: {fileName}");
+                Logger.Info($"Xuất PDF: {fileName}");
 
                 bitmap = CapturePanel();
+
+                if (bitmap == null)
+                {
+                    throw new PdfExportException("Không thể capture panel", null);
+                }
+
                 document = new iTextSharp.text.Document(PageSize.A4, 10, 10, 10, 10);
-                fileStream = new FileStream(fileName, FileMode.Create);
+                fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None);
                 writer = PdfWriter.GetInstance(document, fileStream);
 
                 document.Open();
 
                 var pdfImage = ConvertBitmapToPdfImage(bitmap);
+
+                if (pdfImage == null)
+                {
+                    throw new PdfExportException("Không thể chuyển đổi hình ảnh", null);
+                }
+
                 pdfImage.ScaleToFit(document.PageSize.Width - 20, document.PageSize.Height - 20);
                 pdfImage.Alignment = iTextSharp.text.Image.ALIGN_CENTER;
 
                 document.Add(pdfImage);
 
-                Logger.LogInfo("PDF exported successfully");
-
+                Logger.Info("Xuất PDF thành công");
                 ShowSuccessMessage(fileName);
                 PromptToOpenFile(fileName);
             }
             catch (IOException ioEx)
             {
-                Logger.LogError("File IO error during PDF export", ioEx);
-                ShowErrorMessage("Lỗi xuất file PDF", "Không thể ghi file. Vui lòng kiểm tra:\n- File có đang mở không?\n- Có quyền ghi vào thư mục không?");
+                Logger.Error("Lỗi I/O khi xuất PDF", ioEx);
+                ShowErrorMessage("Lỗi xuất file",
+                    "Không thể ghi file. Vui lòng kiểm tra:\n" +
+                    "- File có đang mở không?\n" +
+                    "- Có quyền ghi vào thư mục không?");
+            }
+            catch (UnauthorizedAccessException uaEx)
+            {
+                Logger.Error("Không có quyền truy cập file", uaEx);
+                ShowErrorMessage("Lỗi phân quyền", "Không có quyền ghi file vào thư mục này.");
+            }
+            catch (PdfExportException pdfEx)
+            {
+                Logger.Error("Lỗi xuất PDF", pdfEx);
+                ShowErrorMessage("Lỗi xuất PDF", pdfEx.Message);
             }
             catch (Exception ex)
             {
-                Logger.LogError("Error exporting PDF", ex);
-                throw new PdfExportException("Lỗi xuất PDF", ex);
+                Logger.Error("Lỗi không xác định khi xuất PDF", ex);
+                ShowErrorMessage("Lỗi", "Không thể xuất PDF. Vui lòng thử lại.");
             }
             finally
             {
-                // Cleanup resources
                 try
                 {
                     document?.Close();
                     writer?.Close();
-                    fileStream?.Close();
+                    fileStream?.Dispose();
                     bitmap?.Dispose();
-
                     ShowExportButton();
-                    Logger.LogInfo("PDF export resources cleaned up");
+
+                    Logger.Debug("Đã giải phóng tài nguyên PDF");
                 }
                 catch (Exception cleanupEx)
                 {
-                    Logger.LogError("Error during cleanup", cleanupEx);
+                    Logger.Error("Lỗi khi dọn dẹp tài nguyên", cleanupEx);
                 }
             }
         }
 
         private void HideExportButton()
         {
-            btnXuatPDF.Visible = false;
-            this.Refresh();
-            Application.DoEvents();
-            System.Threading.Thread.Sleep(200);
+            try
+            {
+                btnXuatPDF.Visible = false;
+                this.Refresh();
+                Application.DoEvents();
+                System.Threading.Thread.Sleep(PANEL_CAPTURE_DELAY);
+            }
+            catch
+            {
+                Logger.Warn("Lỗi khi ẩn nút xuất PDF");
+            }
         }
 
         private void ShowExportButton()
         {
-            btnXuatPDF.Visible = true;
+            try
+            {
+                btnXuatPDF.Visible = true;
+            }
+            catch
+            {
+                Logger.Warn("Lỗi khi hiện nút xuất PDF");
+            }
         }
 
         private string GetSaveFileName()
         {
-            SaveFileDialog saveDialog = null;
-
-            try
+            using (var saveDialog = new SaveFileDialog())
             {
-                saveDialog = new SaveFileDialog
+                try
                 {
-                    Filter = "PDF File|*.pdf",
-                    FileName = $"MIUCOFFEE_BaoCao_{TuNgay:ddMMyyyy}_den_{DenNgay.AddDays(-1):ddMMyyyy}.pdf"
-                };
+                    saveDialog.Filter = "PDF File|*.pdf";
+                    saveDialog.FileName = $"MIUCOFFEE_BaoCao_{TuNgay:ddMMyyyy}_den_{DenNgay.AddDays(-1):ddMMyyyy}.pdf";
+                    saveDialog.DefaultExt = "pdf";
+                    saveDialog.AddExtension = true;
 
-                return saveDialog.ShowDialog() == DialogResult.OK ? saveDialog.FileName : null;
-            }
-            finally
-            {
-                saveDialog?.Dispose();
+                    return saveDialog.ShowDialog() == DialogResult.OK ? saveDialog.FileName : null;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error("Lỗi khi mở hộp thoại lưu file", ex);
+                    return null;
+                }
             }
         }
 
@@ -675,19 +794,31 @@ namespace CKBCDT
         {
             try
             {
+                if (panelMain == null)
+                {
+                    throw new InvalidOperationException("Panel không tồn tại");
+                }
+
                 var bitmap = new Bitmap(panelMain.Width, panelMain.Height);
                 panelMain.DrawToBitmap(bitmap, new DrawingRectangle(0, 0, panelMain.Width, panelMain.Height));
+
+                Logger.Debug($"Đã capture panel: {panelMain.Width}x{panelMain.Height}");
                 return bitmap;
             }
             catch (Exception ex)
             {
-                Logger.LogError("Error capturing panel", ex);
+                Logger.Error("Lỗi khi capture panel", ex);
                 throw;
             }
         }
 
         private iTextSharp.text.Image ConvertBitmapToPdfImage(Bitmap bitmap)
         {
+            if (bitmap == null)
+            {
+                throw new ArgumentNullException(nameof(bitmap));
+            }
+
             MemoryStream memoryStream = null;
 
             try
@@ -695,43 +826,75 @@ namespace CKBCDT
                 memoryStream = new MemoryStream();
                 bitmap.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
                 memoryStream.Position = 0;
-                return iTextSharp.text.Image.GetInstance(memoryStream.ToArray());
+
+                var pdfImage = iTextSharp.text.Image.GetInstance(memoryStream.ToArray());
+                Logger.Debug("Chuyển đổi bitmap sang PDF image thành công");
+
+                return pdfImage;
             }
             catch (Exception ex)
             {
-                Logger.LogError("Error converting bitmap to PDF image", ex);
+                Logger.Error("Lỗi khi chuyển đổi bitmap sang PDF image", ex);
                 throw;
             }
             finally
             {
-                memoryStream?.Close();
+                memoryStream?.Dispose();
             }
         }
 
         private void ShowSuccessMessage(string fileName)
         {
-            MessageBox.Show($"✅ Xuất PDF thành công!\n\n{fileName}",
-                "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                MessageBox.Show(
+                    $"✅ Xuất PDF thành công!\n\n{fileName}",
+                    "Thành công",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            catch
+            {
+                Logger.Warn("Lỗi khi hiển thị thông báo thành công");
+            }
         }
 
         private void PromptToOpenFile(string fileName)
         {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return;
+            }
+
             try
             {
-                var result = MessageBox.Show("Bạn có muốn mở file PDF?", "Mở file",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                var result = MessageBox.Show(
+                    "Bạn có muốn mở file PDF?",
+                    "Mở file",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
+                    if (!File.Exists(fileName))
+                    {
+                        Logger.Warn($"File không tồn tại: {fileName}");
+                        MessageBox.Show("File không tồn tại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
                     Process.Start(fileName);
-                    Logger.LogInfo($"Opened PDF file: {fileName}");
+                    Logger.Info($"Đã mở file PDF: {fileName}");
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogError("Error opening PDF file", ex);
-                MessageBox.Show("Không thể mở file PDF. Vui lòng mở thủ công.", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.Error("Lỗi khi mở file PDF", ex);
+                MessageBox.Show(
+                    "Không thể mở file PDF. Vui lòng mở thủ công.",
+                    "Lỗi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
             }
         }
         #endregion
@@ -739,9 +902,102 @@ namespace CKBCDT
         #region Helper Methods
         private void ShowErrorMessage(string title, string message)
         {
-            MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            try
+            {
+                MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch
+            {
+                Logger.Error("Lỗi khi hiển thị thông báo lỗi");
+            }
+        }
+
+        private int SafeGetInt32(SqlDataReader reader, int ordinal)
+        {
+            try
+            {
+                if (reader == null)
+                {
+                    return 0;
+                }
+
+                if (reader.IsDBNull(ordinal))
+                {
+                    return 0;
+                }
+
+                return reader.GetInt32(ordinal);
+            }
+            catch
+            {
+                Logger.Warn($"Lỗi khi đọc Int32 tại cột {ordinal}");
+                return 0;
+            }
+        }
+
+        private decimal SafeGetDecimal(SqlDataReader reader, int ordinal)
+        {
+            try
+            {
+                if (reader == null)
+                {
+                    return 0m;
+                }
+
+                if (reader.IsDBNull(ordinal))
+                {
+                    return 0m;
+                }
+
+                return reader.GetDecimal(ordinal);
+            }
+            catch
+            {
+                Logger.Warn($"Lỗi khi đọc Decimal tại cột {ordinal}");
+                return 0m;
+            }
+        }
+
+        private string SafeGetString(SqlDataReader reader, int ordinal)
+        {
+            try
+            {
+                if (reader == null)
+                {
+                    return string.Empty;
+                }
+
+                if (reader.IsDBNull(ordinal))
+                {
+                    return string.Empty;
+                }
+
+                return reader.GetString(ordinal);
+            }
+            catch
+            {
+                Logger.Warn($"Lỗi khi đọc String tại cột {ordinal}");
+                return string.Empty;
+            }
+        }
+
+        private int SafeConvertToInt32(object value)
+        {
+            try
+            {
+                if (value == null || value == DBNull.Value)
+                {
+                    return 0;
+                }
+
+                return Convert.ToInt32(value);
+            }
+            catch
+            {
+                Logger.Warn($"Lỗi khi chuyển đổi '{value}' sang Int32");
+                return 0;
+            }
         }
         #endregion
     }
 }
-
